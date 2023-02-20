@@ -1,0 +1,25 @@
+*,*::before,*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+
+}
+body{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.4;
+}
+img {
+    height: 100%;
+    overflow: clip;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.center-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,153 @@
+@import url("./globalStyle.css");
+*{
+    color: #fff;
+}
+.signup-container{
+    /* height: 100vh; */
+    position: relative;
+}
+.signup-container::before{
+    content: "";
+    position: fixed;
+    z-index: -10;
+    background-image: url("../img/background.png");
+    top: 0; left:0; bottom: 0; right: 0;
+    filter: blur(4px);
+}
+.signup-container::after{
+    content: "";
+    position: fixed;
+    z-index: -10;
+    top: 0; left:0; bottom: 0; right: 0;
+    background-color: rgba(0,0,0,0.6);
+}
+.signup{
+    height: 100%;
+    min-width: 400px;
+    padding: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.signup-header{
+    height: 8rem;
+    width: 100%;
+}
+.signup-header .logo{
+    height: inherit;
+}
+.signup-body-title{
+    flex-direction: column;
+}
+.signup-body-title>*{
+    margin-bottom: 1rem;
+}
+.form-handle form{
+    width: 50rem;
+    display: grid;
+    padding: 0 1rem;
+    grid-template-columns: auto auto;
+}
+.input{
+
+    margin: 1rem;
+}
+.text-input input{
+    display: block;
+    width: 90%;
+    padding: 0.5rem;
+    outline: none;
+    border: 1px solid transparent;
+
+    border-radius: 0.25rem;
+    color: #000;
+}
+.text-input input:focus{
+    border: 1px solid #247dc6;
+    box-shadow: 0 0 4px #247dc6;
+}
+.checkbox-input{
+    grid-column: 1/ span 2;
+}
+.checkbox-input input{
+    margin-right: 0.25rem;
+    width: 1rem; height: 1rem;
+    cursor: pointer;
+}
+.checkbox-input input:valid:checked{
+    accent-color: #247dc6;
+
+}
+.checkbox-input a{
+    color: #717d88;
+}
+.checkbox-input a:hover{
+    text-decoration: underline;
+    color: #247dc6;
+
+}
+.submit-input{
+    grid-column: 1/ span 2;
+    margin: 1rem;
+}
+.submit-input input{
+    color: rgb(6, 60, 60);
+    font-weight: 700;
+    border: none;
+    font-size: inherit;
+    padding: 0.65rem 0.95rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+}
+.submit-input input:hover{
+    background-color: #247dc6;
+    color: #fff;
+}
+.have-account{
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+.have-account a{
+    color: #717d88;
+}
+.have-account a:hover{
+    color: rgb(243,147,29);
+}
+.signup-footer{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.3);
+}
+.contact >*{
+    margin-right: 0.5rem;
+}
+.contact a:hover i{
+    color: #247dc6;
+    transform: scale(1.5);
+}
+.contact a i{
+    font-size: 1.2rem;
+    transition: transform 0.2s, color 0.2s;
+}
+
+@media  screen and (max-width: 768px) {
+    .signup-header{
+        height: 6rem;
+    }
+    .form-handle form{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .text-input input{
+        width: 100%;
+    }
+}
+@media  screen and (max-width: 490px){
+    .signup-footer{
+        flex-direction: column;
+    }
+}
