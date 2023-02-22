@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 :root{
-
+    --red: #D71920;
 }
 body{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -23,3 +23,91 @@ a{
     justify-content: center;
     align-items: center;
 }
+/*  */
+.red-hover:hover{
+    cursor: pointer;
+    color: var(--red);
+    transition: color 0.2s;
+}
+.button{
+    display: inline-block;
+    padding: 10px 30px 10px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+}
+.button:hover{
+    cursor: pointer;
+    background-color: var(--red);
+    transition: background-color 0.2s;
+}
+.button-add::before{
+    content: "add to card";
+}
+/*  */
+.container{
+    width: 100%;
+}
+.container >*{
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 8px;
+
+}
+.head-container{
+    position: fixed; 
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.header-logo{
+    height: 60px;
+    background-image: url("../img/logo.webp");
+    background-size: contain;
+    aspect-ratio: 384/76;
+}
+.header-logo a{
+    display: block;
+    width: 100%; height: 100%;
+}
+.navbar{
+    display: flex;
+    justify-content: center;
+}
+.navbar >* { 
+    padding: 0 1.25rem;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.header-nav{
+    width: 60%;
+}
+.header-nav__item h4{ 
+    margin: 0 8px 0 6px;
+}
+.header-usernav__item{
+    padding: 0 1.5rem;
+    font-size: 24px;
+}
+.header-usernav__item.cart{
+    position: relative;
+}
+.header-usernav__item.cart span{
+    font-size: 16px;
+    position: absolute;
+    left: 70%;
+}
+.header-usernav__item.user img{
+    height: 30px;
+    width: 30px;
+}
+

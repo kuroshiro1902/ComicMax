@@ -1,85 +1,107 @@
- <%-- 
-    Document   : index
-    Created on : Feb 18, 2023, 4:36:59 PM
-    Author     : emsin
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://kit.fontawesome.com/f8624d60dd.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="./css/signup.css">
-        <title>Sign up</title>
-    </head>
-    <body>
-        <div class="signup-container center-block">
-            <div class="signup center-block">
-                <div class="signup-header">
-                    <div class="logo">
-                        <img src="./img/logo.png" alt="">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f8624d60dd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <title>Comic Max - Comic & Manga Shop</title>
+</head>
+<body>
+    <section class="head-container container">
+        <div class="header">
+            <div class="header-logo" title="Comic Max - Comic & Manga Shop">
+                <a href="#"></a>
+            </div>
+            <div class="header-nav navbar">
+                <a href="" class="header-nav__item red-hover">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                    <h4>Action</h4>
+                    <i class="fa-solid fa-caret-down"></i>
+                </a>
+                <a href="" class="header-nav__item red-hover">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h4>Shounen</h4>
+                    <i class="fa-solid fa-caret-down"></i>
+                </a>
+                <a href="" class="header-nav__item red-hover">
+                    <i class="fa-solid fa-bars"></i>
+                    <h4>Category</h4>
+                    <i class="fa-solid fa-caret-down"></i>
+                </a>
+                <a href="" class="header-nav__item red-hover">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <h4>Shop</h4>
+                </a>
+                <a href="" class="header-nav__item red-hover">
+                    <i class="fa-solid fa-pen"></i>
+                    <h4>Blog</h4>
+                </a>
+            </div>
+            <div class="header-usernav navbar">
+                <a href="" class="header-usernav__item red-hover cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>0</span>
+                </a>
+                <a href="" class="header-usernav__item red-hover user">
+                    <i class="fa-solid fa-user"></i>
+                    <!-- <img src="./img/l.png" alt=""> -->
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="body-container">
+        <div class="body">
+            <div class="slideshow-container">
+                <div class="slideshow">
+                    <div class="slide1 slide">
+                        <div class="slide__img"></div>
+                        <div class="slide__content">
+                            <div>
+                                <h1>NEW MANGA RELEASES</h1>
+                                <p>We've updated all of the new manga series releasing in 2023 in everyweek! A comprehensive and up-to-date list. Check it out!</p>
+                                <a href="" class="button">CHECK NOW</a>
+                            </div>
+                        </div>
                     </div>
-                    
-                </div>
-                <div class="signup-body">
-                    <div class="signup-body-title center-block">
-                        <h1>ĐĂNG KÍ</h1>
-                        <i>Trở thành thành viên ngay hôm nay!</i>
+                    <div class="slide2 slide">
+                        <div class="slide__img"></div>
+                        <div class="slide__content">
+                            <div>
+                                <h1>ALL COMIC CATEGORIES</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis sapiente mollitia quam. Placeat temporibus atque vero molestiae nesciunt facere velit ab harum, maxime numquam? Non, architecto. Illo dolorem consectetur veniam?</p>
+                                <a href="" class="button">CHECK NOW</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-handle">
-                        <form action="" method="post">
-                            <div class="text-input input">
-                                <label for="firstname">Họ:</label>
-                                <input type="text" id="firstname" name="" placeholder="Họ" required>
+                    <div class="slide3 slide">
+                        <div class="slide__img"></div>
+                        <div class="slide__content">
+                            <div>
+                                <h1>CHARACTER FIGURES</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus neque dolor libero saepe. Natus, incidunt! Vero, amet! Accusantium voluptatum placeat veritatis aperiam facilis pariatur reprehenderit numquam aut veniam. Neque, voluptatem.</p>
+                                <a href="" class="button">CHECK NOW</a>
                             </div>
-                            <div class="text-input input">
-                                <label for="lastname">Tên:</label>
-                                <input type="text" id="lastname" name="" placeholder="Tên" required>
-                            </div>
-                            <div class="text-input input">
-                                <label for="username">Tên đăng nhập:</label>
-                                <input type="text" id="username" name="" placeholder="Tên đăng nhập" required>
-                            </div>
-                            <div class="text-input input">
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="" placeholder="Email" required>
-                            </div>
-                            <div class="text-input input">
-                                <label for="password">Mật khẩu:</label>
-                                <input type="text" id="password" name="" placeholder="Mật khẩu" required>
-                            </div>
-                            <div class="text-input input">
-                                <label for="confirmpswd">Nhập lại mật khẩu:</label>
-                                <input type="text" id="confirmpswd" name="" placeholder="Nhập lại mật khẩu" required>
-                            </div>
-                            <div class="checkbox-input input center-block">
-                                <input type="checkbox" id="agree" name="" required>
-                                <label for="agree"> Đồng ý <a href="">điều khoản dịch vụ</a href=""> của chúng tôi</label>
-                            </div>
-                            <div class="submit-input input center-block">
-                                <input type="submit" id="submit" name="" value="Submit">
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                    <div class="have-account center-block">
-                        <p>Already have an account? <a href="">Login here!</a></p>
+                    <div class="slidedot center-block">
+                        <span class="dot dot1"></span>
+                        <span class="dot dot2"></span>
+                        <span class="dot dot3"></span>
                     </div>
-                </div>
-                <div class="signup-footer">
-                    <div class="contact">
-                        <span>Contact us: </span>
-                        <span><a href=""><i class="fa-brands fa-facebook"></i></a></span>
-                        <span><a href=""><i class="fa-brands fa-instagram"></i></a></span>
-                        <span><a href=""><i class="fa-brands fa-amazon"></i></a></span>
-                    </div>
-                    <div class="license">
-                        <span>@Copyright Shounen Jump 2023</span>
+                    <div class="slidebtn">
+                        <div class="slidebtn__prev center-block">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+                        <div class="slidebtn__next center-block">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </section>
+    <script src="./js/home.js"></script>
+</body>
 </html>
