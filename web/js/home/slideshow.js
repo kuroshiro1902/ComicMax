@@ -1,4 +1,3 @@
-var slides, dots, curr, last, n, timeout
 class Slide{
     constructor(slide){
         this.slide = slide
@@ -31,6 +30,11 @@ class Slide{
         this.content.classList.remove('fade-content')
     }
 }
+//
+const slides = [...document.querySelectorAll(".slide")].map((slide)=>new Slide(slide))
+const dots = [...document.querySelectorAll(".dot")].map((dot,i)=>{slides[i].setDot(dot)})
+const n = slides.length
+var curr = 0, last = slides.length-1, timeout
 function inRange(val){
     if(val>=n) return 0
     if(val<0) return n-1
@@ -51,20 +55,12 @@ function activeSlide(index){
     last = index
     curr = inRange(index+1)
 }
-function slideShow(index){ //bat dau tu slide thu index
+export default function SlideShow(index){ //bat dau tu slide thu index
+    console.log(curr, last);
+    
     activeSlide(index)
     timeout = setTimeout(()=>{
-        slideShow(curr)
+        SlideShow(curr)
     },7000)
     
 }
-window.onload = function() {
-    slides = [...document.querySelectorAll(".slide")].map((slide)=>new Slide(slide))
-    dots = [...document.querySelectorAll(".dot")].map((dot,i)=>{slides[i].setDot(dot)})
-    console.log(slides);
-    n = slides.length
-    curr = 0
-    last = slides.length-1
-    slideShow(0)
-}
-console.log(document.querySelectorAll(".slide__content"));

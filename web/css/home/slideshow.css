@@ -1,7 +1,6 @@
-@import url("./globalStyle.css");
 /*  */
 .body{
-    padding-top: 78px;
+    padding-top: 74px;
 }
 .slideshow{
     position: relative;
@@ -31,13 +30,13 @@
     left: 0; right: 0; top: 0; bottom: 0;
 }
 .slide1 .slide__img{
-    background-image: url("../img/slideshow/slide1.webp");
+    background-image: url("../../img/slideshow/slide1.webp");
 }
 .slide2 .slide__img{
-    background-image: url("../img/slideshow/slide2.webp");
+    background-image: url("../../img/slideshow/slide2.webp");
 }
 .slide3 .slide__img{
-    background-image: url("../img/slideshow/slide3.webp");
+    background-image: url("../../img/slideshow/slide3.webp");
 }
 .active-img{
     animation: active-img 7s linear;
@@ -145,22 +144,4 @@
 }
 .active-dot{
     background-color: var(--red);
-}
-.slidebtn >*{
-    position: absolute;
-    top: 0; bottom: 0;
-    font-size: 36px;
-}
-.slidebtn >* i::before{
-    padding: 2rem 1rem;
-}
-.slidebtn >* i:hover::before{
-    cursor: pointer;
-    color: var(--red);
-}
-.slidebtn__prev{
-    left:0;
-}
-.slidebtn__next{
-    right:0;
 }
