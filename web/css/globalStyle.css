@@ -46,7 +46,6 @@ a{
 .button-add::before{
     content: "add to card";
 }
-/*  */
 .container{
     width: 100%;
 }
@@ -55,6 +54,7 @@ a{
     margin: 0 auto;
 
 }
+/*HEADER*/
 .head-container{
     position: fixed; 
     top: 0;
@@ -101,7 +101,7 @@ a{
     margin: 0 8px 0 6px;
 }
 .header-usernav__item{
-    font-size: 24px;
+    font-size: 28px;
 }
 .header-usernav__item.cart{
     position: relative;
