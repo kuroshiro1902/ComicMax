@@ -1,0 +1,29 @@
+.usersubnav-switch .subnav{
+    width: 180px;
+    left: unset;
+    padding: 0;
+}
+.usersubnav-switch{
+    position: relative
+}
+.usersubnav-switch:hover .subnav{
+    display: block;
+    animation: fadeIn 0.25s;
+    box-shadow: 0 0 2px #fff;
+}
+.usersubnav__item{
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+    background: rgba(0,0,0,0.07 );
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.usersubnav__item:hover{
+    color: #fff;
+    background-color: var(--red);
+}
+.user-hover:hover{
+    background: rgba(0,0,0,0.07);
+}

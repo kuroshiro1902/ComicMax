@@ -1,18 +1,17 @@
-
 @media (max-width: 1280px){
     .header{
         justify-content: space-between;
     }
+    .header >*{
+        margin: 0;
+    }
     .header-logo{
         width: 84px;
-    }
-    .header-nav{
-        width: 70%;
     }
     .header-nav__item, .header-usernav__item{
         padding: 1.5rem 0.5rem;
     }
-    .searchbar input{
+    .searchbar input[type="text"]{
         width: 300px
     }
     .cart span{
@@ -31,7 +30,7 @@
     .slideshow{
         height: 684px;
     }
-    .searchbar input{
+    .searchbar input[type="text"]{
         width: 100%;
     }
     .subnav__category .button{
@@ -63,5 +62,8 @@
     }
     .slide__content{
         margin: 0 10%;
+    }
+    .footer-nav-part .logo{
+        display: none;
     }
 }

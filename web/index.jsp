@@ -7,12 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/f8624d60dd.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/globalStyle.css">
+    <link rel="stylesheet" href="css/globalStyle.css">
     <link rel="stylesheet" href="./css/home/home.css">
     <title>Comic Max - Comic & Manga Shop</title>
+    <jsp:useBean id="loadCategory" class="dao.Categories" scope="request"></jsp:useBean>
 </head>
 <body>
     <jsp:include page="header.jsp" />
+    <div style="height: 300px" onclick="toastMessage('add')"></div>
     <section class="body-container">
         <div class="body">
             <div class="slideshow-container">
@@ -44,15 +46,88 @@
                             </div>
                         </div>
                     </div>
-                    <div class="slidedot center-block">
+                    <div class="slidedot block-center">
                         <span class="dot dot1"></span>
                         <span class="dot dot2"></span>
                         <span class="dot dot3"></span>
                     </div>
                 </div>
             </div>
+            <div class="content-container container">
+                <div class="content">
+                    <div class="content-heading">
+                        <div class="content-heading__title">
+                            <h2>
+                                Welcome to <strong>ComicMax</strong>
+                            </h2>
+                        </div>
+                        <div class="content-heading__description">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content allcategories">
+                    <div class="content-heading">
+                        <div class="content-heading__title">
+                            <h2>
+                                All <strong>categories</strong>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <c:forEach items="${loadCategory.getAllCategories()}" end="8" var="o">
+                            <a class="category-item red-hover" href="">
+                                <div>
+                                    <img src="./img/home_product/${o.img}" alt="">
+                                </div>
+                                
+                                <span class="text-center">${o.value}</span>
+                            </a>
+                        </c:forEach>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-heading">
+                        <div class="content-heading__title">
+                            <h2>
+                                Best <strong>seller</strong>
+                            </h2>
+                        </div>
+                        <div class="content-heading__description">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-heading">
+                        <div class="content-heading__title">
+                            <h2>
+                                New <strong>comics</strong>
+                            </h2>
+                        </div>
+                        <div class="content-heading__description">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-heading">
+                        <div class="content-heading__title">
+                            <h2>
+                                Popular <strong>products</strong>
+                            </h2>
+                        </div>
+                        <div class="content-heading__description">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </section>
-    <script type="module" src="./js/home/home.js"></script>
+    <jsp:include page="footer.jsp" />
+    <script type="module" src="js/home/home.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

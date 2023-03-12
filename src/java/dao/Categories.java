@@ -16,18 +16,15 @@ import java.util.List;
  *
  * @author emsin
  */
-public class DAO {
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
- 
+public class Categories {
     public List<Category> getAllCategories(){
         List<Category> list = new ArrayList<>();
         String query = "select * from Category"; //lay tu db ra
         try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 //khoi tao doi tuong
                 list.add(new Category(rs.getInt(1),
@@ -36,8 +33,7 @@ public class DAO {
                                     ));
             }
             
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
         return list;
     }
 }

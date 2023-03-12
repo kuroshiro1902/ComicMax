@@ -5,7 +5,12 @@ import java.sql.DriverManager;
 
 
 public class DBContext {
-    
+    private static DBContext instance;
+    public static DBContext getInstance(){
+        if (instance==null)
+            instance = new DBContext();
+        return instance;
+    }
     /*USE BELOW METHOD FOR YOUR DATABASE CONNECTION FOR BOTH SINGLE AND MULTILPE SQL SERVER INSTANCE(s)*/
     /*DO NOT EDIT THE BELOW METHOD, YOU MUST USE ONLY THIS ONE FOR YOUR DATABASE CONNECTION*/
      public Connection getConnection()throws Exception {        
