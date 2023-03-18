@@ -6,6 +6,9 @@
 :root{
     --red: #D71920;
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     line-height: 1.4;
@@ -18,6 +21,15 @@ img {
 a{
     text-decoration: none;
     color: inherit;
+}
+.click{
+    color: #007185;
+}
+.click:hover{
+    color: #004652;
+}
+.body{
+    padding: 48px 16px;
 }
 .block-center{
     display: flex;
@@ -38,6 +50,9 @@ strong{
 input[type="submit"]{
     border: none;
     outline: none;
+}
+.pointer{
+    cursor: pointer;
 }
 /*  */
 .breadcrumb{
@@ -86,6 +101,31 @@ input[type="submit"]{
     background-color: var(--red);
     transition: background-color 0.2s;
 }
+.button-confirm{
+    display: inline-block;
+    padding: 10px 30px 10px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: var(--red);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: scale 0.2s;
+}
+.button-cancel{
+    display: inline-block;
+    padding: 10px 30px 10px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: scale 0.2s;
+}
+.button-confirm:hover, .button-cancel:hover{
+    scale: 1.2;
+}
 .button-add::before{
     content: "add to card";
 }
@@ -94,6 +134,7 @@ input[type="submit"]{
 }
 .container >*{
     max-width: 1400px;
+    min-width: 360px;
     margin: 0 auto;
 }
 .book-img{
@@ -200,8 +241,11 @@ input[type="submit"]{
 }
 /*FOOTER*/
 .foot-container{
+    min-width: 380px;
     background-color: #333;
     border-top: 5px solid var(--red);
+}
+.footer{
 }
 .footer-nav{
     padding: 48px; 
@@ -230,6 +274,71 @@ input[type="submit"]{
 }
 .footer-nav-part:last-child p{
     width: 303px;
+}
+/* PRODUCT */
+.product-container {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: auto auto auto auto auto auto;
+    /*grid-gap: 1%;*/
+    padding: 8px;
+    margin-bottom: 1rem;
+}
+.product-container .product {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin: 0 4px;
+    margin-top: 16px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+.product-container .product:hover{
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+.product-container .product img{
+    height: 260px;
+    margin: auto;
+    aspect-ratio: 170/250;
+}
+.product-text{
+    margin-top: 8px;
+}
+.product-title{
+    max-width: 176.8px;
+    margin-bottom: 4px;
+    color: #007185;
+    /* rut gon tieu de*/
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.product-title:hover{
+    color: #024e5c;
+}
+.product-price{
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+.rating{
+    display: flex;
+}
+.rating > *{
+    background-size: contain; background-position: center;
+    width: 16px; height: 16px;
+}
+.rating > i{
+    background-image: url("../img/star_yellow.svg");
+}
+.rating > u{
+    background-image: url("../img/star_gray.svg");
+}
+.rating > span{
+    font-size: 13px;
+    line-height: 1rem;
+    margin-left: 6px;
 }
 
 /* TOAST */
@@ -288,5 +397,55 @@ input[type="submit"]{
         opacity: 1;
     }
 }
-
-
+/* CONFIRM */
+#confirm{
+    position: fixed;
+    top: 0; bottom: 0; right: 0; left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 9999;
+    /*  */
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+#confirm.show{
+    display: flex;
+}
+#confirm .confirm{
+    width: 100%;
+    min-width: 360px;
+    max-width: 480px;
+    background-color: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    animation: showConfirm .5s;
+}
+#confirm .confirm-title{
+    padding: 8px 4px;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    color: #fff;
+    background-color: var(--red);
+}
+#confirm .confirm-content{
+    padding: 1rem .5rem;
+    font-size: 24px;
+    text-align: center;
+}
+#confirm .confirm-buttons{
+    padding: 1rem .5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+@keyframes showConfirm{
+    0%{
+        scale: 0.7;
+    }
+    50%{
+        scale: 1.1;
+    }
+    100%{
+        scale: 1;
+    }
+}

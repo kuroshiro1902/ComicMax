@@ -4,14 +4,25 @@
  */
 package entity;
 public class Account {
-    private String username,password,avatar;
+    private String fullname,username,password,avatar;
+    private int isAdmin=0;
 
-    public Account(String username, String password, String avatar) {
+    public Account(String fullname, String username, String password, String avatar, int isAdmin) {
+        this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.avatar = avatar;
+        this.isAdmin = isAdmin;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -34,6 +45,14 @@ public class Account {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
     
 }

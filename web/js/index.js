@@ -2,8 +2,19 @@ const searchField = $(".searchbar input[type=\"text\"]")
 const searchBtn = $(".searchbar input[type=\"submit\"]")
 const userSubnav = $(".usersubnav-switch .subnav")
 const toastContainer = $("#toast")
-disableSpellcheck()
+const confirm = $("#confirm")
+const confirm_action = {
+    'login':{
+        icon : '<i class="fa-solid fa-user"></i>',
+        title : "Login Required!",
+        message : "Do you want to log in?",
+        href : 'login.jsp'
+    }
+}
+init()
 searchBtnAppearance()
+try{loginRequire()}catch(err){}
+
 function $(selector){
     let doms = document.querySelectorAll(selector)
     return doms.length>1?[...doms]:doms[0]
@@ -12,11 +23,22 @@ function createComponent(tag='div', className=null, styles=null, child=null) {
     const e = document.createElement(tag==null? 'div':tag);
     e.className = className
     e.style = styles
-    child===null? null:e.append(...child)
+    child===null? null:e.innerHTML = child
     return e
 }
-function disableSpellcheck(){
+function init(){
+    //disable spellcheck
     $("input").forEach((input)=>{input.setAttribute("spellcheck","false")})
+    //show, hide confirm alert
+    confirm.addEventListener('click',function(){
+        hideConfirm()
+    })
+    $("#confirm .confirm").addEventListener('click',function(e){
+        e.stopPropagation()
+    })
+    $(".button-cancel").addEventListener('click',function(){
+        hideConfirm()
+    })
 }
 function searchBtnAppearance(){
     searchField.addEventListener('keyup',(e)=>{
@@ -45,4 +67,23 @@ function toastMessage(type){
     toast.innerHTML = toast_content
     toastContainer.append(toast)
     setTimeout(()=>{toast.remove()},4000)
+}
+function hideConfirm(){
+    confirm.className=""
+}
+function showConfirm(){
+    confirm.className="show"
+}
+
+//
+function Confirm(action){
+    $("#confirm .confirm-title").innerHTML = `${confirm_action[action].icon} ${confirm_action[action].title}`
+    $("#confirm .button-confirm").href = confirm_action[action].href
+    $("#confirm .confirm-content").innerHTML = confirm_action[action].message
+    showConfirm()
+}
+function loginRequire(){
+    $(".js-login-require").addEventListener('click',function(){
+        Confirm('login')
+    })
 }

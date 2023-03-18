@@ -1,21 +1,24 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
 package control;
 
-import dao.AccountDAO;
-import entity.Account;
+import dao.BookDAO;
+import entity.Book;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author emsin
  */
-@WebServlet(name="Signup", urlPatterns={"/signup"})
-public class Signup extends HttpServlet {
+public class DetailProduct extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -27,25 +30,13 @@ public class Signup extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try{
-            String fullname = request.getParameter("fullname");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            AccountDAO accounts = new AccountDAO();
-            Account a = accounts.existedAccount(username);
-            if(a==null){
-                accounts.createAccount(fullname, username, password);
-                a = new AccountDAO().login(username, password);
-                 HttpSession session = request.getSession();
-                session.setAttribute("account", a);
-                response.sendRedirect("index.jsp");
-            }
-            else{
-                request.setAttribute("exist", "User already exists. Try another! ");
-                request.getRequestDispatcher("signup.jsp").forward(request, response);
-            }
-        }
-        catch(Exception e){}
+        PrintWriter out = response.getWriter();
+        String pid= request.getParameter("pid");
+        BookDAO books= new BookDAO();
+        Book book= books.getBookById(Integer.parseInt(pid));
+        request.setAttribute("book", book);
+        request.getRequestDispatcher("product.jsp").forward(request, response);
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

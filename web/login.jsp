@@ -18,7 +18,7 @@
             <div class="breadcrumb-content">
                 <h1>My Account</h1>
                 <p>
-                    <span style="opacity: 0.7">home ></span>
+                    <a href="index.jsp" class="red-hover" style="opacity: 0.7">home </a> >
                     <span>LoGIN</span>
                 </p>
             </div>   

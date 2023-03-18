@@ -10,13 +10,12 @@
     <link rel="stylesheet" href="css/globalStyle.css">
     <link rel="stylesheet" href="./css/home/home.css">
     <title>Comic Max - Comic & Manga Shop</title>
-    <jsp:useBean id="loadCategory" class="dao.Categories" scope="request"></jsp:useBean>
+    <jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
 </head>
 <body>
     <jsp:include page="header.jsp" />
-    <div style="height: 300px" onclick="toastMessage('add')"></div>
     <section class="body-container">
-        <div class="body">
+        <div class="">
             <div class="slideshow-container">
                 <div class="slideshow">
                     <div class="slide1 slide">
@@ -75,12 +74,13 @@
                         </div>
                     </div>
                     <div class="content-body">
-                        <c:forEach items="${loadCategory.getAllCategories()}" end="8" var="o">
+
+                        <c:forEach items="${loadCategory.getAllCategories()}" begin="0" end="7" var="o">
                             <a class="category-item red-hover" href="">
                                 <div>
                                     <img src="./img/home_product/${o.img}" alt="">
                                 </div>
-                                
+
                                 <span class="text-center">${o.value}</span>
                             </a>
                         </c:forEach>
@@ -97,6 +97,24 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
                         </div>
                     </div>
+                    <div class="product-container">
+                        <c:forEach begin="1" end="6" var="o">
+                            <div class="product" title="test">
+                                <a href="product?pid=2" class="product-img">
+                                    <img src="./img/home_product/anime-coloring-book.webp" alt="">
+                                </a>
+                                <div class="product-text">
+                                    <a href="product?pid=2  " class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
+                                    <p class="product-price"><b>$</b>12.00</p>
+                                    <p class="rating">
+                                        <c:forEach begin="1" end="3"><i></i></c:forEach>
+                                        <c:forEach begin="4" end="5"><u></u></c:forEach>
+                                        <span>(1.269)</span>
+                                    </p>
+                                </div>
+                                </div>
+                        </c:forEach>
+                    </div>
                 </div>
                 <div class="content">
                     <div class="content-heading">
@@ -108,6 +126,24 @@
                         <div class="content-heading__description">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
                         </div>
+                    </div>
+                    <div class="product-container">
+                        <c:forEach begin="1" end="6" var="o">
+                            <div class="product" title="test">
+                                <a href class="product-img">
+                                    <img src="./img/home_product/anime-coloring-book.webp" alt="">
+                                </a>
+                                <div class="product-text">
+                                    <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
+                                    <p class="product-price"><b>$</b>12.00</p>
+                                    <p class="rating">
+                                        <c:forEach begin="1" end="3"><i></i></c:forEach>
+                                        <c:forEach begin="4" end="5"><u></u></c:forEach>
+                                            <span>(1.269)</span>
+                                        </p>
+                                    </div>
+                                </div>
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="content">
@@ -121,7 +157,24 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
                         </div>
                     </div>
-                    
+                    <div class="product-container">
+                        <c:forEach begin="1" end="6" var="o">
+                            <div class="product" title="test">
+                                <a href class="product-img">
+                                    <img src="./img/home_product/anime-coloring-book.webp" alt="">
+                                </a>
+                                <div class="product-text">
+                                    <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
+                                    <p class="product-price"><b>$</b>12.00</p>
+                                    <p class="rating">
+                                        <c:forEach begin="1" end="3"><i></i></c:forEach>
+                                        <c:forEach begin="4" end="5"><u></u></c:forEach>
+                                            <span>(1.269)</span>
+                                        </p>
+                                    </div>
+                                </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>

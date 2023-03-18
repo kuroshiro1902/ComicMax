@@ -1,6 +1,6 @@
 package control;
 
-import dao.Accounts;
+import dao.AccountDAO;
 import entity.Account;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -30,8 +30,8 @@ public class Login extends HttpServlet {
         try{
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            Accounts accounts = new Accounts();
-            Account a = accounts.login(username, password);
+            AccountDAO account = new AccountDAO();
+            Account a = account.login(username, password);
             if(a==null){
                 request.setAttribute("message", "Wrong password!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

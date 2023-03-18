@@ -24,6 +24,10 @@
         <servlet-name>MainController</servlet-name>
         <servlet-class>control.MainController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailProduct</servlet-name>
+        <servlet-class>control.DetailProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Account</servlet-name>
         <url-pattern>/account</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailProduct</servlet-name>
+        <url-pattern>/product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

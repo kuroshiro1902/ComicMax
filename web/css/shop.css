@@ -1,0 +1,131 @@
+.filter-type{
+    padding: 8px;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.filter-type >*{
+    padding :8px 0;
+}
+.filter-type .form >*{
+    padding: 4px; 
+}
+.filter-type .form input, .filter-type .form label{
+    scale: 1.5;
+    accent-color: var(--red);
+    cursor: pointer;
+}
+.filter-type .form input{
+    margin-left: 8px;
+}
+.filter-type .form label{
+    padding: 4px;
+}
+.shop{
+    display: flex;
+}
+.shop>*{
+    padding: 0 8px;
+}
+.shop .filter{
+    width: 25%;
+}
+.shop .result{
+    width: 75%;
+}
+.shop .search{
+    padding: 8px 8px 16px 8px;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.shop .search >*{
+    padding: 8px 0;
+}
+.shop .search input[type="text"]{
+    padding: 9px 4px;
+    border: 1px solid rgba(0,0,0,.4);
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+}
+.shop .search input[type="submit"]{
+    margin-top: 8px;
+}
+
+/**/
+.shop .result{
+    display: flex;
+    flex-direction: column;
+}
+.shop .result>*{
+    padding: 8px;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.result .filter-tag{
+    display: inline-block;
+    position: relative;
+    padding: 4px 8px 4px 8px;
+    margin: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+}
+.result .filter-tag .filter-tag__close{
+    content: "x";
+    display: block;
+    width: 14px; aspect-ratio: 1/1;
+    text-align: center;
+    position: absolute;
+    top:-4px; right:-4px;
+    color: #000;
+    line-height: 1;
+    font-size: 10px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.result  .result-order::after{
+    content: "";
+    clear: both;
+}
+.result  .result-order select{
+    float: right;
+    margin-right: 16px;
+    padding: 8px 4px;
+}
+.seeResult{
+    display: none;
+    opacity: 0.5;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}
+.seeResult:hover{
+    opacity: 0.9;
+
+}
+@media (max-width: 1080px){
+    .shop{
+        flex-direction: column;
+    }
+    .shop>*{
+        width: 100% !important;
+    }
+    .filter-type-container{
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+    .seeResult{
+        display: unset;
+    }
+}
+@media (max-width: 700px){
+    .filter-type-container{
+        grid-template-columns: auto auto;
+    }
+}
+@media (max-width: 460px){
+    .filter-type-container{
+        grid-template-columns: auto;
+    }
+}

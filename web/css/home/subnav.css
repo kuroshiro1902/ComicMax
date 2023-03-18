@@ -6,10 +6,12 @@
     top: 70.2px;
     left: 0; right:0;
     padding: 8px 0 16px 0;
+}
+.header-nav .subnav{
     background-color: #fff;
 }
 .subnav>*:hover img{
-    opacity: 0.7;
+    opacity: 0.8;
     transition: opacity 0.1s;
 }
 .subnav-switch:hover .subnav{

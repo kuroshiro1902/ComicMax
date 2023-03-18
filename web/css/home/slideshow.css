@@ -1,4 +1,7 @@
 /*  */
+.slideshow-container{
+    margin-top: 24px;
+}
 .slideshow{
     position: relative;
     width: 100%;

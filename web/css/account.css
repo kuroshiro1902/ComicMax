@@ -1,7 +1,4 @@
 @import url("./globalStyle.css");
-.body{
-    padding: 48px 0;
-}
 .main form{
     max-width: 800px;
     padding: 1rem 1.5rem;
@@ -25,7 +22,6 @@
 }
 .title{
     margin-bottom: 1rem; 
-    margin-left: 1rem;
 }
 .text{
     padding:12px;

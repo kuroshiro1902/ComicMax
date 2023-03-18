@@ -1,0 +1,32 @@
+#comment{
+    padding: 16px 16px 48px 16px;
+    border-top: 1px solid rgba(0,0,0,.2);
+}
+#comment h1{
+    font-size: 2em;
+    margin-bottom: 0.5rem;
+}
+#comment .comment{
+    padding: 1rem 0;
+    max-width: 900px;
+    margin: auto;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+#comment .comment>*{
+    padding: 4px 0;
+}
+#comment .comment .comment__user-info{
+    display: flex;
+} 
+#comment .comment__user-info .avatar img{
+    height: 32px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+#comment .comment__user-info .username{
+    align-self: center;
+    margin-left: 0.75rem;
+}
+#comment .comment .comment__user-content{
+    font-size: 14px;
+}

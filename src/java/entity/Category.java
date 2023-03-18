@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entity;
+
+import context.DBContext;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class Category {
     private int id;
     private String value, img="";
@@ -41,6 +47,6 @@ public class Category {
     public void setImg(String img) {
         this.img = img;
     }
-
+    
     
 }

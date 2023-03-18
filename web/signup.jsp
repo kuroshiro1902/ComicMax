@@ -23,7 +23,7 @@
             <div class="breadcrumb-content">
                 <h1>My Account</h1>
                 <p>
-                    <span style="opacity: 0.7">home ></span>
+                    <a href="index.jsp" class="red-hover" style="opacity: 0.7">home </a> >
                     <span>sign up</span>
                 </p>
             </div>   
@@ -35,6 +35,8 @@
                     <form action="signup" method="post">
                         <input type="hidden" name="action" value="signup"> 
                         <p class="exist">${exist}</p>
+                        <label for="fullname-signup">Fullname</label>
+                            <input name="fullname" id="fullname-signup" class="text" required>
                         <label for="username-signup">Username</label>
                             <input name="username" id="username-signup" class="text" required>
                         <label for="password-signup">Password</label>
