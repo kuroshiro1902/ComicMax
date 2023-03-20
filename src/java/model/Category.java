@@ -3,18 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 public class Category {
     private int id;
-    private String value, img="";
+    private String name, img="";
 
-    public Category(int id, String value) {
+    public Category(int id, String name) {
         this.id = id;
-        this.value = value;
+        this.name = name;
     }
 
-    public Category(int id, String value, String img) {
+    public Category(int id, String name, String img) {
         this.id = id;
-        this.value = value;
+        this.name = name;
         this.img = img;
     }
 
@@ -26,12 +27,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImg() {
@@ -41,6 +42,6 @@ public class Category {
     public void setImg(String img) {
         this.img = img;
     }
-
+    
     
 }

@@ -32,15 +32,3 @@ public class DBContext {
   
  
 }
-class Test{
-    public static void main(String[] args) {
-        DBContext db = new DBContext();
-        Connection con =null;
-        try {
-            con = db.getConnection();
-            System.out.println("ket noi thang cong");
-        } catch (Exception e) {
-            System.out.println("ket noi that bai"+ e.getMessage());
-        }
-    }
-}  

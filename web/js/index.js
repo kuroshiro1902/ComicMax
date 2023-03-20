@@ -83,7 +83,10 @@ function Confirm(action){
     showConfirm()
 }
 function loginRequire(){
-    $(".js-login-require").addEventListener('click',function(){
-        Confirm('login')
+    const reqs = $(".js-login-require")
+    reqs.forEach(req=>{
+        req.addEventListener('click',()=>{Confirm('login')})
     })
+
 }
+        

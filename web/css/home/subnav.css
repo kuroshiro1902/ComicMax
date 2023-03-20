@@ -59,6 +59,14 @@
 .subnav__category:hover .button{
     background-color: var(--red);
 }
+.subnav__blur-background{
+    display: none;
+    position: fixed;
+    top: 76.8px; bottom: 0; right: 0; left: 0;
+    background-color: rgba(0,0,0,.5);
+    width: 100vw; height: 100vh;
+    z-index: 1;
+}
 .mb-subnav{
     display: none;
     position: absolute;

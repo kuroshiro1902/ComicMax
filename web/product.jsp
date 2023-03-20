@@ -63,7 +63,7 @@
                         <div class="product__add">
                             <label for="quantity"> </label>
                             <input type="number" id="quantity" name="quantity" min="1" max="123" placeholder="Quantity"><!--Thay max = so luong trong stock-->
-                            <span class="button-add"></span>
+                            <span class="button button-add ${sessionScope.account == null? "js-login-require":""}"></span>
                         </div>
                         <div class="product__description">
                             Have you got the Guts? Kentaro Miura's Berserk has outraged, horrified, and delighted manga and anime fanatics since 1989, creating an international legion of hardcore devotees and inspiring a plethora of TV series, feature films, and video games. And now the badass champion of adult fantasy manga is presented in an oversized 7" x 10" deluxe hardcover edition, nearly 700 pages amassing the first three Berserk volumes, with following volumes to come to serve up the entire series in handsome bookshelf collections. No Guts, no glory!
@@ -79,7 +79,7 @@
                     <c:forEach begin="1" end="6" var="o">
                         <div class="product" title="test">
                             <a href class="product-img">
-                                <img src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img src="img/header/anime-coloring-book.webp" alt="">
                             </a>
                             <div class="product-text">
                                 <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>

@@ -63,6 +63,9 @@
                         <div class="content-heading__description">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
                         </div>
+                        <div style="padding-top: 16px">
+                            <a href="${sessionScope.account != null ? 'shop.jsp' : 'javascript:void(0)'}" style="padding: 12px 36px 12px 36px; font-size:24px" class="button ${sessionScope.account == null? 'js-login-require' : ''}">Buy now</a>
+                        </div>
                     </div>
                 </div>
                 <div class="content allcategories">
@@ -78,10 +81,10 @@
                         <c:forEach items="${loadCategory.getAllCategories()}" begin="0" end="7" var="o">
                             <a class="category-item red-hover" href="">
                                 <div>
-                                    <img src="./img/home_product/${o.img}" alt="">
+                                    <img src="${o.getImg()}" alt="">
                                 </div>
 
-                                <span class="text-center">${o.value}</span>
+                                <span class="text-center">${o.getName()}</span>
                             </a>
                         </c:forEach>
                     </div>
@@ -101,7 +104,7 @@
                         <c:forEach begin="1" end="6" var="o">
                             <div class="product" title="test">
                                 <a href="product?pid=2" class="product-img">
-                                    <img src="./img/home_product/anime-coloring-book.webp" alt="">
+                                    <img src="img/temp.webp" alt="">
                                 </a>
                                 <div class="product-text">
                                     <a href="product?pid=2  " class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
@@ -131,7 +134,7 @@
                         <c:forEach begin="1" end="6" var="o">
                             <div class="product" title="test">
                                 <a href class="product-img">
-                                    <img src="./img/home_product/anime-coloring-book.webp" alt="">
+                                    <img src="img/temp.webp" alt="">
                                 </a>
                                 <div class="product-text">
                                     <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
@@ -161,7 +164,7 @@
                         <c:forEach begin="1" end="6" var="o">
                             <div class="product" title="test">
                                 <a href class="product-img">
-                                    <img src="./img/home_product/anime-coloring-book.webp" alt="">
+                                    <img src="img/temp.webp" alt="">
                                 </a>
                                 <div class="product-text">
                                     <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>

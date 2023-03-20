@@ -4,7 +4,7 @@
  */
 package dao;
 import context.DBContext;
-import entity.Account;
+import model.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

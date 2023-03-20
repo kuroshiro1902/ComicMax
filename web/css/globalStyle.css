@@ -202,12 +202,12 @@ input[type="submit"]{
 }
 .searchbar input[type="text"]{
     width: 100%;
-    height: 32px;
+    height: 36px;
     font-size: 1rem;
     padding: 0 68px 0 12px;
     outline:none;
     border: 1px solid #333;
-    border-radius: 16px;
+    border-radius: 4px;
 }
 .searchbar input[type="submit"]{
     position: absolute;
@@ -217,7 +217,7 @@ input[type="submit"]{
     outline: none;
     border: none;
     cursor: pointer;
-    border-radius: 18px;
+    border-radius: 4px;
     color: #fff;
     background-color: rgba(215,25,32,0.5);
 }
@@ -287,6 +287,7 @@ input[type="submit"]{
 .product-container .product {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 16px;
     margin: 0 4px;
     margin-top: 16px;
@@ -313,7 +314,7 @@ input[type="submit"]{
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
 }
 .product-title:hover{
     color: #024e5c;

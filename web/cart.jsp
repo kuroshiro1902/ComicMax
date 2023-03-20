@@ -14,6 +14,16 @@
         <jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
     </head>
     <body>
+        <jsp:include page="header.jsp" />
+        <div class="breadcrumb">
+            <div class="breadcrumb-content">
+                <h1>Cart</h1>
+                <p>
+                    <a href="index.jsp" class="red-hover" style="opacity: 0.7">home </a> >
+                    <span>cart</span>
+                </p>
+            </div>   
+        </div>
         <h1>Hello World!</h1>
     </body>
 </html>

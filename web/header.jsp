@@ -30,31 +30,32 @@
                         </a>
                         <div class="subnav">
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                         </div>
+                        <div class="subnav__blur-background"></div>
                     </div>
                     <div class="subnav-switch">
                         <a class="header-nav__item red-hover">
@@ -64,27 +65,27 @@
                         </a>
                         <div class="subnav">
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/flash.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
                             <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="./img/home_product/anime-coloring-book.webp" alt="">
+                                <img class="bdr-8" src="img/temp.webp" alt="">
                                 <h2 style="margin-top: 8px">Anime</h2>
                                 <p>$ 20.00</p>
                             </a>
@@ -99,8 +100,8 @@
                         <div class="subnav">
                             <c:forEach items="${loadCategory.allCategories}" var="o" begin="0" end="3">
                                 <a class="subnav__category" href="">
-                                    <img src="./img/home_product/${o.img}" alt="">
-                                    <div class="button" style=" max-width: 146px; text-align: center;">${o.value}</div>
+                                    <img src="${o.img}" alt="">
+                                    <div class="button" style=" max-width: 146px; text-align: center;">${o.name}</div>
                                 </a>
                             </c:forEach>
                         </div>
@@ -140,7 +141,7 @@
                             <div class="subnav cartlist">
                                 <c:forEach begin="1" end="3">
                                     <div class="cart-item" >
-                                        <div class="cart-item__img" style="background-image: url('./img/home_product/flash.webp')"></div>
+                                        <div class="cart-item__img" style="background-image: url('img/header/flash.webp')"></div>
                                         <div class="cart-item__title red-hover"><a href>Berserk Deluxe Volume 1</a></div>
                                         <div class="cart-item__price">$14.59</div>
                                     </div>

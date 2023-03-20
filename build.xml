@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="BTL_LTW" default="default" basedir=".">
-    <description>Builds, tests, and runs the project BTL_LTW.</description>
+<project name="ComicMax" default="default" basedir=".">
+    <description>Builds, tests, and runs the project ComicMax.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

@@ -43,10 +43,11 @@
                                 <h3>By <strong>Categories</strong></h3>
                             </div>
                             <form class="form">
-                                <c:forEach begin="1" end="10" var="o">
+                                <jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
+                                <c:forEach items="${loadCategory.allCategories}" var="o">
                                     <div>
-                                        <input type="checkbox" id="category${o}" name="category${o}" class="filter-input" value="category${o}">
-                                        <label for="category${o}" class="red-hover">category name</label>
+                                        <input id="category${o.getId()}" name="category" value="${o.getName()}" type="checkbox" class="filter-input">
+                                        <label for="category${o.getId()}" class="red-hover">${o.getName()}</label>
                                     </div>
                                 </c:forEach>
                             </form>
@@ -92,13 +93,17 @@
                                 <option value="{orderby: 'price', order: 'DESC'}">Price high to low</option>
                             </select>
                         </div>
+                        <div class="product-container">
+                         
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         </section>
         <jsp:include page="footer.jsp" />
         <script src="./js/index.js"></script>
-        <script src="./js/shop.js"></script>
+        <script type="module" src="./js/shop.js"></script>
     </body>
 </html>
         
