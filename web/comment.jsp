@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<section id="comment">
+<section id="comment" loading="lazy">
     <h1>Reviews</h1>
     <c:forEach begin="1" end="4">
     <div class="comment">

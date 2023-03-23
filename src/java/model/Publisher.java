@@ -4,19 +4,17 @@
  */
 package model;
 
-public class Category {
+/**
+ *
+ * @author emsin
+ */
+public class Publisher {
     private int id;
-    private String name, img="";
+    private String name;
 
-    public Category(int id, String name) {
+    public Publisher(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Category(int id, String name, String img) {
-        this.id = id;
-        this.name = name;
-        this.img = img;
     }
 
     public int getId() {
@@ -34,17 +32,8 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
     @Override
     public String toString(){
         return this.name;
     }
-    
 }

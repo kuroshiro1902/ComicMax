@@ -17,11 +17,11 @@
         <jsp:include page="header.jsp" />
         <div class="breadcrumb">
             <div class="breadcrumb-content">
-                <h1>${book.getName()}</h1>
+                <h1 class="main-product-title"></h1>
                 <p>
                     <a href="index.jsp" class="red-hover" style="opacity: 0.7">home </a> >
-                    <a href="" class="red-hover" style="opacity: 0.7">Product </a> >
-                    <span>${book.getName()}</span>
+                    <a href="shop.jsp" class="red-hover" style="opacity: 0.7">Product </a> >
+                    <span class="main-product-title"></span>
                 </p>
             </div>   
         </div>
@@ -34,31 +34,23 @@
         <div class="container">
             <div class="body" id="product">
                 <div class="product-img">
-                    <img src="https://m.media-amazon.com/images/I/91eRoWSACCL.jpg" alt="">
+                    <img class=" main-product-img" src="https://m.media-amazon.com/images/I/91eRoWSACCL.jpg" alt="">
                 </div>
                 <div class="product-detail">
-                    <h1 class="product__title">
-                        ${book.getName()}
+                    <h1 class="product__title main-product-title">
                     </h1>
-                    <div class="author">By <a href="" class="click">${book.getAuthor_id()}</a></div>
+                    <div class="author">By <a href="shop?auid=" class="main-product-author click"></a></div>
                     <div class="product__info">
-                        <span class="publisher">Publisher: <a href="" class="click">${book.getAuthor_id()}</a></span>
-                        <span class="language">Language: <a href="" class="click">${book.getLanguage()}</a></span>
-                        <span class="sold">Sold: ${book.getSold()}</span>
+                        <span class="publisher">Publisher: <a href="shop/pub?id=" class="main-product-publisher click"></a></span>
+                        <span class="language main-product-language">Language: <a href="" class="click"></a></span>
+                        <span class="sold main-product-sold">Sold: <a></a></span>
                     </div>
-                    <div class="product__category">Category: 
-                        <a href="" class="click">Manga</a>,
-                        <a href="" class="click">Fantasy</a>,
-                        <a href="" class="click">Action</a>
+                    <div class="product__category main-product-category">Category: 
                     </div>
-                    <div class="rating">
-                        <c:forEach begin="1" end="4"><i></i></c:forEach>
-                        <c:forEach begin="5" end="5"><u></u></c:forEach>
-                            <span>(1.269)</span>
-                        </div>
+                    <div class="rating main-product-rating">
+                    </div>
 
-                        <h2 class="product__price">
-                            $ 40.00  
+                        <h2 class="product__price main-product-price">
                         </h2>
                         <div class="product__add">
                             <label for="quantity"> </label>
@@ -66,9 +58,7 @@
                             <span class="button button-add ${sessionScope.account == null? "js-login-require":""}"></span>
                         </div>
                         <div class="product__description">
-                            Have you got the Guts? Kentaro Miura's Berserk has outraged, horrified, and delighted manga and anime fanatics since 1989, creating an international legion of hardcore devotees and inspiring a plethora of TV series, feature films, and video games. And now the badass champion of adult fantasy manga is presented in an oversized 7" x 10" deluxe hardcover edition, nearly 700 pages amassing the first three Berserk volumes, with following volumes to come to serve up the entire series in handsome bookshelf collections. No Guts, no glory!
-                            Have you got the Guts? Kentaro Miura's Berserk has outraged, horrified, and delighted manga and anime fanatics since 1989, creating an international legion of hardcore devotees and inspiring a plethora of TV series, feature films, and video games. And now the badass champion of adult fantasy manga is presented in an oversized 7" x 10" deluxe hardcover edition, nearly 700 pages amassing the first three Berserk volumes, with following volumes to come to serve up the entire series in handsome bookshelf collections. No Guts, no glory!
-
+                            ${book.getName()} is one of the best-selling ${book.getCategories()[0]} manga series by ${book.getAuthor()}. Published by ${book.getPublisher()} in ${book.getLanguage()}, ${book.getName()} quickly received worldwide acceptance by comic lovers with ${book.getSold()} sold. With an engaging storyline, beautiful drawings, ${book.getName()} will take you on an exciting and fascinating adventure. Buy stories today on ComicMax with best deal!
                         </div>
 
                     </div>
@@ -85,10 +75,7 @@
                                 <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
                                 <p class="product-price"><b>$</b>12.00</p>
                                 <p class="rating">
-                                    <c:forEach begin="1" end="3"><i></i></c:forEach>
-                                    <c:forEach begin="4" end="5"><u></u></c:forEach>
-                                        <span>(1.269)</span>
-                                    </p>
+                                </p>
                                 </div>
                             </div>
                     </c:forEach>
@@ -100,4 +87,5 @@
     </body>
     <jsp:include page="footer.jsp" />
     <script src="./js/index.js"></script>
+    <script src="./js/productInfo.js"></script>
 </html>

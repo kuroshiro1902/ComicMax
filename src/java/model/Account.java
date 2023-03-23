@@ -54,5 +54,8 @@ public class Account {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
-    
+    @Override
+    public String toString(){
+        return this.fullname;
+    }
 }

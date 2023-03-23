@@ -4,6 +4,11 @@
  */
 package model;
 
+import dao.AuthorDAO;
+import dao.CategoryDAO;
+import dao.PublisherDAO;
+import java.util.List;
+
 /**
  *
  * @author emsin
@@ -12,6 +17,9 @@ public class Book {
     private String name, img, language;
     private int id, author_id, publisher_id, amount, sold, ratingnums;
     private float star, price;
+    private Publisher publisher;
+    private Author author;
+    private List<Category> categories;
 
     public Book(int id, String name, String img, String language, int author_id, int publisher_id, float price, int amount, int sold, float star, int ratingnums ) {
         this.id = id;
@@ -27,6 +35,9 @@ public class Book {
         this.star = star;
         this.ratingnums = ratingnums;
         
+        this.author = new AuthorDAO().getAuthorById(author_id);
+        this.publisher = new PublisherDAO().getPublisherById(publisher_id);
+        this.categories = new CategoryDAO().getAllCategoriesOfBookId(id);
     }
 
     public String getName() {
@@ -117,6 +128,18 @@ public class Book {
         this.price = price;
     }
 
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+    
     @Override
     public String toString() {
         return "Book{" + "name=" + name + ", img=" + img + ", language=" + language + ", id=" + id + ", author_id=" + author_id + ", publisher_id=" + publisher_id + ", amount=" + amount + ", sold=" + sold + ", star=" + star + ", ratingnums=" + ratingnums + ", price=" + price + '}';

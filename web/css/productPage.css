@@ -15,6 +15,7 @@
 }
 #product .product-detail{
     padding-left: 56px;
+    flex-grow: 1;
 }
 #product .product-detail >*{
     margin-bottom: 16px;

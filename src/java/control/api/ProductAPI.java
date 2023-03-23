@@ -3,22 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package control;
+package control.api;
 
+import com.google.gson.Gson;
 import dao.BookDAO;
+import model.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Book;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author emsin
  */
-public class Product extends HttpServlet {
+public class ProductAPI extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,12 +32,15 @@ public class Product extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        Gson gson = new Gson();
         String pid= request.getParameter("pid");
-        BookDAO books= new BookDAO();
-        Book book= books.getBookById(Integer.parseInt(pid));
-        request.setAttribute("book", book);
-        request.getRequestDispatcher("product.jsp").forward(request, response);
+        Book book = new BookDAO().getBookById(Integer.parseInt(pid));
+        String bookJson = gson.toJson(book);
+        PrintWriter out = response.getWriter();
+	out.print(bookJson);
+        
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

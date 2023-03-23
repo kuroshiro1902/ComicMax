@@ -19,7 +19,7 @@
                 <h1>Buying books</h1>
                 <p>
                     <a href="index.jsp" class="red-hover" style="opacity: 0.7">home </a> >
-                    <span>shop</span>
+                    <span>product</span>
                 </p>
             </div>   
         </div>
@@ -30,10 +30,10 @@
                         <div class="content-heading__title">
                             <h3>Search <strong>Product</strong></h3>
                         </div>
-                        <form>
-                            <input type="text" name="search" placeholder="Search" required="">
-                            <input class="button" type="submit" value="search">
-                        </form>
+                        <div action="shop">
+                            <input class="main-input" type="text" name="search" placeholder="Search">
+                            <input class="button main-input-submit" type="submit" value="search">
+                        </div>
                     </div>
                     
                     <!--Lấy các tác giả, nxb, ngôn ngữ từ result cho vào đây-->
@@ -46,7 +46,7 @@
                                 <jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
                                 <c:forEach items="${loadCategory.allCategories}" var="o">
                                     <div>
-                                        <input id="category${o.getId()}" name="category" value="${o.getName()}" type="checkbox" class="filter-input">
+                                        <input id="category${o.getId()}" name="category" value="${o.getName()}" data-param="cid=${o.getId()}" type="checkbox" class="filter-input">
                                         <label for="category${o.getId()}" class="red-hover">${o.getName()}</label>
                                     </div>
                                 </c:forEach>
@@ -103,7 +103,7 @@
         </section>
         <jsp:include page="footer.jsp" />
         <script src="./js/index.js"></script>
-        <script type="module" src="./js/shop.js"></script>
+        <script src="./js/shop.js"></script>
     </body>
 </html>
         
