@@ -20,6 +20,10 @@
         <servlet-name>Product</servlet-name>
         <servlet-class>control.Product</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Shop</servlet-name>
+        <servlet-class>control.Shop</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>Product</servlet-name>
         <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Shop</servlet-name>
+        <url-pattern>/shop</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

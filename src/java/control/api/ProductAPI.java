@@ -14,13 +14,28 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import model.Account;
 
 /**
  *
  * @author emsin
  */
+class PostData{
+    private int pid, amount;
+    private String username;
+
+    public PostData(int pid, int amount) {
+        this.pid = pid;
+        this.amount = amount;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    
+}
 public class ProductAPI extends HttpServlet {
    
     /** 
@@ -32,15 +47,7 @@ public class ProductAPI extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("application/json");
-        Gson gson = new Gson();
-        String pid= request.getParameter("pid");
-        Book book = new BookDAO().getBookById(Integer.parseInt(pid));
-        String bookJson = gson.toJson(book);
-        PrintWriter out = response.getWriter();
-	out.print(bookJson);
-        
-        
+         
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,7 +61,13 @@ public class ProductAPI extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json");
+        Gson gson = new Gson();
+        String pid= request.getParameter("pid");
+        Book book = new BookDAO().getBookById(Integer.parseInt(pid));
+        String bookJson = gson.toJson(book);
+        PrintWriter out = response.getWriter();
+	out.print(bookJson);
     } 
 
     /** 
@@ -67,7 +80,16 @@ public class ProductAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json");
+        Gson gson = new Gson();
+        BufferedReader reader = request.getReader();
+        //Get data from fetch body
+        PostData body = gson.fromJson(reader, PostData.class);
+        Account a = (Account)request.getSession().getAttribute("account");
+        body.setUsername(a.getUsername());
+        // query here////////////////////////////////////////////////
+        PrintWriter out = response.getWriter();
+	out.print(gson.toJson(body));
     }
 
     /** 

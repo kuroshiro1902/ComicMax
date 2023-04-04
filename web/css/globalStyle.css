@@ -5,6 +5,9 @@
 }
 :root{
     --red: #D71920;
+    --confirm: #47d864;
+    --info: #016df0;
+    --warning: #ff3a25;
 }
 html{
     scroll-behavior: smooth;
@@ -356,7 +359,7 @@ input[type="submit"]{
     align-items: center;
     background-color: #fff;
     border-radius: 2px;
-    border-left: 4px solid #47d864;
+    border-left: 4px solid var(--confirm);
     box-shadow: 0 4px 8px rgba(0,0,0,0.08);
     animation: slideIn .7s ease-out, slideIn .7s 3s ease-in reverse forwards;
 }
@@ -365,7 +368,7 @@ input[type="submit"]{
     line-height: 1.4;
 }
 .toast__icon{
-    color: #47d864;
+    color: var(--confirm);
 }
 .toast__icon,.toast__close{
     padding: 0 16px

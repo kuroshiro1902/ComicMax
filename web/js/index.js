@@ -47,23 +47,22 @@ function searchBtnAppearance(){
         else searchBtn.style.display='block'
     })
 }
-function toastMessage(type){
-    let message
-    if (type=='add')
-        message = "Product added to cart."
-    else
-        message = "Deleted product from cart."
+function toastMessage(type, title, message){
+//    if (type=='add')
+//        message = "Product added to cart."
+//    else
+//        message = "Deleted product from cart."
     const toast_content = `<div class="toast__icon">
           <i class="fas fa-check-circle"></i>
      </div>
      <div class="toast__text">
-          <h3 class="toast__title">Done!</h3>
+          <h3 class="toast__title">${title}</h3>
           <div class="toast_message">${message}</div>
      </div>
      <div class="toast__close">
           <i class="fas fa-close"></i>
      </div>`
-    const toast = createComponent('div','toast',null,null)
+    const toast = createComponent('div',`toast toast_${type}`,null,null)
     toast.innerHTML = toast_content
     toastContainer.append(toast)
     setTimeout(()=>{toast.remove()},4000)

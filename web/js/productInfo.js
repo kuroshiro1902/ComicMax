@@ -22,6 +22,8 @@ window.addEventListener("DOMContentLoaded", () => {
   fetch(window.location.href.split("?").join("api?"))
         .then(res=>res.json())
         .then(data=>{
+            //id (for adding to wishlist)
+            $("#product").setAttribute('data-id',data.id)
             //title
             $(".main-product-title").forEach((titleField)=>{
                 titleField.innerText = data.name

@@ -7,7 +7,10 @@ package model;
 import dao.AuthorDAO;
 import dao.CategoryDAO;
 import dao.PublisherDAO;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -139,7 +142,12 @@ public class Book {
     public List<Category> getCategories() {
         return categories;
     }
-    
+    public Set<Integer> getCategoryIds(){
+        int n = categories.size();
+        Set<Integer> list = new HashSet<>();
+        for(int i=0;i<n;i++) list.add(categories.get(i).getId());
+        return list;
+    }
     @Override
     public String toString() {
         return "Book{" + "name=" + name + ", img=" + img + ", language=" + language + ", id=" + id + ", author_id=" + author_id + ", publisher_id=" + publisher_id + ", amount=" + amount + ", sold=" + sold + ", star=" + star + ", ratingnums=" + ratingnums + ", price=" + price + '}';

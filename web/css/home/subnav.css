@@ -34,6 +34,13 @@
 .subnav__book:hover{
     color: var(--red);
 }
+.subnav__book h2{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
 @keyframes fadeIn{
     from{
         opacity: 0;

@@ -1,4 +1,5 @@
 @import url("./comment.css");
+@import url("./toast.css");
 #product{
     display: flex;
 }

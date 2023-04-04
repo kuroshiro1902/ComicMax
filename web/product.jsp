@@ -32,7 +32,7 @@
             </div>
         </c:if>
         <div class="container">
-            <div class="body" id="product">
+            <div class="body" id="product" data-id>
                 <div class="product-img">
                     <img class=" main-product-img" src="https://m.media-amazon.com/images/I/91eRoWSACCL.jpg" alt="">
                 </div>
@@ -41,7 +41,7 @@
                     </h1>
                     <div class="author">By <a href="shop?auid=" class="main-product-author click"></a></div>
                     <div class="product__info">
-                        <span class="publisher">Publisher: <a href="shop/pub?id=" class="main-product-publisher click"></a></span>
+                        <span class="publisher">Publisher: <a href="shop?pubid=" class="main-product-publisher click"></a></span>
                         <span class="language main-product-language">Language: <a href="" class="click"></a></span>
                         <span class="sold main-product-sold">Sold: <a></a></span>
                     </div>
@@ -55,10 +55,15 @@
                         <div class="product__add">
                             <label for="quantity"> </label>
                             <input type="number" id="quantity" name="quantity" min="1" max="123" placeholder="Quantity"><!--Thay max = so luong trong stock-->
-                            <span class="button button-add ${sessionScope.account == null? "js-login-require":""}"></span>
+                            <c:if  test="${sessionScope.account == null}">
+                                <span class="button button-add js-login-require"></span>
+                            </c:if>
+                            <c:if  test="${sessionScope.account != null}">
+                                <span class="button button-add js-add-to-cart"></span>
+                            </c:if>
                         </div>
                         <div class="product__description">
-                            ${book.getName()} is one of the best-selling ${book.getCategories()[0]} manga series by ${book.getAuthor()}. Published by ${book.getPublisher()} in ${book.getLanguage()}, ${book.getName()} quickly received worldwide acceptance by comic lovers with ${book.getSold()} sold. With an engaging storyline, beautiful drawings, ${book.getName()} will take you on an exciting and fascinating adventure. Buy stories today on ComicMax with best deal!
+                            ${book.getName()} is one of the best-selling ${book.getCategories()[0]} comic series by ${book.getAuthor()}. Published by ${book.getPublisher()} in ${book.getLanguage()}, ${book.getName()} quickly received worldwide acceptance by comic lovers with ${book.getSold()} sold. With an engaging storyline, beautiful drawings, ${book.getName()} will take you on an exciting and fascinating adventure. Buy stories today on ComicMax with best deal!
                         </div>
 
                     </div>
@@ -88,4 +93,7 @@
     <jsp:include page="footer.jsp" />
     <script src="./js/index.js"></script>
     <script src="./js/productInfo.js"></script>
+    <c:if  test="${sessionScope.account != null}">
+        <script type="module" src="./js/user/index.js"></script>
+    </c:if>
 </html>

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
-        <jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
+<jsp:useBean id="loadBook" class="dao.BookDAO" scope="request"></jsp:useBean>
         <div id="toast"></div>
         <div id="confirm">
             <div class="confirm">
@@ -28,33 +29,39 @@
                             <h4>Action</h4>
                             <i class="fa-solid fa-caret-down"></i>
                         </a>
-                        <div class="subnav">
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
-                            </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
-                            </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
-                            </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
-                            </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
-                            </a>
-                        </div>
+                    
+                    <div class="subnav">
+                        <c:set var = "o" scope = "request" value = "${loadBook.getBookById(97)}"/>
+                        <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                            <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                            <h2 style="margin-top: 8px">${o.name}</h2>
+                            <p>$ ${o.price}</p>
+                        </a>
+                        <c:set var = "o" scope = "request" value = "${loadBook.getBookById(105)}"/>
+                        <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                            <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                            <h2 style="margin-top: 8px">${o.name}</h2>
+                            <p>$ ${o.price}</p>
+                        </a>
+                        <c:set var = "o" scope = "request" value = "${loadBook.getBookById(110)}"/>
+                        <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                            <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                            <h2 style="margin-top: 8px">${o.name}</h2>
+                            <p>$ ${o.price}</p>
+                        </a>
+                        <c:set var = "o" scope = "request" value = "${loadBook.getBookById(120)}"/>
+                        <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                            <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                            <h2 style="margin-top: 8px">${o.name}</h2>
+                            <p>$ ${o.price}</p>
+                        </a>
+                        <c:set var = "o" scope = "request" value = "${loadBook.getBookById(130)}"/>
+                        <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                            <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                            <h2 style="margin-top: 8px">${o.name}</h2>
+                            <p>$ ${o.price}</p>
+                        </a>
+                    </div>
                         <div class="subnav__blur-background"></div>
                     </div>
                     <div class="subnav-switch">
@@ -64,31 +71,36 @@
                             <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="subnav">
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
+                            <c:set var = "o" scope = "request" value = "${loadBook.getBookById(1)}"/>
+                            <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                                <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                                <h2 style="margin-top: 8px">${o.name}</h2>
+                                <p>$ ${o.price}</p>
                             </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
+                            <c:set var = "o" scope = "request" value = "${loadBook.getBookById(20)}"/>
+                            <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                                <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                                <h2 style="margin-top: 8px">${o.name}</h2>
+                                <p>$ ${o.price}</p>
                             </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
+                            <c:set var = "o" scope = "request" value = "${loadBook.getBookById(30)}"/>
+                            <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                                <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                                <h2 style="margin-top: 8px">${o.name}</h2>
+                                <p>$ ${o.price}</p>
                             </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
+                            <c:set var = "o" scope = "request" value = "${loadBook.getBookById(80)}"/>
+                            <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                                <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                                <h2 style="margin-top: 8px">${o.name}</h2>
+                                <p>$ ${o.price}</p>
                             </a>
-                            <a class="subnav__book text-center" href="">
-                                <img class="bdr-8" src="img/temp.webp" alt="">
-                                <h2 style="margin-top: 8px">Anime</h2>
-                                <p>$ 20.00</p>
-                            </a>
+                            <c:set var = "o" scope = "request" value = "${loadBook.getBookById(100)}"/>
+                            <a class="subnav__book text-center" href="product?pid=${o.id}" title="${o.name}">
+                                <img class="bdr-8" src="${o.img}" alt="${o.name}">
+                                <h2 style="margin-top: 8px">${o.name}</h2>
+                                <p>$ ${o.price}</p>
+                            </a> 
                         </div>
                     </div>
                     <div class="subnav-switch mb-menu">
@@ -127,7 +139,7 @@
                         </a>
                     </div>
                 </div>
-                <form class="searchbar block-center">
+                <form class="searchbar block-center" action="shop.jsp">
                     <input type="text" name="search" placeholder="Search" title="What do want to read?" required>
                     <input type="submit" value="Search" class="button" style="display: none">
                 </form>

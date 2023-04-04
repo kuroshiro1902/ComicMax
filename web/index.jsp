@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/home/home.css">
     <title>Comic Max - Comic & Manga Shop</title>
     <jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
+    <jsp:useBean id="loadBook" class="dao.BookDAO" scope="request"></jsp:useBean>
 </head>
 <body>
     <jsp:include page="header.jsp" />
@@ -101,18 +102,18 @@
                         </div>
                     </div>
                     <div class="product-container">
-                        <c:forEach begin="1" end="6" var="o">
-                            <div class="product" title="test">
-                                <a href="product?pid=2" class="product-img">
-                                    <img src="img/temp.webp" alt="">
+                        <c:forEach items="${loadBook.getTop(6)}" var="o">
+                            <div class="product" title="${o.name}">
+                                <a href="product?pid=${o.id}" class="product-img">
+                                    <img src="${o.img}" alt="${o.name}">
                                 </a>
                                 <div class="product-text">
-                                    <a href="product?pid=2  " class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
-                                    <p class="product-price"><b>$</b>12.00</p>
+                                    <a href="product?pid=${o.id}" class="product-title">${o.name}</a>
+                                    <p class="product-price"><b>$</b>${o.price}</p>
                                     <p class="rating">
-                                        <c:forEach begin="1" end="3"><i></i></c:forEach>
-                                        <c:forEach begin="4" end="5"><u></u></c:forEach>
-                                        <span>(1.269)</span>
+                                        <c:forEach begin="1" end="${o.star}"><i></i></c:forEach>
+                                        <c:forEach begin="${o.star+1}" end="5"><u></u></c:forEach>
+                                        <span>(${o.sold})</span>
                                     </p>
                                 </div>
                                 </div>
@@ -131,20 +132,20 @@
                         </div>
                     </div>
                     <div class="product-container">
-                        <c:forEach begin="1" end="6" var="o">
-                            <div class="product" title="test">
-                                <a href class="product-img">
-                                    <img src="img/temp.webp" alt="">
+                        <c:forEach items="${loadBook.getTopNewestBooks(6)}" var="o">
+                            <div class="product" title="${o.name}">
+                                <a href="product?pid=${o.id}" class="product-img">
+                                    <img src="${o.img}" alt="${o.name}">
                                 </a>
                                 <div class="product-text">
-                                    <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
-                                    <p class="product-price"><b>$</b>12.00</p>
+                                    <a href="product?pid=${o.id}" class="product-title">${o.name}</a>
+                                    <p class="product-price"><b>$</b>${o.price}</p>
                                     <p class="rating">
-                                        <c:forEach begin="1" end="3"><i></i></c:forEach>
-                                        <c:forEach begin="4" end="5"><u></u></c:forEach>
-                                            <span>(1.269)</span>
-                                        </p>
-                                    </div>
+                                        <c:forEach begin="1" end="${o.star}"><i></i></c:forEach>
+                                        <c:forEach begin="${o.star+1}" end="5"><u></u></c:forEach>
+                                        <span>(${o.sold})</span>
+                                    </p>
+                                </div>
                                 </div>
                         </c:forEach>
                     </div>
@@ -161,20 +162,20 @@
                         </div>
                     </div>
                     <div class="product-container">
-                        <c:forEach begin="1" end="6" var="o">
-                            <div class="product" title="test">
-                                <a href class="product-img">
-                                    <img src="img/temp.webp" alt="">
+                        <c:forEach items="${loadBook.getTop(6)}" var="o">
+                            <div class="product" title="${o.name}">
+                                <a href="product?pid=${o.id}" class="product-img">
+                                    <img src="${o.img}" alt="${o.name}">
                                 </a>
                                 <div class="product-text">
-                                    <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>
-                                    <p class="product-price"><b>$</b>12.00</p>
+                                    <a href="product?pid=${o.id}" class="product-title">${o.name}</a>
+                                    <p class="product-price"><b>$</b>${o.price}</p>
                                     <p class="rating">
-                                        <c:forEach begin="1" end="3"><i></i></c:forEach>
-                                        <c:forEach begin="4" end="5"><u></u></c:forEach>
-                                            <span>(1.269)</span>
-                                        </p>
-                                    </div>
+                                        <c:forEach begin="1" end="${o.star}"><i></i></c:forEach>
+                                        <c:forEach begin="${o.star+1}" end="5"><u></u></c:forEach>
+                                        <span>(${o.sold})</span>
+                                    </p>
+                                </div>
                                 </div>
                         </c:forEach>
                     </div>

@@ -13,11 +13,20 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Book;
 /**
  *
  * @author emsin
  */
 public class ShopAPI extends HttpServlet {
+    public String searchPrepocessor(String s){
+            s=s.toLowerCase();
+            s=s.trim();
+            s=s.replaceAll("([`~!@#$%^&*()-_=+[{]};:',<.>/?])", " ");
+            s=s.replaceAll("\\s+", " ");
+        return s;
+    }
 //    private final Gson gson = new Gson();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,16 +40,21 @@ public class ShopAPI extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
+        //search
         String search = request.getParameter("search");
+        String[] cids = request.getParameterValues("cid");
+        String author = request.getParameter("auid");
         String ans;
         if(search!=null && !search.equals("")){
-            ans = new Gson().toJson(new BookDAO().getTop(Integer.parseInt(search)));
+            search = this.searchPrepocessor(search);
+            ans = new Gson().toJson(new BookDAO().search(search, cids, author));
         }
         else{
             ans = new Gson().toJson(new BookDAO().getTop(10));
         }
-        out.print(ans);
+        //category
 
+        out.print(ans);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
