@@ -1,4 +1,11 @@
 const product = $("#product")
+function cartItem(item){
+    return `<div class="cart-item" data-pid="${item.pid}">
+                <div class="cart-item__img" style="background-image: url('${item.img}')"></div>
+                <div class="cart-item__title red-hover"><a href>${$(".main-product-title").innerText}</a></div>
+                <div class="cart-item__price" style="position:relative">${$(".main-product-price").innerText} <span style="position:absolute;top:100%;left:0"> x ${item.amount}</span></div>
+            </div>`
+}
 export default function AddToCart(){
     const pid = product.getAttribute('data-id')
     const amount = $("#quantity").value
@@ -17,7 +24,10 @@ export default function AddToCart(){
         .then(res=>res.json())
         .then(data=>{
             $("#quantity").value = null
-            toastMessage('confirm','Done!','Products have been added to cart.') 
+            toastMessage('confirm','Done!','Products have been added to cart.')
+            if($(".cart-item").length <= 3){
+                $(".cartlist").append(cartItem(data))
+            }
             console.log(data)
         })
         .catch(function(){

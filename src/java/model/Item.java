@@ -10,7 +10,7 @@ package model;
  */
 public class Item {
     private int pid, amount;
-    private String username;
+    private String username, img = null;
 
     public Item(int pid, int amount) {
         this.pid = pid;
@@ -44,5 +44,16 @@ public class Item {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    public float getTotal(float price){
+        return (float) Math.round(price*this.amount*100)/100;
     }
 }

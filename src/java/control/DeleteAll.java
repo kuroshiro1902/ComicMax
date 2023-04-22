@@ -3,26 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package control.api;
+package control;
 
-import com.google.gson.Gson;
-import dao.BookDAO;
-import dao.ItemDAO;
-import model.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import model.Account;
-import model.Item;
+
 /**
  *
  * @author emsin
  */
-public class ProductAPI extends HttpServlet {
+public class DeleteAll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,7 +27,9 @@ public class ProductAPI extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         
+        response.setContentType("text/html;charset=UTF-8");
+        //thuc thi lenh xoa
+        response.sendRedirect("cart.jsp");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,13 +43,7 @@ public class ProductAPI extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("application/json");
-        Gson gson = new Gson();
-        String pid= request.getParameter("pid");
-        Book book = new BookDAO().getBookById(Integer.parseInt(pid));
-        String bookJson = gson.toJson(book);
-        PrintWriter out = response.getWriter();
-	out.print(bookJson);
+        processRequest(request, response);
     } 
 
     /** 
@@ -66,18 +56,7 @@ public class ProductAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("application/json");
-        Gson gson = new Gson();
-        BufferedReader reader = request.getReader();
-        //Get data from fetch body
-        Item item = gson.fromJson(reader, Item.class);
-        Account a = (Account)request.getSession().getAttribute("account");
-        item.setUsername(a.getUsername());
-        new ItemDAO().addItemToCart(item);
-        // query here////////////////////////////////////////////////
-        item.setImg(new BookDAO().getBookById(item.getPid()).getImg());
-        PrintWriter out = response.getWriter();
-	out.print(gson.toJson(item));
+        processRequest(request, response);
     }
 
     /** 

@@ -65,7 +65,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates minima tempore cumque!</p>
                         </div>
                         <div style="padding-top: 16px">
-                            <a href="${sessionScope.account != null ? 'shop.jsp' : 'javascript:void(0)'}" style="padding: 12px 36px 12px 36px; font-size:24px" class="button ${sessionScope.account == null? 'js-login-require' : ''}">Buy now</a>
+                            <a href="shop.jsp" style="padding: 12px 36px 12px 36px; font-size:24px" class="button">Buy now</a>
                         </div>
                     </div>
                 </div>

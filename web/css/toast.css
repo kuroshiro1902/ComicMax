@@ -3,14 +3,14 @@
 }
 /*info*/
 .toast_info{
-    border-left: 4px solid var(--info);
+    border-left: 4px solid var(--info) !important;
 }
 .toast_info .toast__icon{
     color: var(--info);
 }
 /*warning*/
 .toast_warning{
-    border-left: 4px solid var(--warning);
+    border-left: 4px solid var(--warning) !important;
 }
 .toast_warning .toast__icon{
     color: var(--warning);

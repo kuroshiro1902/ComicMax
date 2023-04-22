@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <jsp:useBean id="loadCategory" class="dao.CategoryDAO" scope="request"></jsp:useBean>
 <jsp:useBean id="loadBook" class="dao.BookDAO" scope="request"></jsp:useBean>
+<jsp:useBean id="loadItem" class="dao.ItemDAO" scope="request"></jsp:useBean>
         <div id="toast"></div>
         <div id="confirm">
             <div class="confirm">
@@ -146,20 +147,28 @@
                 <div class="header-usernav navbar">
                     <c:if test="${sessionScope.account != null}">
                         <div class="usersubnav-switch user-hover">
-                            <a href class="header-usernav__item red-hover cart">
+                            <div class="header-usernav__item red-hover cart">
                                <i class="fa-solid fa-cart-shopping"></i>
                                 <span class="amount">0</span>
-                            </a>
+                            </div>
                             <div class="subnav cartlist">
-                                <c:forEach begin="1" end="3">
-                                    <div class="cart-item" >
-                                        <div class="cart-item__img" style="background-image: url('img/header/flash.webp')"></div>
-                                        <div class="cart-item__title red-hover"><a href>Berserk Deluxe Volume 1</a></div>
-                                        <div class="cart-item__price">$14.59</div>
+                                <c:if test="${loadItem.getAllItemsByUser(sessionScope.account).size()<=0}">
+                                    <div class="cart-item" style="text-align: center; font-size: 18px">
+                                        No item in Cart!
+                                    </div>
+                                </c:if>
+                                <c:if test="${loadItem.getAllItemsByUser(sessionScope.account).size()>0}">
+                                    <c:forEach items="${loadItem.getAllItemsByUser(sessionScope.account)}" var="i" begin="0" end="3">
+                                    <c:set var = "b" scope = "request" value = "${loadBook.getBookById(i.getPid())}"/>
+                                    <div class="cart-item" data-pid="${b.getId()}">
+                                        <div class="cart-item__img" style="background-image: url('${b.getImg()}')"></div>
+                                        <div class="cart-item__title red-hover"><a href>${b.getName()}</a></div>
+                                        <div class="cart-item__price" style="position:relative">$${b.getPrice()} <span style="position:absolute;top:100%;left:0"> x ${i.getAmount()}</span></div>
                                     </div>
                                 </c:forEach>
+                                </c:if>
                                 <div class="cart-item">
-                                    <a href class="button"> See all</a>
+                                    <a href="cart.jsp" class="button"> See all</a>
                                 </div>
                                 
                             </div>

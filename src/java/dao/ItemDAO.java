@@ -18,7 +18,7 @@ import model.Item;
  * @author emsin
  */
 public class ItemDAO {
-    public List<Item> getAllItemsByUsername(Account a){
+    public List<Item> getAllItemsByUser(Account a){
         List list = new ArrayList<>();
         String query = "select * from Item where username = ?"; //lay tu db ra
         try {
@@ -28,12 +28,11 @@ public class ItemDAO {
             ps.setString(1, a.getUsername());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                list.add(new Item(rs.getString(1),
-                                 rs.getInt(2),
-                                rs.getInt(3))
+                list.add(new Item(rs.getString(1), 
+                        rs.getInt(2), 
+                        rs.getInt(3))
                 );
             }
-          
         } catch (Exception e) {}
         return list;
     }
@@ -49,29 +48,40 @@ public class ItemDAO {
             while(rs.next()){
                 Item item = new Item(rs.getString(1),
                                  rs.getInt(2),
-                                rs.getInt(3));
+                                rs.getInt(3)
+                );
                 return item;
             }
           
         } catch (Exception e) {}
         return null;
     }
-//    public void addItemToCart(Item item){
-//        String insert_query = "insert into Item values (?,?,?)"; //lay tu db ra
-//        try {
-//            DBContext db = DBContext.getInstance();
-//            Connection conn = db.getConnection();
-//            PreparedStatement ps = conn.prepareStatement(query);
-//            ps.setInt(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            while(rs.next()){
-//                Category result = new Category(rs.getInt(1),
-//                                 rs.getString(2),
-//                                rs.getString(3)          
-//               );
-//                return result;
-//            }
-//          
-//        } catch (Exception e) {}
-//    }
+    public boolean addItemToCart(Item item){
+        String query;
+        int effectRow=0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+            Item instanceItem = this.getItemByUsernameAndBookId(item.getUsername(), item.getPid());
+            if(instanceItem!=null){ //neu item da co trong gio hang
+                item.setAmount(instanceItem.getAmount()+item.getAmount()); //them so luong vao
+                query = "update Item set amount = ? where username = ? and book_id = ?";
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, item.getAmount());
+                ps.setString(2, item.getUsername());
+                ps.setInt(3, item.getPid());
+                
+            }
+            else{ //neu item chua co trong gio hang
+                query = "insert into Item values (?,?,?)";
+                ps = conn.prepareStatement(query);
+                ps.setString(1, item.getUsername());
+                ps.setInt(2, item.getPid());
+                ps.setInt(3, item.getAmount());
+            }
+            effectRow = ps.executeUpdate();
+        } catch (Exception e) {}
+        return effectRow>0;
+    }
 }

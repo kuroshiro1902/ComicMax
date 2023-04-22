@@ -24,6 +24,10 @@
         <servlet-name>Shop</servlet-name>
         <servlet-class>control.Shop</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAll</servlet-name>
+        <servlet-class>control.DeleteAll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>Shop</servlet-name>
         <url-pattern>/shop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAll</servlet-name>
+        <url-pattern>/deleteall</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

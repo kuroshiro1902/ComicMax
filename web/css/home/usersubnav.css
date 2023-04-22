@@ -50,8 +50,7 @@
     background-size: cover; 
 }
 .cartlist .cart-item__title{
-    padding: 8px 0;
-    margin: 8px;
+    margin: 16px;
     min-width: 160px;
     max-width: 200px;
     text-overflow: ellipsis;

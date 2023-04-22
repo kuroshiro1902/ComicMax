@@ -9,6 +9,12 @@ const confirm_action = {
         title : "Login Required!",
         message : "Do you want to log in?",
         href : 'login.jsp'
+    },
+    'delete':{
+        icon : '<i class="fa-solid fa-mark"></i>',
+        title : "Delete",
+        message : "Do you want to delete this product!",
+        href : './deleteall'
     }
 }
 init()
@@ -30,15 +36,7 @@ function init(){
     //disable spellcheck
     $("input").forEach((input)=>{input.setAttribute("spellcheck","false")})
     //show, hide confirm alert
-    confirm.addEventListener('click',function(){
-        hideConfirm()
-    })
-    $("#confirm .confirm").addEventListener('click',function(e){
-        e.stopPropagation()
-    })
-    $(".button-cancel").addEventListener('click',function(){
-        hideConfirm()
-    })
+    
 }
 function searchBtnAppearance(){
     searchField.addEventListener('keyup',(e)=>{
@@ -79,13 +77,24 @@ function Confirm(action){
     $("#confirm .confirm-title").innerHTML = `${confirm_action[action].icon} ${confirm_action[action].title}`
     $("#confirm .button-confirm").href = confirm_action[action].href
     $("#confirm .confirm-content").innerHTML = confirm_action[action].message
+    confirm.onclick = hideConfirm
+    $(".button-cancel").onclick = hideConfirm
+    $("#confirm .confirm").onclick = function(e){
+        e.stopPropagation()
+    }
     showConfirm()
+    return 1
 }
 function loginRequire(){
     const reqs = $(".js-login-require")
-    reqs.forEach(req=>{
-        req.addEventListener('click',()=>{Confirm('login')})
-    })
-
+    try{
+        reqs.forEach(req=>{
+            req.addEventListener('click',()=>{Confirm('login')})
+        })
+    }
+    catch(err){
+        reqs.addEventListener('click',()=>{Confirm('login')})
+    }
+    
 }
         
