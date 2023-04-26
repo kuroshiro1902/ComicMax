@@ -64,7 +64,7 @@
                             <button type="button" class="js-add">+</button>
                         </div>
                         <div class="total">$${o.getTotal(b.getPrice())}</div>
-                        <div class="delete" title="Delete this product" onclick="alert('hello')">
+                        <div class="delete js-delete" title="Delete this product">
                             <span>x</span>
                         </div>
                     </div>

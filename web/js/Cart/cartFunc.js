@@ -1,3 +1,4 @@
+import Delete from "../CRUD/Delete.js"
 const selectBtns = $(".js-select").concat($(".js-select-all"))
 function selectAll(e){
     const E = e.target
@@ -47,7 +48,7 @@ function minus(e){
     const E = e.target
     let amount = parseInt(E.nextElementSibling.value)
     if(!amount) amount = 0
-    E.nextElementSibling.value = amount>1? amount-1 : Confirm('delete')
+    E.nextElementSibling.value = amount>1? amount-1 : Delete(E.parentElement.parentElement)
     updateTotalItem(E.parentElement.parentElement)
 }
 function totalCalculate(){

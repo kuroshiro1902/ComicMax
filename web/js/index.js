@@ -14,7 +14,7 @@ const confirm_action = {
         icon : '<i class="fa-solid fa-mark"></i>',
         title : "Delete",
         message : "Do you want to delete this product!",
-        href : './deleteall'
+        href : false
     }
 }
 init()
@@ -71,17 +71,18 @@ function hideConfirm(){
 function showConfirm(){
     confirm.className="show"
 }
-
 //
-function Confirm(action){
+confirm.onclick = hideConfirm
+$(".button-cancel").onclick = hideConfirm
+$("#confirm .button-confirm").addEventListener('click',hideConfirm)
+$("#confirm .confirm").onclick = function(e){
+    e.stopPropagation()
+}
+function Confirm(action,cb=undefined){
     $("#confirm .confirm-title").innerHTML = `${confirm_action[action].icon} ${confirm_action[action].title}`
-    $("#confirm .button-confirm").href = confirm_action[action].href
+    confirm_action[action].href ? $("#confirm .button-confirm").href = confirm_action[action].href : null
+    $("#confirm .button-confirm").onclick = cb
     $("#confirm .confirm-content").innerHTML = confirm_action[action].message
-    confirm.onclick = hideConfirm
-    $(".button-cancel").onclick = hideConfirm
-    $("#confirm .confirm").onclick = function(e){
-        e.stopPropagation()
-    }
     showConfirm()
     return 1
 }

@@ -1,7 +1,23 @@
 import cartFunc from "./cartFunc.js"
-console.log(cartFunc)
+import Update from "../CRUD/Update.js"
+import Delete from "../CRUD/Delete.js"
 $(".js-select").forEach(selectBtn=>{
-    selectBtn.onclick = cartFunc.totalCalculate
+    selectBtn.onclick = ()=>{
+        cartFunc.totalCalculate()
+        const selects = $(".js-select")
+        if (selects.reduce(
+            (total,slctBtn)=> total + (slctBtn.checked ? 1 : 0)
+        ,0) === selects.length){
+            $(".js-select-all").forEach(selectAllBtn => {
+                selectAllBtn.checked = true
+            })
+        }
+        else{
+            $(".js-select-all").forEach(selectAllBtn => {
+                selectAllBtn.checked = false
+            })
+        }
+    }
 })
 $(".js-select-all").forEach(selectAllBtn=>{
     selectAllBtn.onchange = cartFunc.selectAll
@@ -14,17 +30,19 @@ $(".js-amount").forEach(input=>{
 })
 $(".js-add").forEach(addBtn=>{
     addBtn.onclick = cartFunc.add
+    addBtn.addEventListener('click',()=>{
+        Update(addBtn.parentElement.parentElement)
+    })
 })    
 $(".js-minus").forEach(minusBtn=>{
     minusBtn.onclick = cartFunc.minus
+    minusBtn.addEventListener('click',()=>{
+        Update(minusBtn.parentElement.parentElement)
+    })
 })
 $(".js-select-all").forEach(selectAllBtn=>{
     selectAllBtn.onclick = cartFunc.totalCalculate
 })
-//Items.forEach(i=>{
-//    i.checkbox.onchange = (e)=>{
-//        $(".total:last-child").innerText = Items.reduce((total,item)=>{
-//            return total + (item.checkbox.checked?item.getTotal():0)
-//        },0)
-//    }
-//})
+$(".js-delete").forEach(deleteBtn=>{
+    deleteBtn.onclick = ()=>{Delete(deleteBtn.parentElement)}
+})

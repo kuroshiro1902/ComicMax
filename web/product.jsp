@@ -94,6 +94,6 @@
     <script src="./js/index.js"></script>
     <script src="./js/productInfo.js"></script>
     <c:if  test="${sessionScope.account != null}">
-        <script type="module" src="./js/user/index.js"></script>
+        <script type="module" src="./js/CRUD/index.js"></script>
     </c:if>
 </html>
