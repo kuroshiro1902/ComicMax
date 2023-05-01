@@ -46,8 +46,9 @@ public class ShopAPI extends HttpServlet {
         String author = request.getParameter("auid");
         String ans;
         if(search!=null && !search.equals("")){
-            search = this.searchPrepocessor(search);
-            ans = new Gson().toJson(new BookDAO().search(search, cids, author));
+//            search = this.searchPrepocessor(search);
+//            ans = new Gson().toJson(new BookDAO().search(search, cids, author));
+            ans = new Gson().toJson(new BookDAO().getAllBooksLike(search));
         }
         else{
             ans = new Gson().toJson(new BookDAO().getTop(10));

@@ -84,4 +84,18 @@ public class ItemDAO {
         } catch (Exception e) {}
         return effectRow>0;
     }
+    public boolean deleteItem(Item item){
+        String query = "DELETE FROM Item WHERE book_id = ? and username = ? ";
+        int effectRow=0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, item.getPid());
+            ps.setString(2, item.getUsername());
+            effectRow = ps.executeUpdate();
+        } catch (Exception e) {}
+        return effectRow>0;
+    }
 }

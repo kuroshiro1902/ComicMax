@@ -11,10 +11,13 @@ package model;
 public class Item {
     private int pid, amount;
     private String username, img = null;
-
     public Item(int pid, int amount) {
         this.pid = pid;
         this.amount = amount;
+    }
+    public Item(String username, int pid){
+        this.pid = pid;
+        this.username = username;   
     }
     public Item(String username, int pid, int amount) {
         this.pid = pid;

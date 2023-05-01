@@ -26,6 +26,9 @@ public class BookDAO {
         }
         return list;
     }
+//    public List<Book> getList(String query, String n){
+//        
+//    }
     public List<Book> getTop(int n){
         List<Book> list = new ArrayList<>();
         String query = "select top "+ n +" * from Book order by sold DESC"; //lay tu db ra
@@ -84,11 +87,12 @@ public class BookDAO {
     }
     public List<Book> getAllBooksLike(String s){
         List<Book> list = new ArrayList<>();
-        String query = "exec searchAllBooksLike " + s; //lay tu db ra
+        String query = "exec getAllBooksLike ?"; //lay tu db ra
         try {
             DBContext db = DBContext.getInstance();
             Connection conn = db.getConnection();
             PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, s);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 //khoi tao doi tuong
@@ -270,6 +274,11 @@ public class BookDAO {
                     break;
                 }  
         }
+        return list;
+    }
+    public List<Book> getRelateBook(Book book, int n){
+        List<Book> list = new ArrayList<>();
+        
         return list;
     }
 }

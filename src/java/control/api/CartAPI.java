@@ -100,14 +100,13 @@ public class CartAPI extends HttpServlet {
         BufferedReader reader = request.getReader();
         //Get data from fetch body
         int pid = gson.fromJson(reader, Integer.class);
-        Item item = new Item(pid,0);
-        Account a = (Account)request.getSession().getAttribute("account");
-        item.setUsername(a.getUsername());
-//        new ItemDAO().addItemToCart(item);
-        // query here////////////////////////////////////////////////
-//        item.setImg(new BookDAO().getBookById(item.getPid()).getImg());
+        Account a = (Account)request.getSession().getAttribute("account"); //lay ra account dang dang nhap
+        String username = a.getUsername();
+        Item item = new Item(username, pid);
+        new ItemDAO().deleteItem(item);
+
         PrintWriter out = response.getWriter();
-	out.print(gson.toJson(item));
+	out.print(gson.toJson(item)); //tra nguoc lai data cho fe
     }
     /** 
      * Returns a short description of the servlet.
