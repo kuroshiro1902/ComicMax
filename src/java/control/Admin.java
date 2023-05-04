@@ -3,25 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package control.api;
+package control;
 
-import com.google.gson.Gson;
 import dao.BookDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dao.Utils;
-import java.util.List;
-import model.Book;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
+
 /**
  *
  * @author emsin
  */
-public class ShopAPI extends HttpServlet {
-//    private final Gson gson = new Gson();
+@WebServlet(name="Admin", urlPatterns={"/Admin"})
+public class Admin extends HttpServlet {
+   private String setValue(String param, String defaultValue){
+       return param == null? defaultValue : param;
+   }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -29,37 +31,22 @@ public class ShopAPI extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
         BookDAO bookdao = new BookDAO();
-        //search
-        String search = request.getParameter("search");
-        String[] cids = request.getParameterValues("cid");
-        String auid = request.getParameter("auid");
-        String pubid = request.getParameter("pubid");
-        String page_index = request.getParameter("pindex");
-        String amount_per_page = "12";
-        String ans;
-        if(search!=null && !search.equals("")){
-            search = Utils.searchPrepocessor(search);
-            ans = new Gson().toJson(
-                bookdao.filterBooksByCategories(
-                    bookdao.searchBooks(search, null, auid, pubid, page_index, amount_per_page),
-                    cids
-                    )
-            );
+        String selected = this.setValue(request.getParameter("selected"),"pedit"); //menu admin
+        String search = this.setValue(request.getParameter("selected"), ""); //search words
+        if(selected.equals("pedit")){
+            String index = this.setValue(request.getParameter("index"),"1");  //page_index
+            request.setAttribute("products", bookdao.getBooksByPageIndex(Integer.parseInt(index), 10, null, null));
+            
+//            request.setAttribute("products", bookdao.pagingByBookList(bookdao.getAllBooks(),Integer.parseInt(index),10));
+            request.setAttribute("selected", selected);
+            request.setAttribute("index", index);
+            request.setAttribute("count", new BookDAO().getCount());
         }
-        else{
-            ans = new Gson().toJson(new BookDAO().getTop(12));
-        }
-        //category
-
-        out.print(ans);
-    } 
-
+        request.getRequestDispatcher("admin.jsp?selected=pedit").forward(request, response);
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.

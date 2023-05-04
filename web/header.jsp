@@ -128,15 +128,15 @@
                             <div class="mb-subnav__btn">
                                 <a href="">
                                     <i class="fa-solid fa-pen"></i>
-                                    <span>BLOG</span>
+                                    <span>SHOP</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <a href="blog.jsp" class="header-nav__item red-hover">
-                            <i class="fa-solid fa-pen"></i>
-                            <h4>Blog</h4>
+                        <a href="shop.jsp" class="header-nav__item red-hover">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                            <h4>Shop</h4>
                         </a>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                             </a>
                             <div class="subnav">
                                 <c:if test="${sessionScope.account.getIsAdmin() == 1}">
-                                    <a class="usersubnav__item" href>Manager product &nbsp;<i class="fa-solid fa-bag-shopping"></i></a>
+                                    <a class="usersubnav__item" href="./admin">Manager product &nbsp;<i class="fa-solid fa-bag-shopping"></i></a>
                                 </c:if>
                                 <a class="usersubnav__item" href>Account &nbsp;<i class="fa-solid fa-user"></i></a>
                                 <a class="usersubnav__item" href>Delivery &nbsp;<i class="fa-solid fa-truck"></i></a>
@@ -194,7 +194,7 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                         </a>
                         <div class="usersubnav-switch">
-                            <a href="signup.jsp" class="header-usernav__item red-hover user">
+                            <a href="login.jsp" class="header-usernav__item red-hover user">
                                 <i class="fa-solid fa-user" title="Sign up for an account"></i>
                             </a>
                         </div>

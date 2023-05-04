@@ -4,42 +4,26 @@
  */
 package dao;
 
-import context.DBContext;
 import model.Book;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import model.Item;
-
 /**
  *
  * @author emsin
  */
-public class BookDAO {
-    private int [] convertStringArrayToIntArray(String[] a){
-        int n = a.length;
-        int[] list = new int[n];
-        for(int i=0;i<n;i++){
-            list[i] = Integer.parseInt(a[i]);
-        }
-        return list;
-    }
-//    public List<Book> getList(String query, String n){
-//        
-//    }
-    public List<Book> getTop(int n){
-        List<Book> list = new ArrayList<>();
-        String query = "select top "+ n +" * from Book order by sold DESC"; //lay tu db ra
+//ORDER{"new","old","cheap","expensive"}
+
+public class BookDAO extends DAO{
+    private String setValue(String param, String defaultValue){
+       defaultValue = defaultValue == null || defaultValue.equals("null")? "null" : defaultValue;
+       return param == null || param.equals("null")? defaultValue : param;
+   }
+    private Book newBook(ResultSet rs){
+        Book book = null;
         try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                //khoi tao doi tuong
-                list.add(new Book(
+            book = new Book(
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -51,235 +35,128 @@ public class BookDAO {
                         rs.getInt(9),
                         rs.getFloat(10),
                         rs.getInt(11)
-                                    ));
-            }
-            
+                                    );
         } catch (Exception e) {}
-        return list;
+        return book;
     }
-    public Book getBookById(int id){
-        
-        String query = "select * from Book where id = ?"; //lay tu db ra
+    private Book getBookByQuery(String query){
+        ResultSet rs = this.getResult(query);
         try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Book  result = new Book(rs.getInt(1),
-                                 rs.getString(2),
-                                rs.getString(3),
-                                rs.getString(4),
-                                rs.getInt(5),
-                                rs.getInt(6),
-                                rs.getFloat(7),
-                               rs.getInt(8),
-                               rs.getInt(9),
-                               rs.getFloat(10),
-                               rs.getInt(11)
-               );
-                return result;
+                return this.newBook(rs);
             }
-          
         } catch (Exception e) {}
         return null;
     }
-    public List<Book> getAllBooksLike(String s){
+    private List<Book> getListByQuery(String query){
         List<Book> list = new ArrayList<>();
-        String query = "exec getAllBooksLike ?"; //lay tu db ra
+        ResultSet rs = this.getResult(query);
         try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, s);
-            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                //khoi tao doi tuong
-                list.add(new Book(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getFloat(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getFloat(10),
-                        rs.getInt(11)
-                                    ));
+                list.add(this.newBook(rs));
             }
-            
         } catch (Exception e) {}
         return list;
+    }
+    public int getCount(){
+        int count = -1;
+        String query = "select count(id) from book";
+        ResultSet rs = this.getResult(query);
+        try {
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {}
+        return count;
+    }
+    public List<Book> searchBooks(String _keywords, String _category_id, String _author_id, String _publisher_id, String _page_index, String _amount_per_page){
+        String keywords = this.setValue(_keywords, "");
+        String category_id = this.setValue(_category_id, null) ;
+        String author_id = this.setValue(_author_id, null);
+        String publisher_id = this.setValue(_publisher_id, null);
+        String page_index = this.setValue(_page_index, "1");
+        String amount_per_page = this.setValue(_amount_per_page, "12");
+//      "EXEC searchBooks @keywords = 'one',  @category_id = NULL, @author_id = NULL, @publisher_id = NULL, @page_index = 1, @amount_per_page = 10"
+        String query = "EXEC searchBooks"
+                + " @keywords = '" + keywords + "'"
+                + ",  @category_id = " + category_id
+                + ", @author_id = " + author_id
+                + ", @publisher_id = "+ publisher_id
+                + ", @page_index = " + page_index
+                + ", @amount_per_page = " + amount_per_page;
+        return this.getListByQuery(query);
+    }
+    public List<Book> getAllBooks(){
+        String query = "Select * from Book";
+        return this.getListByQuery(query);
+    }
+    public List<Book> getTop(int n){
+        String query = "select top "+ n +" * from Book order by sold DESC"; 
+        return this.getListByQuery(query);
+    }
+    public Book getBookById(int id){
+        String query = "select * from Book where id = "+id; 
+        return this.getBookByQuery(query);
+    }
+    public List<Book> getAllBooksLike(String s){
+        String query = "exec getAllBooksLike "+Utils.searchPrepocessor(s); 
+        return this.getListByQuery(query);
     }
     public List<Book> getTopNewestBooks(int n){
-        List<Book> list = new ArrayList<>();
-        String query = "select top " + n + " * from Book order by id DESC"; //lay tu db ra
-        try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                //khoi tao doi tuong
-                list.add(new Book(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getFloat(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getFloat(10),
-                        rs.getInt(11)
-                                    ));
-            }
-            
-        } catch (Exception e) {}
-        return list;
+        String query = "select top " + n + " * from Book order by id DESC"; 
+        return this.getListByQuery(query);
     }
     public List<Book> getBooksByCategoryId(int x, int n){
-        List<Book> list = new ArrayList<>();
-        String query = "select top " + n + " * from Book where publisher_id = " + x; //lay tu db ra
-        try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                //khoi tao doi tuong
-                list.add(new Book(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getFloat(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getFloat(10),
-                        rs.getInt(11)
-                                    ));
-            }
-            
-        } catch (Exception e) {}
-        return list;
+        String query = "select top " + n + " * from Book where publisher_id = " + x; 
+        return this.getListByQuery(query);
     }
     public List<Book> getBooksByAuthorId(int x, int n){
-        List<Book> list = new ArrayList<>();
-        String query = "select top " + n + " * from Book where author_id= " + x; //lay tu db ra
-        try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                //khoi tao doi tuong
-                list.add(new Book(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getFloat(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getFloat(10),
-                        rs.getInt(11)
-                                    ));
-            }
-            
-        } catch (Exception e) {}
-        return list;
+        String query = "select top " + n + " * from Book where author_id= " + x; 
+        return this.getListByQuery(query);
     }
     public List<Book> getBooksByLanguage(int x, int n){
-        List<Book> list = new ArrayList<>();
-        String query = "select top " + n + " * from Book where language = " + x; //lay tu db ra
-        try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                //khoi tao doi tuong
-                list.add(new Book(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getFloat(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getFloat(10),
-                        rs.getInt(11)
-                                    ));
-            }
-            
-        } catch (Exception e) {}
-        return list;
+        String query = "select top " + n + " * from Book where language = " + x; 
+        return this.getListByQuery(query);
     }
     public List<Book> getBooksByPrice(int x, int n){
-        List<Book> list = new ArrayList<>();
-        String query = "select top" + n + "* from Book where price <= " + x; //lay tu db ra
-        try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                //khoi tao doi tuong
-                list.add(new Book(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getFloat(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getFloat(10),
-                        rs.getInt(11)
-                                    ));
-            }
-            
-        } catch (Exception e) {}
-        return list;
+        String query = "select top" + n + "* from Book where price <= " + x; 
+        return this.getListByQuery(query);
     }
-    public List<Book> search(String s, String[] cs, String aid){
-        List<Book> list = this.getAllBooksLike(s);
-        int[] cids = cs==null? null : this.convertStringArrayToIntArray(cs);
-        int auid = aid==null? -1: Integer.parseInt(aid);
-        int n = list.size();
-        for(int i=n-1;i>=0;i--){
-            Book book = list.get(i);
-            if(auid>=0){
-                if(book.getAuthor_id() != auid){
-                    list.remove(book);
-                    continue;
-                }
+    public List<Book> getBooksByPageIndex(int index, int amount, String orderBy, String order){
+        if(orderBy==null) orderBy = "id";
+        if(order==null) order = "ASC";
+        String query =  "SELECT *\n" +
+                        "FROM Book\n" +
+                        "ORDER BY " +orderBy+ " " +order+ "\n" +
+                        "OFFSET (" +index+" - 1) * "+ amount +" ROWS\n" +
+                        "FETCH NEXT " +amount+" ROWS ONLY;"; 
+        return this.getListByQuery(query);
+    }
+    public List<Book> filterBooksByCategories(List<Book> list, String[] category_ids_array){
+        List<String> category_ids = new ArrayList<>();
+        if(category_ids_array != null){
+            category_ids.addAll(Arrays.asList(category_ids_array));
+            for(Book book: list){
+                if(!book.getCategoryIds().containsAll(category_ids)) list.remove(book);
             }
-            if(cs!=null)
-            for(int j=0;j<cids.length;j++)
-                if(!book.getCategoryIds().contains(cids[j])){
-                    list.remove(book);
-                    break;
-                }  
         }
         return list;
     }
+    public List<Book> pagingByBookList(List<Book> list, int index, int amount){
+        List<Book> ans = new ArrayList<>();
+        int begin = (index-1)*amount,
+            end = begin + amount;
+        for(int i= begin; i<end;i++){
+            ans.add(list.get(i));
+        }
+        return ans;
+    }
+    public int getCountPage(int n, int productPerPage){
+        return (int) Math.ceil((float)n/(float)productPerPage);
+    }
     public List<Book> getRelateBook(Book book, int n){
-        List<Book> list = new ArrayList<>();
-        
-        return list;
+        String query = "";
+        return this.getListByQuery(query);
     }
 }
 

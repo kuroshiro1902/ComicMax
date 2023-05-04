@@ -32,6 +32,10 @@
         <servlet-name>CartAPI</servlet-name>
         <servlet-class>control.api.CartAPI</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>control.Admin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>CartAPI</servlet-name>
         <url-pattern>/cartapi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

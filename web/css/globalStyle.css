@@ -26,6 +26,11 @@ a{
     text-decoration: none;
     color: inherit;
 }
+button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 .click{
     color: #007185;
 }
@@ -442,6 +447,19 @@ input[type="submit"]{
     padding: 1rem .5rem;
     display: flex;
     justify-content: space-evenly;
+}
+.pages{
+    padding: 8px;
+    margin-top: 18px;
+}
+.pages button{
+    margin: 0 8px;
+    padding: 4px 8px;
+}
+.pages button.selected{
+    background: #ccc;
+    color: #333;
+    cursor: initial;
 }
 @keyframes showConfirm{
     0%{

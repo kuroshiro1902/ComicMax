@@ -23,7 +23,6 @@ public class Book {
     private Publisher publisher;
     private Author author;
     private List<Category> categories;
-
     public Book(int id, String name, String img, String language, int author_id, int publisher_id, float price, int amount, int sold, float star, int ratingnums ) {
         this.id = id;
         this.name = name;
@@ -142,10 +141,10 @@ public class Book {
     public List<Category> getCategories() {
         return categories;
     }
-    public Set<Integer> getCategoryIds(){
+    public Set<String> getCategoryIds(){
         int n = categories.size();
-        Set<Integer> list = new HashSet<>();
-        for(int i=0;i<n;i++) list.add(categories.get(i).getId());
+        Set<String> list = new HashSet<>();
+        for(int i=0;i<n;i++) list.add(categories.get(i).getId()+"");
         return list;
     }
     @Override
