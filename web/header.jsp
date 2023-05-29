@@ -112,7 +112,7 @@
                         </a>
                         <div class="subnav">
                             <c:forEach items="${loadCategory.allCategories}" var="o" begin="0" end="3">
-                                <a class="subnav__category" href="">
+                                <a class="subnav__category" href="./shop.jsp?category=${o.getId()}">
                                     <img src="${o.img}" alt="">
                                     <div class="button" style=" max-width: 146px; text-align: center;">${o.name}</div>
                                 </a>

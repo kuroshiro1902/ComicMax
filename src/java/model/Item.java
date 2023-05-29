@@ -9,7 +9,7 @@ package model;
  * @author emsin
  */
 public class Item {
-    private int pid, amount;
+    private int id, pid, amount;
     private String username, img = null;
     public Item(int pid, int amount) {
         this.pid = pid;
@@ -19,10 +19,19 @@ public class Item {
         this.pid = pid;
         this.username = username;   
     }
-    public Item(String username, int pid, int amount) {
+    public Item(String username, int pid, int amount, int id) {
         this.pid = pid;
         this.amount = amount;
         this.username = username;
+        this.id = id; 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPid() {

@@ -48,7 +48,7 @@
 
                     <div class="row">
                         <label for="note">Ghi chú: </label>
-                        <textarea id="note" name="note" rows="3"></textarea>
+                        <textarea id="note" name="note" rows="6"></textarea>
                     </div>
 
                     <div class="row">
@@ -59,6 +59,46 @@
                             <option value="bank">Chuyển khoản ngân hàng</option>
                             <option value="paypal">PayPal</option>
                         </select>
+                    </div>
+                </form>
+                <form class="hoadon" method="POST" action="">
+<div class="row2">
+                        <h4>Sản phẩm</h4>
+                    </div>
+                    <div class="row3">
+                        <h4>Tổng</h4>
+                    </div>
+                    <div class="row2">
+                        <h>Tổng phụ</h>
+                    </div>
+                    <div class="row3">
+                        <h4>xxxx đ</h4>
+                    </div>
+                    <div class="row2">
+                        <h>Giao hàng</h>
+                    </div>
+                    <div class="row3">
+                        <h4>Phí giao hàng toàn quốc:</h4>
+                    </div>
+                    <div class="row2">
+                        <h>Giảm giá từ shop: </h>
+                    </div>
+                    <div class="row3">
+                        <h4>giảm giá</h4>
+                    </div>
+                    <div class="row2">
+                        <h>Tổng thanh toán: </h>
+                    </div>
+                    <div class="row3">
+                        <h4>tiềnasdasd</h4>
+                    </div>
+                    <div class="phieu">
+                        <h3> Phiếu ưu đãi</h3>
+                        <input type='text' placeholder='Mã ưu đãi'>
+                        <button class='Apdung' >Áp dụng</button>
+                    </div>
+                    <div class='thanhtoan'>
+                        <button class='dathang'>Đặt hàng</button>
                     </div>
                 </form>
             </div>

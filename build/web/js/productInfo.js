@@ -13,7 +13,7 @@ function categoryGenerate(categories){
     let categoryHTML = []
     let n = categories.length
     for(let i=0;i<n-1;i++){
-        categoryHTML[i] = `<a href="shop?cid=${categories[i].id}" class="click">${categories[i].name}</a>`
+        categoryHTML[i] = `<a href="shop.jsp?category=${categories[i].id}" class="click">${categories[i].name}</a>`
     }
     
     return "Category: " + categoryHTML.join(", ")

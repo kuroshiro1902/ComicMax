@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <jsp:useBean id="loadBook" class="dao.BookDAO" scope="request"></jsp:useBean>
+<div style="padding: 8px 16px">
+    <button style="float:right" class="button">Add Book</button>
+    <div style="clear: both"></div>
+</div>
     <div style="display:flex;flex-direction: column;align-items: center">
         <div style="min-width: 678px; width: 90%;">
             <div class="item">

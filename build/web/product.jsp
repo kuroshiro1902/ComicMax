@@ -25,12 +25,6 @@
                 </p>
             </div>   
         </div>
-        <c:if test="${sessionScope.account != null}">
-            <div class="manager-option">
-                <div class="button">Edit Product</div>
-                <div class="button" style="margin-left: 1rem ">Delete Product</div>
-            </div>
-        </c:if>
         <div class="container">
             <div class="body" id="product" data-id>
                 <div class="product-img">

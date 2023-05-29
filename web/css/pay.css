@@ -7,13 +7,84 @@
     font-weight: bold;
 }
 
+.main{
+}
+
+
 .row input[type="text"],
 .row input[type="email"],
-.row textarea,
-.row select {
-    width: 360px;
-    padding: 5px;
+.row textarea{
+    width: 100%;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
     resize: none;
+}
+.body {
+    display: flex;
+}
+
+.main {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.hoadon {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--red);
+    border-radius: 8px;
+}
+
+.row,
+.row2,
+.row3 {
+    margin-bottom: 10px;
+}
+
+.phieu,
+.thanhtoan {
+    margin-top: 20px;
+}
+
+.phieu input {
+    margin-right: 10px;
+}
+
+.row2 {
+    display: flex;
+    align-items: center;
+}
+
+.row2 h4 {
+    margin-right: 10px;
+}
+
+.row3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.row3 h4 {
+    margin-right: 10px;
+}
+
+.row2-item {
+    display: flex;
+    align-items: center;
+}
+
+.row2-item h4 {
+    margin-right: 10px;
+}
+.thanhtoan button {
+    padding: 0;
+    border: none;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
 }

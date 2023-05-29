@@ -5,6 +5,7 @@
 package dao;
 
 import context.DBContext;
+import java.util.Collections;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,10 +31,12 @@ public class ItemDAO {
             while(rs.next()){
                 list.add(new Item(rs.getString(1), 
                         rs.getInt(2), 
-                        rs.getInt(3))
+                        rs.getInt(3),
+                rs.getInt(4))
                 );
             }
         } catch (Exception e) {}
+        Collections.reverse(list);
         return list;
     }
     public Item getItemByUsernameAndBookId(String username, int book_id){
@@ -46,9 +49,10 @@ public class ItemDAO {
             ps.setInt(2, book_id);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Item item = new Item(rs.getString(1),
-                                 rs.getInt(2),
-                                rs.getInt(3)
+                Item item = new Item(rs.getString(1), 
+                        rs.getInt(2), 
+                        rs.getInt(3),
+                rs.getInt(4)
                 );
                 return item;
             }
@@ -99,13 +103,12 @@ public class ItemDAO {
         return effectRow>0;
     }
     public boolean modifyItemInCart(Item item){
-        String query="";
         int effectRow=0;
         try {
             DBContext db = DBContext.getInstance();
             Connection conn = db.getConnection();
             PreparedStatement ps;
-                query = "";
+                String query = "UPDATE Item set amount = ? where username = ? and book_id = ?";
                 ps = conn.prepareStatement(query);
                 ps.setInt(1, item.getAmount());
                 ps.setString(2, item.getUsername());

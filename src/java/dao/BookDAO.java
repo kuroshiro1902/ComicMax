@@ -213,6 +213,13 @@ public class BookDAO extends DAO{
          catch (Exception e) {}
         return effectRow>0? deletedBook : null;
     }
+    public List<Book> getRelatedBooks(Book book) {
+         String query = "SELECT TOP 6 Book.* " +
+               "FROM Book " +
+               "INNER JOIN Book_Category ON Book.id = Book_Category.book_id " +
+               "WHERE Book_Category.Category_id = " + book.getCategories().get(0).getId();
+        return this.getListByQuery(query);
+    }
     public String testsearchBooks(String _keywords, String[] _category_ids, String _author_id, String _publisher_id, String _page_index,String _amount_per_page,String _id_order, String _price_order){
         String keywords = this.setValue(_keywords, "");
         String category_ids = _category_ids != null? "'"+String.join(",", _category_ids)+"'": "null";

@@ -44,6 +44,10 @@
         <servlet-name>EditProductAPI</servlet-name>
         <servlet-class>control.api.EditProductAPI</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Pay</servlet-name>
+        <servlet-class>control.Pay</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>EditProductAPI</servlet-name>
         <url-pattern>/editproductapi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Pay</servlet-name>
+        <url-pattern>/Pay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
