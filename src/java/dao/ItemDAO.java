@@ -98,4 +98,22 @@ public class ItemDAO {
         } catch (Exception e) {}
         return effectRow>0;
     }
+    public boolean modifyItemInCart(Item item){
+        String query="";
+        int effectRow=0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+                query = "";
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, item.getAmount());
+                ps.setString(2, item.getUsername());
+                ps.setInt(3, item.getPid());
+                
+           
+            effectRow = ps.executeUpdate();
+        } catch (Exception e) {}
+        return effectRow>0;
+    }
 }

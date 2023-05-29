@@ -1,0 +1,112 @@
+.admin{
+    padding: 48px 0;
+    padding-top: 24px;
+    display: flex;
+}
+.admin h4,.title{
+    color: var(--red);
+}
+.admin .option{
+    width: 100%;
+    text-align: start;
+    padding: 12px;
+    font-weight:600;
+    color: #666;
+    border-radius: 8px 0 0 8px;
+    background: transparent;
+    text-transform: uppercase;
+    opacity: .8;
+}
+.admin .option:hover{
+    cursor: pointer;
+    color: var(--red);
+    background: rgb(240,240,240);
+    opacity: 1
+}
+.admin .option .icon{
+    display: inline-block;
+    width: 22px;
+}
+.admin .option.selected{
+    background: rgb(220,220,220);
+    color: var(--red);
+    cursor: initial;
+    opacity: 1
+}
+.left-bar{
+    width: 160px;
+    height: 100%;
+}
+.admin .main{
+    flex-grow: 1;
+    background: rgb(220,220,220);
+}
+
+
+/*item*/
+.main .item{
+    max-width: 95%;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+.main .image{
+    width: 25%;
+}
+.main .image img{
+    width: 40px;
+}
+.main .price , .main .amount{
+    font-size: 16px;
+    max-width: 76px;
+    text-align: center;
+    padding: 8px 4px;
+    margin: 0 4px;
+}
+.main .edit{
+    width: 15%;
+}
+.main .edit button{
+    margin: 0 8px;
+    padding: 4px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.main .edit button:nth-child(1){
+    background: #47d864;
+}
+.main .edit button:nth-child(2){
+    background: #ff3a25;
+}
+#edit-container{
+    /*display:flex;*/
+    display: none;
+    justify-content: center; align-items: center;
+    position: fixed;
+    top:78px;bottom:0;right:0;left:0;
+    background: rgba(0,0,0,.5);
+}
+.edit-field{
+    min-width: 360px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: rgba(255,255,255,.9);
+    border-radius: 8px;
+}
+.edit-field label{
+    margin-top: 8px;
+}
+.edit-field input[type="text"]{
+    padding: 4px;
+}
+.edit-field .buttons{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 16px 0;
+}
+.edit-field button{
+    justify-self: center;
+    max-width: 30%;
+    min-width: 150px;
+}

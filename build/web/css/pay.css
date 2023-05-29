@@ -1,0 +1,19 @@
+.row {
+    margin-bottom: 16px;
+}
+
+.row label {
+    display: block;
+    font-weight: bold;
+}
+
+.row input[type="text"],
+.row input[type="email"],
+.row textarea,
+.row select {
+    width: 360px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    resize: none;
+}

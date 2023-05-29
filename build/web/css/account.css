@@ -1,0 +1,54 @@
+@import url("./globalStyle.css");
+.main form{
+    max-width: 800px;
+    padding: 1rem 1.5rem;
+    margin: 0 1rem;
+    border: 1px solid rgba(51,51,51,0.4);
+    border-radius: 5px;
+}
+.main form input{
+    margin-bottom: 1rem;
+}
+.main form input:focus{
+    border: 1px solid #333;
+}
+.main form label{
+    display: block;
+}
+.main form label::after{
+    content:" *";
+    font-weight: bold;
+    color: var(--red);
+}
+.title{
+    margin-bottom: 1rem; 
+}
+.text{
+    padding:12px;
+    background-color: rgba(51,51,51,0.05);
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+    max-width: 768px;
+}
+.message, .exist{
+    display: none;
+}
+.alert-message, .account-exist{
+    display: block;
+    padding: 8px;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: rgba(215,25,32,0.4);
+}
+.forget{
+    display: block;
+    text-decoration: underline;
+    font-size: 12px;
+}
+.direct{
+    text-decoration: underline;
+    
+}

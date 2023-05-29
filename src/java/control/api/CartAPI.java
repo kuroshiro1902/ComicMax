@@ -79,9 +79,7 @@ public class CartAPI extends HttpServlet {
         Item item = gson.fromJson(reader, Item.class);
         Account a = (Account)request.getSession().getAttribute("account");
         item.setUsername(a.getUsername());
-//        new ItemDAO().addItemToCart(item);
-        // query here////////////////////////////////////////////////
-//        item.setImg(new BookDAO().getBookById(item.getPid()).getImg());
+        new ItemDAO().modifyItemInCart(item);
         PrintWriter out = response.getWriter();
 	out.print(gson.toJson(item));
     }

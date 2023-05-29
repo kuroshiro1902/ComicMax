@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 
 package control;
 
+import com.google.gson.Gson;
 import dao.BookDAO;
+import dao.Utils;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,13 +11,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Account;
+import model.Book;
+import model.PageData;
 
 /**
  *
  * @author emsin
  */
-@WebServlet(name="Admin", urlPatterns={"/Admin"})
+//@WebServlet(name="Admin", urlPatterns={"/Admin/*"})
 public class Admin extends HttpServlet {
    private String setValue(String param, String defaultValue){
        return param == null? defaultValue : param;
@@ -31,21 +36,31 @@ public class Admin extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+   protected void editOption(HttpServletRequest request, HttpServletResponse response){
+            BookDAO bookdao = new BookDAO();
+            //get Params
+            String search = this.setValue(request.getParameter("search"), ""); //search words
+            String index = this.setValue(request.getParameter("index"),"1");  //page_index
+            //get Datas
+            search = Utils.searchPrepocessor(search);
+            List<Book> list = bookdao.searchBooks(search, null, null, null, null, null,null,null); 
+            int total = bookdao.getCount(search, null, null, null);
+            PageData currentPageData = new PageData(list,total,index);
+            //set Params
+            request.setAttribute("index", index);
+            request.setAttribute("count", currentPageData.getCount());
+            request.setAttribute("products", currentPageData.getList());          
+            request.setAttribute("selected", "pedit");
+   }
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        BookDAO bookdao = new BookDAO();
         String selected = this.setValue(request.getParameter("selected"),"pedit"); //menu admin
-        String search = this.setValue(request.getParameter("selected"), ""); //search words
         if(selected.equals("pedit")){
-            String index = this.setValue(request.getParameter("index"),"1");  //page_index
-            request.setAttribute("products", bookdao.getBooksByPageIndex(Integer.parseInt(index), 10, null, null));
-            
-//            request.setAttribute("products", bookdao.pagingByBookList(bookdao.getAllBooks(),Integer.parseInt(index),10));
-            request.setAttribute("selected", selected);
-            request.setAttribute("index", index);
-            request.setAttribute("count", new BookDAO().getCount());
+            this.editOption(request, response);
         }
-        request.getRequestDispatcher("admin.jsp?selected=pedit").forward(request, response);
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -71,7 +86,8 @@ public class Admin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       processRequest(request, response);
+
     }
 
     /** 

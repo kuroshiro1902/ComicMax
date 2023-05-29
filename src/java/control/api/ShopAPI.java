@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import dao.Utils;
 import java.util.List;
 import model.Book;
+import model.PageData;
 /**
  *
  * @author emsin
@@ -35,28 +36,22 @@ public class ShopAPI extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         BookDAO bookdao = new BookDAO();
-        //search
+        //get Params
         String search = request.getParameter("search");
-        String[] cids = request.getParameterValues("cid");
-        String auid = request.getParameter("auid");
-        String pubid = request.getParameter("pubid");
-        String page_index = request.getParameter("pindex");
-        String amount_per_page = "12";
+//        String[] cids = request.getParameterValues("category");
+        String[] cids = request.getParameterValues("category")!=null? request.getParameterValues("category") : null;
+        String auid = request.getParameter("author");
+        String pubid = request.getParameter("publisher");
+        String id_order = request.getParameter("id_order");
+        String price_order = request.getParameter("price_order");
+        String page_index = request.getParameter("page_index");
+        //
         String ans;
-        if(search!=null && !search.equals("")){
-            search = Utils.searchPrepocessor(search);
-            ans = new Gson().toJson(
-                bookdao.filterBooksByCategories(
-                    bookdao.searchBooks(search, null, auid, pubid, page_index, amount_per_page),
-                    cids
-                    )
-            );
-        }
-        else{
-            ans = new Gson().toJson(new BookDAO().getTop(12));
-        }
-        //category
-
+        search = Utils.searchPrepocessor(search);
+        List<Book> list = bookdao.searchBooks(search, cids, auid, pubid, page_index, PageData.amount_per_page+"",id_order,price_order ); 
+        int total = bookdao.getCount(search, cids, auid, pubid);
+        PageData currentPageData = new PageData(list,total, page_index);
+        ans = new Gson().toJson(currentPageData);
         out.print(ans);
     } 
 

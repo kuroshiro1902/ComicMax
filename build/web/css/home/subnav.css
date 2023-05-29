@@ -1,0 +1,94 @@
+.subnav{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    justify-content: space-evenly;
+    top: 70.2px;
+    left: 0; right:0;
+    padding: 8px 0 16px 0;
+}
+.header-nav .subnav{
+    background-color: #fff;
+}
+.subnav>*:hover img{
+    opacity: 0.8;
+    transition: opacity 0.1s;
+}
+.subnav-switch:hover .subnav{
+    display:flex;
+    animation: fadeIn 0.25s;
+}
+.subnav-switch:hover .header-nav__item{
+    color: var(--red);
+}
+.subnav__book{
+    width: 19%;
+    display: grid;
+    transition: color 0.2s;
+}
+.subnav__book img{
+    /* height: 360px; */
+    width: 100%;
+    aspect-ratio: 4/5.25;
+}
+.subnav__book:hover{
+    color: var(--red);
+}
+.subnav__book h2{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+/*  */
+.subnav__category{
+    display: block;
+    position: relative;
+    width: 22%;
+}
+.subnav__category img{
+    /* height: 420px; */
+    width: 100%;
+}
+.subnav__category .button{
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.subnav__category:hover .button{
+    background-color: var(--red);
+}
+.subnav__blur-background{
+    display: none;
+    position: fixed;
+    top: 76.8px; bottom: 0; right: 0; left: 0;
+    background-color: rgba(0,0,0,.5);
+    width: 100vw; height: 100vh;
+    z-index: 1;
+}
+.mb-subnav{
+    display: none;
+    position: absolute;
+    left: 0; right: 0;
+    flex-direction: column;
+}
+.mb-subnav__btn{
+    width: 100%;
+}
+.mb-subnav__btn a{
+    display: block;
+    padding: 1rem;
+    color: #fff;
+    background-color: rgba(0,0,0,0.5);
+}
+.mb-subnav__btn a:hover{
+    color: var(--red);
+}

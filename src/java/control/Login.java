@@ -1,6 +1,7 @@
 package control;
 
 import dao.AccountDAO;
+import dao.Utils;
 import model.Account;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -33,9 +34,14 @@ public class Login extends HttpServlet {
             AccountDAO account = new AccountDAO();
             Account a = account.login(username, password);
             if(a==null){
-                request.setAttribute("message", "Wrong password!");
+                request.setAttribute("message", "Account didn't exist!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else{
+            }
+            else if(!a.getPassword().equals(password)){
+                request.setAttribute("message", "Wrong password! Try again.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+            else{
                 HttpSession session = request.getSession();
                 session.setAttribute("account", a);
                 response.sendRedirect("shop.jsp");

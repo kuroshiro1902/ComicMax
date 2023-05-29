@@ -1,4 +1,4 @@
-
+- Phân trang: Sơn
 - API
 api fe: Thành
 "method", trả về "object" là gì cho server //method[POST, GET, DELETE, UPDATE], object

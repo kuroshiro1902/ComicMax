@@ -4,11 +4,15 @@
  */
 package dao;
 
+import context.DBContext;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import model.Book;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import model.PageData;
 /**
  *
  * @author emsin
@@ -58,9 +62,17 @@ public class BookDAO extends DAO{
         } catch (Exception e) {}
         return list;
     }
-    public int getCount(){
-        int count = -1;
-        String query = "select count(id) from book";
+    public int getCount(String _keywords, String[] _category_ids, String _author_id, String _publisher_id){
+        int count = 0;
+        String keywords = this.setValue(_keywords, "");
+        String category_ids = _category_ids != null? "'"+String.join(",", _category_ids)+"'": "null";
+        String author_id = this.setValue(_author_id, null);
+        String publisher_id = this.setValue(_publisher_id, null);
+        String query = "exec countSearchBooks \n"+
+                "@keywords = '"+keywords+"',\n" +
+                "@category_id = "+category_ids+",\n" +
+                "@publisher_id = "+publisher_id+",\n" +
+                "@author_id = "+author_id;
         ResultSet rs = this.getResult(query);
         try {
             while(rs.next()){
@@ -69,21 +81,28 @@ public class BookDAO extends DAO{
         } catch (Exception e) {}
         return count;
     }
-    public List<Book> searchBooks(String _keywords, String _category_id, String _author_id, String _publisher_id, String _page_index, String _amount_per_page){
+    public List<Book> searchBooks(String _keywords, String[] _category_ids, String _author_id, String _publisher_id, String _page_index,String _amount_per_page,String _id_order, String _price_order){
         String keywords = this.setValue(_keywords, "");
-        String category_id = this.setValue(_category_id, null) ;
+        String category_ids = _category_ids != null? "'"+String.join(",", _category_ids)+"'": "null";
         String author_id = this.setValue(_author_id, null);
         String publisher_id = this.setValue(_publisher_id, null);
         String page_index = this.setValue(_page_index, "1");
-        String amount_per_page = this.setValue(_amount_per_page, "12");
-//      "EXEC searchBooks @keywords = 'one',  @category_id = NULL, @author_id = NULL, @publisher_id = NULL, @page_index = 1, @amount_per_page = 10"
-        String query = "EXEC searchBooks"
-                + " @keywords = '" + keywords + "'"
-                + ",  @category_id = " + category_id
-                + ", @author_id = " + author_id
-                + ", @publisher_id = "+ publisher_id
-                + ", @page_index = " + page_index
-                + ", @amount_per_page = " + amount_per_page;
+        String amount_per_page = this.setValue(_amount_per_page, ""+PageData.amount_per_page);
+        String id_order = _id_order!=null? "'"+_id_order+"'" : "null";
+        String price_order = _price_order!=null? "'"+_price_order+"'" : "null";
+        if(id_order.equals("null") && price_order.equals("null")){
+            id_order = "'DESC'";
+            price_order = "null";
+        }
+        String query ="EXEC searchBooks \n" +
+                "@keywords = '"+keywords+"',\n" +
+                "@category_id = "+category_ids+",\n" +
+                "@publisher_id = "+publisher_id+",\n" +
+                "@author_id = "+author_id+",\n" +
+                "@page_index = "+page_index+",\n" +
+                "@amount_per_page = "+amount_per_page+",\n"+
+                "@idOrder = "+id_order+",\n" +
+                "@priceOrder = "+price_order;
         return this.getListByQuery(query);
     }
     public List<Book> getAllBooks(){
@@ -157,6 +176,66 @@ public class BookDAO extends DAO{
     public List<Book> getRelateBook(Book book, int n){
         String query = "";
         return this.getListByQuery(query);
+    }
+    public Book modifyProduct(Book book) throws Exception{
+        BookDAO bookdao= new BookDAO();
+        String query;
+        int effectRow=0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+            query = "UPDATE book SET name = ?, img = ?, amount = ?, price = ? WHERE id = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, book.getName().trim());
+            ps.setString(2, book.getImg().trim());
+            ps.setInt(3, book.getAmount());
+            ps.setFloat(4, book.getPrice());
+            ps.setInt(5, book.getId());
+            effectRow = ps.executeUpdate();
+        }
+         catch (Exception e) {}
+        return effectRow>0? bookdao.getBookById(book.getId()) : null;
+    }
+    public Book deleteProduct(int id) throws Exception{
+        BookDAO bookdao= new BookDAO();
+        Book deletedBook = bookdao.getBookById(id);
+        String query;
+        int effectRow=0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+            query = "DELETE FROM BOOK WHERE id = "+id;
+            ps = conn.prepareStatement(query);
+            effectRow = ps.executeUpdate();
+        }
+         catch (Exception e) {}
+        return effectRow>0? deletedBook : null;
+    }
+    public String testsearchBooks(String _keywords, String[] _category_ids, String _author_id, String _publisher_id, String _page_index,String _amount_per_page,String _id_order, String _price_order){
+        String keywords = this.setValue(_keywords, "");
+        String category_ids = _category_ids != null? "'"+String.join(",", _category_ids)+"'": "null";
+        String author_id = this.setValue(_author_id, null);
+        String publisher_id = this.setValue(_publisher_id, null);
+        String page_index = this.setValue(_page_index, "1");
+        String amount_per_page = this.setValue(_amount_per_page, ""+PageData.amount_per_page);
+        String id_order = _id_order!=null? "'"+_id_order+"'" : "null";
+        String price_order = _price_order!=null? "'"+_price_order+"'" : "null";
+        if(id_order.equals("null") && price_order.equals("null")){
+            id_order = "'DESC'";
+            price_order = "null";
+        }
+        String query ="EXEC searchBooks \n" +
+                "@keywords = '"+keywords+"',\n" +
+                "@category_id = "+category_ids+",\n" +
+                "@publisher_id = "+publisher_id+",\n" +
+                "@author_id = "+author_id+",\n" +
+                "@page_index = "+page_index+",\n" +
+                "@amount_per_page = "+amount_per_page+",\n"+
+                "@idOrder = "+id_order+",\n" +
+                "@priceOrder = "+price_order;
+        return query;
     }
 }
 

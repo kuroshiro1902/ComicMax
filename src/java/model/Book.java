@@ -42,6 +42,14 @@ public class Book {
         this.categories = new CategoryDAO().getAllCategoriesOfBookId(id);
     }
 
+    public Book(int id, String name, String img, int amount, float price) {
+        this.id = id;
+        this.name = name;
+        this.img = img;
+        this.amount = amount;
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }
