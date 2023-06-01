@@ -170,7 +170,7 @@
                         <div class="usersubnav-switch user-hover">
                             <a href="javascript:void(0)" class="header-usernav__item user user-hover"
                                 title="${sessionScope.account.getFullname()}">
-                                <img src="./img/default.webp" alt="" style="border-radius: 50%">
+                                <img src="./img/temp.webp" alt="" style="border-radius: 50%">
                             </a>
                             <div class="subnav">
                                 <c:if test="${sessionScope.account.getIsAdmin() == 1}">

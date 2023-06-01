@@ -82,6 +82,7 @@ public class CartAPI extends HttpServlet {
         new ItemDAO().modifyItemInCart(item);
         PrintWriter out = response.getWriter();
 	out.print(gson.toJson(item));
+        out.flush();
     }
     /** 
      * Handles the HTTP <code>DELETE</code> method.
@@ -105,6 +106,7 @@ public class CartAPI extends HttpServlet {
 
         PrintWriter out = response.getWriter();
 	out.print(gson.toJson(item)); //tra nguoc lai data cho fe
+        out.flush();
     }
     /** 
      * Returns a short description of the servlet.

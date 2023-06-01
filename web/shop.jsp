@@ -98,7 +98,7 @@
                         <div class="product-container">
                          
                         </div>
-                        
+                        <div class="js-page-index"></div>
                     </div>
                 </div>
             </div>

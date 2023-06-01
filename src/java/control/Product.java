@@ -6,13 +6,13 @@
 package control;
 
 import dao.BookDAO;
+import dao.CommentDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+import java.util.*;
 import model.Book;
+import model.Comment;
 
 /**
  *
@@ -29,12 +29,7 @@ public class Product extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String pid= request.getParameter("pid");
-        BookDAO books= new BookDAO();
-        Book book= books.getBookById(Integer.parseInt(pid));
-        request.setAttribute("book", book);
-        request.getRequestDispatcher("product.jsp").forward(request, response);
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +43,14 @@ public class Product extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        int pid= Integer.parseInt(request.getParameter("pid"));
+        Book book= new BookDAO().getBookById(pid);
+        List<Comment> comments = new CommentDAO().getAllCommentsByBookId(pid);
+        request.setAttribute("book", book);
+        Collections.reverse(comments); // sap xep tu moi den cu
+        request.setAttribute("comments",comments );
+        request.getRequestDispatcher("product.jsp").forward(request, response);
     } 
 
     /** 
@@ -61,7 +63,6 @@ public class Product extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /** 

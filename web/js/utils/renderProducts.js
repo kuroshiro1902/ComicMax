@@ -48,8 +48,9 @@ export default function renderProducts(data={count:1,currentPageIndex:"1",list:[
                 productElement.title = product.name
                 productsHTML += productElement.outerHTML
             })
-            const pagingHTML = `<div class="pages" style="grid-column:1/-1" data-page-index="${currentPageIndex}">${generatePageIndexButtons(count,currentPageIndex)}</div>`
-            container.innerHTML = productsHTML + pagingHTML
+            const pagingHTML = `<div class="pages" data-page-index="${currentPageIndex}">${generatePageIndexButtons(count,currentPageIndex)}</div>`
+            container.innerHTML = productsHTML
+            $(".js-page-index").innerHTML = pagingHTML
             
         }
         const pageIndexButtons = []

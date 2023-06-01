@@ -3,26 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package control.api;
+package control;
 
-import com.google.gson.Gson;
-import dao.BookDAO;
+import dao.ItemDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dao.Utils;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
-import model.Book;
-import model.PageData;
+import model.Account;
+import model.Item;
+
 /**
  *
  * @author emsin
  */
-public class ShopAPI extends HttpServlet {
-//    private final Gson gson = new Gson();
+public class Buy extends HttpServlet {
+   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -30,30 +31,21 @@ public class ShopAPI extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
-        BookDAO bookdao = new BookDAO();
-        //get Params
-        String search = request.getParameter("search");
-//        String[] cids = request.getParameterValues("category");
-        String[] cids = request.getParameterValues("category")!=null? request.getParameterValues("category") : null;
-        String auid = request.getParameter("author");
-        String pubid = request.getParameter("publisher");
-        String id_order = request.getParameter("id_order");
-        String price_order = request.getParameter("price_order");
-        String page_index = request.getParameter("page_index");
-        //
-        String ans;
-        search = Utils.searchPrepocessor(search);
-        List<Book> list = bookdao.searchBooks(search, cids, auid, pubid, page_index, PageData.amount_per_page+"",id_order,price_order ); 
-        int total = bookdao.getCount(search, cids, auid, pubid);
-        PageData currentPageData = new PageData(list,total, page_index);
-        ans = new Gson().toJson(currentPageData);
-        out.print(ans);
-        out.flush();
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Buy</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Buy at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,7 +72,23 @@ public class ShopAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        String username = account.getUsername();
+        String[] book_ids = request.getParameterValues("book_id");
+
+        ItemDAO itemdao = new ItemDAO();
+        List<Item> itemList = new ArrayList<>();
+        for (String id : book_ids) {
+            int book_id = Integer.parseInt(id);
+            Item item = itemdao.getItemByUsernameAndBookId(username, book_id);
+            if (item != null) {
+                itemList.add(item);
+            }
+        }
+        request.setAttribute("items", itemList);
+        request.getRequestDispatcher("/pay").forward(request, response);
     }
 
     /** 

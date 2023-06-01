@@ -68,7 +68,7 @@
                     <c:forEach begin="1" end="6" var="o">
                         <div class="product" title="test">
                             <a href class="product-img">
-                                <img src="img/header/anime-coloring-book.webp" alt="">
+                                <img src="img/temp.webp" alt="">
                             </a>
                             <div class="product-text">
                                 <a href class="product-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid commodi nesciunt voluptates delectus similique temporibus eligendi molestias consectetur alias repellat tempora, maiores harum aliquam accusamus facilis amet unde repellendus.</a>

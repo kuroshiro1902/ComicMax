@@ -1,4 +1,7 @@
 @media (max-width: 1280px){
+    .container{
+        max-width: 100vw;
+    }
     .header{
         justify-content: space-between;
     }
@@ -55,6 +58,7 @@
     .subnav-switch .fa-caret-down{
         display: none;
     }
+
     .header-nav__item:last-child{
         display: none;
     }
@@ -104,16 +108,22 @@
     .product{
         align-items: center
     }
+    #product{
+        flex-direction: column;
+    }
 }
 @media (max-width:480px){
     .product-container{
         grid-template-columns:auto;
-        gap: 0.5%;
     }
     .product-container .product img{
         height: 360px;
     }
     #comment{
         margin-top: 80px
+    }
+        .subnav.cartlist{
+        position: fixed;
+        left: 0;
     }
 }

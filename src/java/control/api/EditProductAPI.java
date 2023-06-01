@@ -38,6 +38,7 @@ public class EditProductAPI extends HttpServlet {
         Book book = gson.fromJson(reader, Book.class);
         PrintWriter out = response.getWriter();
         out.print(gson.toJson(new BookDAO().modifyProduct(book)));
+        out.flush();
     }
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setContentType("application/json");
@@ -47,6 +48,7 @@ public class EditProductAPI extends HttpServlet {
         int id = gson.fromJson(reader, Integer.class);
         PrintWriter out = response.getWriter();
         out.print(gson.toJson(new BookDAO().deleteProduct(id)));
+        out.flush();
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         try {
@@ -55,7 +57,9 @@ public class EditProductAPI extends HttpServlet {
             PrintWriter out = response.getWriter();
             String ans = new Gson().toJson("null");
             out.print(ans);
+            out.flush();
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : login
     Created on : Mar 6, 2023, 7:23:15 PM
     Author     : emsin
@@ -34,16 +34,15 @@
                     <h1 class="title">SIGN UP</h1>
                     <form action="signup" method="post">
                         <input type="hidden" name="action" value="signup"> 
-                        <p class="exist">${exist}</p>
                         <label for="fullname-signup">Fullname</label>
-                            <input name="fullname" id="fullname-signup" class="text" required>
+                            <input name="fullname" id="fullname-signup" class="text" value="${fullname}" required>
                         <label for="username-signup">Username</label>
-                            <input name="username" id="username-signup" class="text" required>
+                            <input name="username" id="username-signup" class="text" value="${username}" required>
                         <label for="password-signup">Password</label>
                             <input name="password" id="password-signup" type="password" class="text" required>
                         <label for="confirm-signup">Confirm Password</label>
                             <input name="confirm" id="confirm-signup" type="password" class="text" required>
-                        <p class="message">Password didn't match. Please try again!</p>
+                            <p style="margin-bottom: 1rem"><i class="message">${exist}</i></p>
                         <input type="submit" class="button" value="sign up">
                         <p>Already had an account? <a href="login.jsp" class="direct red-hover">Login here!</a></p>
                     </form>

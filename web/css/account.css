@@ -32,9 +32,6 @@
     width: 100%;
     max-width: 768px;
 }
-.message, .exist{
-    display: none;
-}
 .alert-message, .account-exist{
     display: block;
     padding: 8px;
@@ -51,4 +48,7 @@
 .direct{
     text-decoration: underline;
     
+}
+.message{
+    color: var(--red);
 }

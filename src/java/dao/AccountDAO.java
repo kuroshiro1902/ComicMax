@@ -62,4 +62,20 @@ public class AccountDAO {
             ps.executeUpdate();
         } catch (Exception e) {}
     }
+    public String getFullnameByUsername(String username){
+        String query = "select * from account where username = '" + username + "'";
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getString(1);
+            }
+            
+        } catch (Exception e) {
+            return query;
+        }
+        return null;
+    }
 }

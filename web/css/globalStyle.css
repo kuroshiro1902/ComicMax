@@ -452,10 +452,11 @@ input[type="submit"]{
     padding: 8px;
     margin-top: 18px;
     display: flex;
-    justify-content: center
+    justify-content: center;
+        flex-wrap: wrap;
 }
 .pages >*{
-    margin: 0 8px;
+    margin: 8px;
     padding: 4px 8px;
 }
 .pages button.selected{

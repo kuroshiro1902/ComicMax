@@ -55,6 +55,7 @@ public class ProductAPI extends HttpServlet {
         String bookJson = gson.toJson(book);
         PrintWriter out = response.getWriter();
 	out.print(bookJson);
+        out.flush();
     } 
 
     /** 
@@ -79,6 +80,7 @@ public class ProductAPI extends HttpServlet {
         item.setImg(new BookDAO().getBookById(item.getPid()).getImg());
         PrintWriter out = response.getWriter();
 	out.print(gson.toJson(item));
+        out.flush();
     }
 
     /** 

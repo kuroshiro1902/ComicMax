@@ -13,9 +13,15 @@ const confirm_action = {
     'delete':{
         icon : '<i class="fa-solid fa-mark"></i>',
         title : "Delete",
-        message : "Do you want to delete this product!",
+        message : "Do you want to delete this product?",
         href : false
-    }
+    },
+    'deleteComment':{
+        icon : '<i class="fa-solid fa-comment"></i>',
+        title : "Delete comment",
+        message : "Do you want to delete this comment?",
+        href : false
+    },
 }
 init()
 try{loginRequire();searchBtnAppearance()}catch(err){}

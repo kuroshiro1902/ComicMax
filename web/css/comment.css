@@ -30,3 +30,6 @@
 #comment .comment .comment__user-content{
     font-size: 14px;
 }
+.text-area{
+    resize: none; width: 100%; font: inherit; font-size: 14px; padding: .5rem
+}

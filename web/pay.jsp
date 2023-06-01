@@ -92,18 +92,14 @@
                     <div class="row3">
                         <h4>tiềnasdasd</h4>
                     </div>
-                    <div class="phieu">
-                        <h3> Phiếu ưu đãi</h3>
-                        <input type='text' placeholder='Mã ưu đãi'>
-                        <button class='Apdung' >Áp dụng</button>
-                    </div>
                     <div class='thanhtoan'>
-                        <button class='dathang'>Đặt hàng</button>
+                        <button id="submit" class='dathang'>Đặt hàng</button>
                     </div>
                 </form>
             </div>
         </section>
         <jsp:include page="footer.jsp" />
         <script src="./js/index.js"></script>
+        <<script src="./js/pay.js"></script>
     </body>
 </html>

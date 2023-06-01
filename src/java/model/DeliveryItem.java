@@ -99,7 +99,7 @@ public class DeliveryItem {
         this.doneTime = doneTime;
     }
 
-    public DeliveryItem(String username, int bookId, int amount, String payment, int itemId, String address, String phone, String email, String note, String orderTime, String doneTime) {
+    public DeliveryItem(String username, int bookId, int amount, String payment, String address, String phone, String email, String note, String orderTime, String doneTime) {
         this.username = username;
         this.bookId = bookId;
         this.amount = amount;
