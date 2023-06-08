@@ -37,6 +37,7 @@ function editComment(btn){
     }
 }
 function deleteComment(id){
-    //comment?method=delete
-    Confirm('deleteComment',()=>{window.location.href = `./comment?method=delete&id=${id}`})
+    const searchParams = new URLSearchParams((new URL(window.location.href).searchParams))
+    const pid = searchParams.get('pid');
+    Confirm('deleteComment',()=>{window.location.href = `./comment?method=delete&book_id=${pid}&id=${id}`})
 }

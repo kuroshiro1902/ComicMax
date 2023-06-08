@@ -5,7 +5,6 @@ const editCancelBtns = [$("#edit-cancel"),$("#edit-container")]
 const editConfirm = $("#edit-confirm")
 const showEditBtns = $(".admin .js-show")
 const deleteProductBtns = $(".admin .js-delete")
-
 editField.onclick = (e)=>{e.stopPropagation()}
 editCancelBtns.forEach(btn=>{
     btn.onclick = adminFunc.hideEdit

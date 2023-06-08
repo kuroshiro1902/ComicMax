@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -64,20 +62,22 @@ public class CommentProduct extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            /*Hàm này dùng để delete comment vì sự kiện delete gọi bằng link :)))))))))))))))))*/
+            /*Hàm này dùng để delete comment vì sự kiện delete gọi bằng link*/
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
         String username = account.getUsername();
+        int book_id = Integer.parseInt(request.getParameter("book_id"));
         String method = request.getParameter("method");
         if(method.equals("delete")){
-            String id = request.getParameter("id");
-            try (PrintWriter out = response.getWriter()) {
-                response.setContentType("application/json");
-                out.print("{\"work\": \"Tạo hàm xóa comment bằng username và id trong DAO\"}");
+            try {
+                String id = request.getParameter("id");
+                new CommentDAO().deleteComment(username, Integer.parseInt(id));
+                response.sendRedirect("./product?pid=" + book_id);
+            } catch (Exception ex) {
+                Logger.getLogger(CommentProduct.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
     }
 
     /**
@@ -91,18 +91,13 @@ public class CommentProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*Còn hàm này dùng để thêm comment vì sự kiện thêm comment gọi bằng form lmao :))))))))))))))))*/
+        /*Còn hàm này dùng để thêm comment vì sự kiện thêm comment gọi bằng form*/
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
         String username = account.getUsername();
-        String method = request.getParameter("method");
         int book_id = Integer.parseInt(request.getParameter("book_id"));
         String content = request.getParameter("content").trim();
-        // Lấy thời gian hiện tại
-        LocalDate currentDate = LocalDate.now();
-        // Chuyển đổi thành java.sql.Date
-        Date dateNow = Date.valueOf(currentDate);
-        Comment comment = new Comment(username, book_id, content, dateNow, 0);
+        Comment comment = new Comment(username, book_id, content, null, 0);
         try {
             new CommentDAO().addComment(comment);
             response.sendRedirect("./product?pid=" + book_id);

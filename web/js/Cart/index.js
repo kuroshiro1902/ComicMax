@@ -50,3 +50,4 @@ $(".js-select-all").forEach(selectAllBtn=>{
 convertSingleToArray($(".js-delete")).forEach(deleteBtn=>{
     deleteBtn.onclick = ()=>{Delete(deleteBtn.parentElement)}
 })
+$("#buy").onclick = cartFunc.buy

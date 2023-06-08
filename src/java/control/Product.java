@@ -10,7 +10,11 @@ import dao.CommentDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
+import java.io.PrintWriter;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Account;
 import model.Book;
 import model.Comment;
 
@@ -48,7 +52,6 @@ public class Product extends HttpServlet {
         Book book= new BookDAO().getBookById(pid);
         List<Comment> comments = new CommentDAO().getAllCommentsByBookId(pid);
         request.setAttribute("book", book);
-        Collections.reverse(comments); // sap xep tu moi den cu
         request.setAttribute("comments",comments );
         request.getRequestDispatcher("product.jsp").forward(request, response);
     } 
@@ -63,8 +66,21 @@ public class Product extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        try {
+            HttpSession session = request.getSession();
+            Account account = (Account) session.getAttribute("account");
+            String username = account.getUsername();
+            String content = request.getParameter("content");
+            int id = Integer.parseInt(request.getParameter("id"));
+            new CommentDAO().modifyComment(content,username, id);
+        } catch (Exception ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String currentUrl = request.getRequestURL().toString();
+        String queryString = request.getQueryString();
+        currentUrl += "?" + queryString;
+        response.sendRedirect(currentUrl);
     }
-
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

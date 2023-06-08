@@ -58,12 +58,29 @@ function totalCalculate(){
         item.children[0].firstElementChild.checked? total + Number(item.children[5].innerText.substring(1)) : total
     ,0)*100)/100
 }
+function buy(){
+    const pids = []
+    const items = convertSingleToArray($(".item input"))
+    items.forEach(item=>{
+        if(item.checked === true){
+            pids.push(item.parentElement.parentElement.getAttribute('data-pid'))
+        }
+    })
+    if(pids.length === 0){
+        toastMessage('info', 'Không có sản phẩm', 'Không có sản phẩm nào được chọn')
+        return;
+    }
+    const queryParams = pids.map(pid => `item_id=${pid}`).join("&");
+    const url = `./buy?${queryParams}`;
+    window.location.href = url
+}
 export default {
     selectAll,
     onInput,
     onFocusout,
     add,
     minus,
-    totalCalculate
+    totalCalculate,
+    buy
 }
 //js-total-cart

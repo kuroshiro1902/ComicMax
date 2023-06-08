@@ -8,7 +8,7 @@
         <form class="comment" action="./comment" method="POST" >
             <div class="comment__user-info">
                 <div class="avatar">
-                    <img src="./img/default.webp" alt="">
+                    <img src="./img/temp.webp" alt="">
                 </div>
                 <div class="username">
                     ${sessionScope.account.getFullname()}
@@ -56,7 +56,8 @@
                 </div>
             </div>
             
-            <form method="PUT" id="commentForm${o.getId()}">
+            <form method="POST" id="commentForm${o.getId()}">
+                <input name="id" value="${o.getId()}" style="display: none">
                 <div class="comment__user-content" style="font-size: 14px" id="comment${o.getId()}">
                     ${o.getContent()}
                 </div>

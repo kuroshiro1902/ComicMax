@@ -4,19 +4,19 @@
  */
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Comment {
     private String username;
     private int bookId;
     private String content;
-    private Date postTime;
+    private Timestamp postTime;
     private int id;
 
     public Comment() {
     }
 
-    public Comment(String username, int bookId, String content, Date postTime, int id) {
+    public Comment(String username, int bookId, String content, Timestamp postTime, int id) {
         this.username = username;
         this.bookId = bookId;
         this.content = content;
@@ -56,11 +56,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getPostTime() {
+    public Timestamp getPostTime() {
         return postTime;
     }
 
-    public void setPostTime(Date postTime) {
+    public void setPostTime(Timestamp postTime) {
         this.postTime = postTime;
     }
 }

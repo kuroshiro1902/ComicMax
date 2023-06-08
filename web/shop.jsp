@@ -95,7 +95,7 @@
                                 <option value='{"orderby": "id_order", "order": "ASC"}'>Oldest to newest</option>
                             </select>
                         </div>
-                        <div class="product-container">
+                        <div class="product-container" >
                          
                         </div>
                         <div class="js-page-index"></div>

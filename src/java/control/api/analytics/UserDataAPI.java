@@ -3,26 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package control;
+package control.api.analytics;
 
-import dao.ItemDAO;
+import com.google.gson.Gson;
+import dao.AccountDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import model.Account;
-import model.Item;
 
 /**
  *
  * @author emsin
  */
-public class Buy extends HttpServlet {
+@WebServlet(name="UserDataAPI", urlPatterns={"/userdataapi"})
+public class UserDataAPI extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,22 +32,8 @@ public class Buy extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("account");
-        String username = account.getUsername();
-        String[] item_ids = request.getParameterValues("item_id");
-
-        ItemDAO itemdao = new ItemDAO();
-        List<Item> itemList = new ArrayList<>();
-        for (String id : item_ids) {
-            int book_id = Integer.parseInt(id);
-            Item item = itemdao.getItemByUsernameAndBookId(username, book_id);
-            if (item != null) {
-                itemList.add(item);
-            }
+        try (PrintWriter out = response.getWriter()) {
         }
-        session.setAttribute("items", itemList);
-        request.getRequestDispatcher("/buy.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +47,10 @@ public class Buy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int countAccount = new AccountDAO().countAccount();
+        
+        PrintWriter out = response.getWriter();
+        out.print("{\"countAccount\":"+countAccount+"}");
     } 
 
     /** 
@@ -76,7 +63,7 @@ public class Buy extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         processRequest(request, response);
+        processRequest(request, response);
     }
 
     /** 

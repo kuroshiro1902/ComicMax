@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DeliveryItem {
+
     private String username;
     private int bookId;
     private int amount;
@@ -18,6 +19,7 @@ public class DeliveryItem {
     private String note;
     private String orderTime;
     private String doneTime;
+    private int id;
 
     public String getUsername() {
         return username;
@@ -99,7 +101,7 @@ public class DeliveryItem {
         this.doneTime = doneTime;
     }
 
-    public DeliveryItem(String username, int bookId, int amount, String payment, String address, String phone, String email, String note, String orderTime, String doneTime) {
+    public DeliveryItem(String username, int bookId, int amount, String payment, String address, String phone, String email, String note, String orderTime, String doneTime, int id) {
         this.username = username;
         this.bookId = bookId;
         this.amount = amount;
@@ -110,11 +112,19 @@ public class DeliveryItem {
         this.note = note;
         this.orderTime = orderTime;
         this.doneTime = doneTime;
+        this.id = id;
     }
 
-   
-    public LocalDateTime getDateTime(String dateString){ //chuyen String ve datetime
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        return LocalDateTime.parse(dateString, formatter);
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public float getTotal(float price) {
+        return (float) Math.round(price * this.amount * 100) / 100;
+    }
+
 }

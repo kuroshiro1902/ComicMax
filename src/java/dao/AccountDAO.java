@@ -78,4 +78,20 @@ public class AccountDAO {
         }
         return null;
     }
+    public int countAccount(){
+        String query = "select count(username) from account where isAdmin = 0";
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+            
+        } catch (Exception e) {
+            return 0;
+        }
+        return 0;
+    }
 }

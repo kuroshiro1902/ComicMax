@@ -52,6 +52,18 @@
         <servlet-name>Buy</servlet-name>
         <servlet-class>control.Buy</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>control.AddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delivery</servlet-name>
+        <servlet-class>control.Delivery</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeliveryAPI</servlet-name>
+        <servlet-class>control.api.DeliveryAPI</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -98,11 +110,23 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Pay</servlet-name>
-        <url-pattern>/Pay</url-pattern>
+        <url-pattern>/pay</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Buy</servlet-name>
         <url-pattern>/buy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delivery</servlet-name>
+        <url-pattern>/delivery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeliveryAPI</servlet-name>
+        <url-pattern>/deliveryapi</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

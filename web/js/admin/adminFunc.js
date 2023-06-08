@@ -7,71 +7,89 @@ const editTitle = $("#edit-title")
 const editPrice = $("#edit-price")
 const editAmount = $("#edit-amount")
 //
+const addContainer = $("#add-container")
+const addId = $("#add-id")
+const addImg = $("#add-img")
+const addTitle = $("#add-title")
+const addPrice = $("#add-price")
+const addAmount = $("#add-amount")
+//
+function showEdit(e) {
 
-function showEdit(e){
+    $(".edit-field h3").innerText = 'Edit Product'
     const productElement = e.target.parentElement.parentElement
     const product = getProductElementById(productElement.getAttribute("data-pid"))
-    editId.setAttribute("value",product.id)
+    editId.setAttribute("value", product.id)
     editImg.value = product.img
     editTitle.value = product.title
     editPrice.value = product.price
     editAmount.value = product.amount
+
     editContainer.style.display = "flex";
+
 }
-function hideEdit(){
+function hideEdit() {
     editContainer.style.display = "none"
 }
 
-function reRenderProductByid(id){
+function reRenderProductByid(id) {
     const productItem = $(`.item[data-pid=${id}]`)
 }
 
-function submitEditProduct () {
+function submitEditProduct() {
     const data = {id: editId.value.trim(),
-            name: editTitle.value.trim(),
-            img: editImg.value.trim(),
-            price: editPrice.value.trim(),
-            amount: editAmount.value.trim()}
-        console.log(data)
-    fetch('./editproductapi',{
+        name: editTitle.value.trim(),
+        img: editImg.value.trim(),
+        price: editPrice.value.trim(),
+        amount: editAmount.value.trim()}
+    console.log(data)
+    fetch('./editproductapi', {
         method: 'POST',
         body: JSON.stringify(data)
     })
-        .then(res=>res.json())
-        .then(data=> {
-            console.log(data)
-            toastMessage("confirm", "Done", "Update product complete!")
-            const product = getProductElementById(data.id)
-            product.setImg(data.img)
-            product.setTitle(data.name)
-            product.setPrice(data.price)
-            product.setAmount(data.amount)
-        })
-        .catch(error => {
-            console.log(error)
-            toastMessage("warning", "Error", "Something wrong. Try again!")
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toastMessage("confirm", "Done", "Update product complete!")
+                const product = getProductElementById(data.id)
+                product.setImg(data.img)
+                product.setTitle(data.name)
+                product.setPrice(data.price)
+                product.setAmount(data.amount)
+            })
+            .catch(error => {
+                console.log(error)
+                toastMessage("warning", "Error", "Something wrong. Try again!")
+            })
 }
-function submitDeleteProduct(productElement){
+function submitDeleteProduct(productElement) {
     console.log(productElement)
-    fetch('./editproductapi',{
+    fetch('./editproductapi', {
         method: 'DELETE',
         body: JSON.stringify(+productElement.id)
     })
-        .then(res=>res.json())
-        .then(data=> {
-            console.log(data)
-            toastMessage("confirm", "Done", "Delete product complete!")
-            productElement.element.remove()
-        })
-        .catch(error => {
-            console.log(error)
-            toastMessage("warning", "Error", "Something wrong. Try again!")
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toastMessage("confirm", "Done", "Delete product complete!")
+                productElement.element.remove()
+            })
+            .catch(error => {
+                console.log(error)
+                toastMessage("warning", "Error", "Something wrong. Try again!")
+            })
 }
-function deleteProduct(productElement){
+function addProduct(){
+     $(".add-field h3").innerText = 'Add Product'
+    
+
+    addContainer.style.display = "flex";
+}
+function deleteProduct(productElement) {
     Confirm("delete",
-    (e)=>{submitDeleteProduct(productElement)},
-    `Do you want to delete ${productElement.title}?`)
+            (e) => {
+        submitDeleteProduct(productElement)
+    },
+            `Do you want to delete ${productElement.title}?`)
 }
-export default {showEdit, hideEdit,submitEditProduct, deleteProduct}
+export default {showEdit, hideEdit, submitEditProduct, deleteProduct, addProduct}

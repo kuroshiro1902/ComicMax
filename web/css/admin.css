@@ -77,15 +77,17 @@
 .main .edit button:nth-child(2){
     background: #ff3a25;
 }
-#edit-container{
+#edit-container, #add-container{
     /*display:flex;*/
     display: none;
-    justify-content: center; align-items: center;
+    justify-content: center;
     position: fixed;
-    top:78px;bottom:0;right:0;left:0;
+    top:80px;bottom:0;right:0;left:0;
     background: rgba(0,0,0,.5);
+    font-size: 14px;
 }
-.edit-field{
+.edit-field, .add-field{
+    margin-bottom: 80px;
     min-width: 360px;
     width: 50%;
     display: flex;
@@ -93,20 +95,81 @@
     padding: 20px;
     background: rgba(255,255,255,.9);
     border-radius: 8px;
+    overflow-y: scroll;
 }
-.edit-field label{
+.edit-field label, .add-field label{
     margin-top: 8px;
 }
-.edit-field input[type="text"]{
+.edit-field input, .add-field input, .add-field select{
     padding: 4px;
 }
-.edit-field .buttons{
+.edit-field .buttons, .add-field .buttons{
     display: flex;
     justify-content: space-evenly;
     margin: 16px 0;
 }
-.edit-field button{
+.edit-field button, .add-field button{
     justify-self: center;
     max-width: 30%;
     min-width: 150px;
+}
+.add-field .category-tag{
+    font-size: 13px; border: 1px solid #333; border-radius: 4px; padding: 2px 4px; cursor: pointer; display: inline-flex; background-color: #fff;
+}
+option{
+    padding: 4px;
+    cursor: pointer
+}
+/**/
+.searchbar{
+    margin: 0 auto;
+    margin-top: 16px;
+}
+/**/
+.row{
+   padding: 4px;
+   margin-top: 24px;
+   margin-bottom: 24px;
+   display: flex;
+   justify-content: space-evenly;
+}
+.card{
+    min-width: 20%;
+    display: inline-block;
+    border-radius: 4px;
+    box-shadow: 0 0 4px #000;
+    background-color: #fff;
+    padding: 8px;
+}
+.card .label{
+    font-size: .75rem
+}
+.card .value{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.25rem
+}
+
+/*ANALYTICS */
+#doneDeliveryItemChart{
+    background-color: white;
+}
+
+.product-container .product{
+    background-color: #fff;
+    box-shadow: 0 0 4px #000;
+}
+.product img{
+    width: 124px;
+    height: unset !important;
+}
+.bookChart{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#topBook{
+    font-size: .9rem;
+        display: block;
+    margin: auto;
 }

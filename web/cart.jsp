@@ -28,6 +28,8 @@
         </div>
         <section class="body-container">
             <div class="body">
+                <a href="./delivery" class="button" style="float:right">Bought Items</a>
+                <div style="clear:both"></div>
                 <div class="itemlist">
                     <div class="item-head">
                         <div class="checkbox">
@@ -92,7 +94,7 @@
                             </div>
                         </div>
                         <div class="buy">
-                            <div class="button">Buy</div>
+                            <div class="button" id="buy">Buy</div>
                         </div>
                     </div>
                 </div>

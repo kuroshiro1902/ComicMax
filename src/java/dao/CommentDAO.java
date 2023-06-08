@@ -23,7 +23,7 @@ public class CommentDAO extends DAO {
                     rs.getString(1),
                     rs.getInt(2),
                     rs.getString(3),
-                    rs.getDate(4),
+                    rs.getTimestamp(4),
                     rs.getInt(5)
             );
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class CommentDAO extends DAO {
     }
     
     public List<Comment> getAllCommentsByBookId(int bookId) {
-        String query = "SELECT * FROM Comment WHERE book_id = " + bookId;
+        String query = "SELECT * FROM Comment WHERE book_id = " + bookId + " order by posttime desc";
         return this.getCommentListByQuery(query);
     }
     public List<Comment> getAllCommentsByUsernameAndBookId(String username, int bookId) {
@@ -63,23 +63,58 @@ public class CommentDAO extends DAO {
         return this.getCommentListByQuery(query);
     }
     public List<Comment> addComment(Comment comment) throws Exception {
-    CommentDAO commentDao = new CommentDAO();
-    String query;
-    int effectRow = 0;
-    try {
-        DBContext db = DBContext.getInstance();
-        Connection conn = db.getConnection();
-        PreparedStatement ps;
-        query = "INSERT INTO Comment VALUES (?, ?, ?, ?)";
-        ps = conn.prepareStatement(query);
-        ps.setString(1, comment.getUsername().trim());
-        ps.setInt(2, comment.getBookId());
-        ps.setString(3, comment.getContent().trim());
-        ps.setDate(4, new java.sql.Date(comment.getPostTime().getTime()));
-        effectRow = ps.executeUpdate();
-    } catch (Exception e) {}
-    return effectRow > 0 ? commentDao.getAllCommentsByUsernameAndBookId(comment.getUsername(), comment.getBookId()) : null;
-}
+        CommentDAO commentDao = new CommentDAO();
+        String query;
+        int effectRow = 0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+            query = "INSERT INTO Comment VALUES (?, ?, ?, ?)";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, comment.getUsername().trim());
+            ps.setInt(2, comment.getBookId());
+            ps.setString(3, comment.getContent().trim());
+            ps.setNull(4, java.sql.Types.NULL);
+            effectRow = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return effectRow > 0 ? commentDao.getAllCommentsByUsernameAndBookId(comment.getUsername(), comment.getBookId()) : null;
+    }
+    public boolean modifyComment( String content, String username, int id) throws Exception {
+        String query;
+        int effectRow = 0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+            query = "UPDATE Comment SET content = ? WHERE username = ? and id = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, content.trim());
+            ps.setString(2,username);
+            ps.setInt(3, id);
 
+            effectRow = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return effectRow > 0;
+    }
 
+public boolean deleteComment(String username, int id) throws Exception {
+        String query;
+        int effectRow = 0;
+        try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps;
+            query = "DELETE Comment WHERE username = ? and id = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1,username);
+            ps.setInt(2, id);
+
+            effectRow = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return effectRow > 0;
+    }
 }

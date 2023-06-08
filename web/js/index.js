@@ -40,7 +40,6 @@ function createComponent(tag='div', className=null, styles=null, child=null) {
 function init(){
     //disable spellcheck
     $("input").forEach((input)=>{input.setAttribute("spellcheck","false")})
-    //show, hide confirm alert
     
 }
 function searchBtnAppearance(){

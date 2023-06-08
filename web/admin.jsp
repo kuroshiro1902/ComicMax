@@ -73,10 +73,7 @@
                         </form>
                     </div>
                             <div class="main" action="">
-                                <form class="searchbar" >
-                                    <input type="text" name="search">
-                                    <input type="submit" value="Search" class="button" spellcheck="false">
-                                </form>
+                                
                                 <jsp:include page="./views_admin/${selected}.jsp" />
                             </div>
                 </div>
@@ -90,25 +87,7 @@
                 </div>
                 </c:otherwise>
             </c:choose>
-            <div id="edit-container">
-                <div class="edit-field">
-                    <h3>Edit Product</h3>
-                    <input id="edit-id" style="display: none">
-                    <label for="edit-title">Title</label>
-                    <input id="edit-title" type="text" name="edit-title" placeholder="Title">
-                    <label for="edit-img">Image</label>
-                    <input id="edit-img" type="text" name="edit-img" placeholder="Image">
-                    <label for="edit-price">Price</label>
-                    <input id="edit-price" name="edit-price" type="text" placeholder="Price">
-                    <label for="edit-amount">Amount</label>
-                    <input id="edit-amount" name="edit-amount" type="text" placeholder="Amount">
-                    <div class="buttons">
-                        <button id="edit-confirm" class="button-confirm">Submit</button>
-                        <button id="edit-cancel" class="button-cancel">Cancel</button>
-                    </div>
-                    
-                </div>
-            </div>
+            
         </section>
         <jsp:include page="footer.jsp" />
         <script src="./js/index.js"></script>
