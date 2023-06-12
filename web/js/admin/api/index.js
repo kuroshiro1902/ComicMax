@@ -1,5 +1,6 @@
 import getTopBookByMonth from "./getTopBookByMonth.js"
 import getMonthData from "./getMonthData.js"
-import drawChart from "./drawChart.js"
-import getCountAccount from "./getCountAccount.js"
-export {getTopBookByMonth, getMonthData, drawChart, getCountAccount}
+import drawColumnChart from "./drawColumnChart.js"
+import drawLineChart from "./drawLineChart.js"
+import getData from "./getData.js"
+export {getData, getTopBookByMonth, getMonthData, drawColumnChart, drawLineChart }

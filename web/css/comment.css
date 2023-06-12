@@ -30,6 +30,33 @@
 #comment .comment .comment__user-content{
     font-size: 14px;
 }
+#rating input{
+    display: none;
+}
+
+#rating label{
+    display: inline-block;
+  cursor: pointer;
+  background-image: url("../img/star_gray.svg");
+  background-size: contain;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+}
 .text-area{
     resize: none; width: 100%; font: inherit; font-size: 14px; padding: .5rem
+}
+.rating-state{
+    animation: pop 0.3s ease-in-out;
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

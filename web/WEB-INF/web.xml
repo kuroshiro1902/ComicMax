@@ -64,6 +64,18 @@
         <servlet-name>DeliveryAPI</servlet-name>
         <servlet-class>control.api.DeliveryAPI</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Account</servlet-name>
+        <servlet-class>control.Account</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DataAPI</servlet-name>
+        <servlet-class>control.api.analytics.DataAPI</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RevenueDataAPI</servlet-name>
+        <servlet-class>control.api.analytics.RevenueDataAPI</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -127,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>DeliveryAPI</servlet-name>
         <url-pattern>/deliveryapi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Account</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DataAPI</servlet-name>
+        <url-pattern>/dataapi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RevenueDataAPI</servlet-name>
+        <url-pattern>/revenuedataapi</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

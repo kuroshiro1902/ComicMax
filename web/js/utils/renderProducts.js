@@ -64,5 +64,8 @@ export default function renderProducts(data={count:1,currentPageIndex:"1",list:[
     }
     else{
         container.innerHTML = `<p style="grid-column: 1 / -1; text-align: center">No product matches. Search for another product.</p>`
+        const pagingHTML = `<div class="pages" data-page-index="${currentPageIndex}">${generatePageIndexButtons(count,currentPageIndex)}</div>`
+        $(".js-page-index").innerHTML = pagingHTML
+        
     }
 }

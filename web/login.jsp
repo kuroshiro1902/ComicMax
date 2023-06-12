@@ -16,7 +16,7 @@
         <jsp:include page="header.jsp" />
         <div class="breadcrumb">
             <div class="breadcrumb-content">
-                <h1>My Account</h1>
+                <h1>LOGIN</h1>
                 <p>
                     <a href="index.jsp" class="red-hover" style="opacity: 0.7">home </a> >
                     <span>LoGIN</span>

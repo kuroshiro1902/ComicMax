@@ -31,6 +31,7 @@
                 <div class="main" style="flex-direction: column">
                     <div>
                         <h2>Order Completed!</h2>
+                        <a style="margin: .5rem 0" class="button" href="./cart.jsp">Back to cart</a>
                         <p>Thanks for choosing our products. <a href="./shop.jsp" style="color: teal">Watch more products.</a></p>
                     </div>
                     
@@ -63,7 +64,7 @@
                         <div class="total">
                             <div>
                                 <span style="font-weight: bolder">Total: </span>
-                                <span data-total class="num">$123  </span>
+                                <span data-total class="num">${totalPrice} </span>
                             </div>
                         </div>
                 </div>

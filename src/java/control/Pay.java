@@ -59,7 +59,10 @@ public class Pay extends HttpServlet {
                 deliveryitems.add(deliveryitem);
             }
             session.removeAttribute("items");
+            float totalPrice = (float) session.getAttribute("totalPrice"); 
+            session.removeAttribute("totalPrice");
             request.setAttribute("deliveryitems", deliveryitems);
+            request.setAttribute("totalPrice", totalPrice);
             request.getRequestDispatcher("/done.jsp").forward(request, response);
         } catch (Exception e) {
             response.sendRedirect("./");

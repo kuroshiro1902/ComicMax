@@ -7,16 +7,22 @@ package model;
 public class MonthData {
 
     private String label;
-    private int data;
+    private int data=0;
+    private float floatData;
 
     public MonthData(int month) {
         this.label = this.getMonthLabel(month);
         this.data = 0;
+        this.floatData = 0f;
     }
 
     public MonthData(int month, int data) {
         this.label = this.getMonthLabel(month);
         this.data = data;
+    }
+    public MonthData(int month, float data) {
+        this.label = this.getMonthLabel(month);
+        this.floatData = data;
     }
 
     public String getMonth() {
@@ -33,6 +39,14 @@ public class MonthData {
 
     public void setData(int data) {
         this.data = data;
+    }
+
+    public float getFloatData() {
+        return floatData;
+    }
+
+    public void setFloatData(float floatData) {
+        this.floatData = floatData;
     }
 
     private String getMonthLabel(int n) {

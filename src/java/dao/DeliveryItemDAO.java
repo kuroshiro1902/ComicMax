@@ -6,6 +6,8 @@ import model.DeliveryItem;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import model.Account;
+import model.Book;
 /**
  *
  * @author Dell
@@ -54,6 +56,15 @@ public class DeliveryItemDAO extends DAO{
         } catch (Exception e) {}
         return list;
     }
+    private int getNumberByQuery(String query){
+        ResultSet rs = this.getResult(query);
+        try {
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {}
+        return 0;
+    }
     public DeliveryItem getDeliveryItemByIdAndUsername(int id, String username){
         String query = "select * from deliveryitem where id = "+id+" and username = '"+username+"'";
         return this.getDeliveryItemByQuery(query);
@@ -94,7 +105,7 @@ public class DeliveryItemDAO extends DAO{
         return query;
     }
     public int getDoneDeliveryItemByMonth (int month) {
-        String query = "SELECT sum(amount) FROM DeliveryItem WHERE MONTH(ordertime) =" + month;
+        String query = "SELECT sum(amount) FROM DeliveryItem WHERE MONTH(donetime) =" + month;
         try {
             DBContext db = DBContext.getInstance();
             Connection conn = db.getConnection();
@@ -111,19 +122,7 @@ public class DeliveryItemDAO extends DAO{
     }
     public int getCountCustomerByAmount(int amount){
         String query = "SELECT count(distinct username) FROM DeliveryItem GROUP BY username HAVING SUM(amount) > " + amount;
-        try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query); 
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                return rs.getInt(1);
-            }
-
-        } catch (Exception e) {
-            return 0;
-        }
-        return 0;
+        return this.getNumberByQuery(query);
     }
     public boolean setDoneByIdAndUsername(int id, String username){
         int effectRow;
@@ -137,5 +136,41 @@ public class DeliveryItemDAO extends DAO{
             effectRow = 0;
         }
         return effectRow>0; 
+    }
+    public int getAmountByBookAndMonth(Book book, int month){
+        String query = "select sum(amount) from DeliveryItem where month(donetime) = "+month+" and book_id = "+book.getId();
+        return this.getNumberByQuery(query);
+    }
+    public int getAmountByMonth(int month){
+        String query = "select sum(amount) from DeliveryItem where month(donetime) = "+month;
+        return this.getNumberByQuery(query);
+    }
+    public float getRevenueByMonth(int month){
+        String query = "SELECT SUM(Book.price * DeliveryItem.amount)\n" +
+                        "FROM Book\n" +
+                        "INNER JOIN DeliveryItem ON Book.id = DeliveryItem.book_id\n" +
+                        "WHERE MONTH(DeliveryItem.donetime) = "+month;
+         try {
+            DBContext db = DBContext.getInstance();
+            Connection conn = db.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getFloat(1);
+            }
+        } catch (Exception e) {
+            return 0f;
+        }
+        return 0f; 
+    }
+    public boolean didUserBuyProduct(Account account, Book book){
+        if(account!=null){
+            String query = "select * from DeliveryItem where username = '"+account.getUsername()
+                    + "' and book_id = "+book.getId()
+                    + " and donetime is not null";
+            List<DeliveryItem> list = this.getListByQuery(query);
+            return !list.isEmpty();
+            }
+        else return false;
     }
 }

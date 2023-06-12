@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import model.Comment;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,7 +23,8 @@ public class CommentDAO extends DAO {
                     rs.getInt(2),
                     rs.getString(3),
                     rs.getTimestamp(4),
-                    rs.getInt(5)
+                    rs.getInt(5),
+                    rs.getInt(6)
             );
         } catch (Exception e) {
         }
@@ -70,12 +70,13 @@ public class CommentDAO extends DAO {
             DBContext db = DBContext.getInstance();
             Connection conn = db.getConnection();
             PreparedStatement ps;
-            query = "INSERT INTO Comment VALUES (?, ?, ?, ?)";
+            query = "INSERT INTO Comment VALUES (?, ?, ?, ?, ?)";
             ps = conn.prepareStatement(query);
             ps.setString(1, comment.getUsername().trim());
             ps.setInt(2, comment.getBookId());
             ps.setString(3, comment.getContent().trim());
             ps.setNull(4, java.sql.Types.NULL);
+            ps.setInt(5, comment.getRating());
             effectRow = ps.executeUpdate();
         } catch (Exception e) {
         }

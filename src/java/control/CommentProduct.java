@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -97,7 +99,11 @@ public class CommentProduct extends HttpServlet {
         String username = account.getUsername();
         int book_id = Integer.parseInt(request.getParameter("book_id"));
         String content = request.getParameter("content").trim();
-        Comment comment = new Comment(username, book_id, content, null, 0);
+        String _rating = request.getParameter("rating");
+            if(_rating == null) _rating ="5";
+        int rating = Integer.parseInt(_rating);
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        Comment comment = new Comment(username, book_id, content, timestamp, rating, 0);
         try {
             new CommentDAO().addComment(comment);
             response.sendRedirect("./product?pid=" + book_id);

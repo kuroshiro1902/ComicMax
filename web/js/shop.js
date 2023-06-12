@@ -42,7 +42,6 @@ export class Filter{
         $(".result-filter").append(this.tag)
     }
     remove(){
-        console.log("remove")
         this.input.checked = false
         this.tag.remove()
     }

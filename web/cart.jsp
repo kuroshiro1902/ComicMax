@@ -28,7 +28,7 @@
         </div>
         <section class="body-container">
             <div class="body">
-                <a href="./delivery" class="button" style="float:right">Bought Items</a>
+                <a href="./delivery" class="button" style="float:right">Delivery Items</a>
                 <div style="clear:both"></div>
                 <div class="itemlist">
                     <div class="item-head">

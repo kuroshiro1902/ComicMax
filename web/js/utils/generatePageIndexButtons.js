@@ -5,6 +5,8 @@ function pageIndexButton(index=null,currentIndex=null,text=index){
     : `<button class="button" name="page_index" value="${index}">${text}</button>`
 }
 export default function generatePageIndexButtons(total, current){
+        console.log("total", total)
+        console.log("current", current)
     current = Number(current)
     let ans = []
     for(let i=1;i<=total;i++){

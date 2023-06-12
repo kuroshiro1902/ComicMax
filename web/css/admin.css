@@ -36,6 +36,8 @@
 .left-bar{
     width: 160px;
     height: 100%;
+    position: sticky;
+    top:90px;
 }
 .admin .main{
     flex-grow: 1;
@@ -82,7 +84,10 @@
     display: none;
     justify-content: center;
     position: fixed;
-    top:80px;bottom:0;right:0;left:0;
+    top:80px;
+    bottom:0;
+    right:0;
+    left:0;
     background: rgba(0,0,0,.5);
     font-size: 14px;
 }
@@ -114,7 +119,13 @@
     min-width: 150px;
 }
 .add-field .category-tag{
-    font-size: 13px; border: 1px solid #333; border-radius: 4px; padding: 2px 4px; cursor: pointer; display: inline-flex; background-color: #fff;
+    font-size: 13px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2px 4px;
+    cursor: pointer;
+    display: inline-flex;
+    background-color: #fff;
 }
 option{
     padding: 4px;
@@ -127,11 +138,11 @@ option{
 }
 /**/
 .row{
-   padding: 4px;
-   margin-top: 24px;
-   margin-bottom: 24px;
-   display: flex;
-   justify-content: space-evenly;
+    padding: 4px;
+    margin-top: 24px;
+    margin-bottom: .75rem;
+    display: flex;
+    justify-content: space-evenly;
 }
 .card{
     min-width: 20%;
@@ -140,9 +151,15 @@ option{
     box-shadow: 0 0 4px #000;
     background-color: #fff;
     padding: 8px;
+    color: #fff;
+    --red1: #264653;
+    --red2: #2a9d8f;
+    --red3: #e9c46a;
+    --red4: #f4a261;
+    --red5: #e76f51;
 }
 .card .label{
-    font-size: .75rem
+    font-size: .9rem
 }
 .card .value{
     text-align: center;
@@ -150,8 +167,27 @@ option{
     font-size: 1.25rem
 }
 
+.row .card:nth-child(1){
+    background-image: linear-gradient(to right,var(--red1), var(--red2));
+}
+.row .card:nth-child(2){
+    background-image: linear-gradient(to right, var(--red2), var(--red3));
+
+}
+.row .card:nth-child(3){
+    background-image: linear-gradient(to right, var(--red3), var(--red4));
+    color: #333;
+}
+.row .card:nth-child(4){
+    background-image: linear-gradient(to right, var(--red4), var(--red5));
+    color: #333;
+}
+.box-shadow {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 6px 6px rgba(0, 0, 0, 0.2);
+}
 /*ANALYTICS */
-#doneDeliveryItemChart{
+
+#ColumnChart{
     background-color: white;
 }
 
@@ -170,6 +206,6 @@ option{
 
 #topBook{
     font-size: .9rem;
-        display: block;
+    display: block;
     margin: auto;
 }

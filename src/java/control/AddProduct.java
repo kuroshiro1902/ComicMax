@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -33,7 +35,7 @@ public class AddProduct extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         
         BookDAO bookDAO = new BookDAO();
@@ -43,24 +45,28 @@ public class AddProduct extends HttpServlet {
         List<Integer> category_ids = new ArrayList<>();
         for(String id : cate_id){
             if(id != null){
-                category_ids.add(Integer.parseInt(id));
+                category_ids.add(Integer.valueOf(id));
             }
         }
         String img = request.getParameter("img");
         String language = request.getParameter("language");
-        int author_id=0;
-        int publisher_id=0;
-        String author_name = request.getParameter("author_name ");
-        if(author_name == null || author_name.equals("")){
-            author_id = Integer.parseInt(request.getParameter("author_id"));
-        }
-        String publisher_name = request.getParameter("publisher_name ");
-        if(publisher_name == null || publisher_name.equals("")){
-            publisher_id = Integer.parseInt(request.getParameter("publisher_id"));
-        }
+        int author_id=Integer.parseInt(request.getParameter("author_id"));
+        int publisher_id=Integer.parseInt(request.getParameter("publisher_id"));
+        String author_name = request.getParameter("author_name");
+        String publisher_name = request.getParameter("publisher_name");
         float price = Float.parseFloat(request.getParameter("price"));
         int amount = Integer.parseInt(request.getParameter("amount"));
         
+//        PrintWriter out = response.getWriter();
+//        out.println(name+"\n");
+//        out.println(img+"\n");
+//        out.println(language+"\n");
+//        out.println(author_id+"\n");
+//        out.println(author_name+"\n");
+//        out.println(publisher_id+"\n");
+//        out.println(publisher_name.equals(""));
+//        out.println(price+"\n");
+//        out.println(amount+"\n");
 
         bookDAO.addProduct(name, category_ids, img, language, author_name, author_id, publisher_name, publisher_id, price, amount);
         
@@ -79,7 +85,11 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -93,7 +103,11 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 

@@ -60,6 +60,15 @@ public class ItemDAO {
         } catch (Exception e) {}
         return null;
     }
+    public float getTotalPriceByItemList(List<Item> list){
+        float total = 0f;
+        for(Item item: list){
+            int amount = item.getAmount();
+            float price = new BookDAO().getBookById(item.getPid()).getPrice();
+            total += price*amount;
+        }
+        return (float) Math.round((total*100))/100;
+    }
     public boolean addItemToCart(Item item){
         String query;
         int effectRow=0;

@@ -176,8 +176,8 @@
                                 <c:if test="${sessionScope.account.getIsAdmin() == 1}">
                                     <a class="usersubnav__item" href="./admin">Manager product &nbsp;<i class="fa-solid fa-bag-shopping"></i></a>
                                 </c:if>
-                                <a class="usersubnav__item" href>Account &nbsp;<i class="fa-solid fa-user"></i></a>
-                                <a class="usersubnav__item" href>Delivery &nbsp;<i class="fa-solid fa-truck"></i></a>
+                                <a class="usersubnav__item" href="./delivery">Delivery &nbsp;<i class="fa-solid fa-truck"></i></a>
+                                <a class="usersubnav__item" href="./account">Account &nbsp;<i class="fa-solid fa-user"></i></a>
                                 <a class="usersubnav__item" href>Setting &nbsp;<i class="fa-solid fa-gear"></i></a>
                                 <a class="usersubnav__item" href="./logout">Log out &nbsp;<i class="fa-solid fa-right-from-bracket"></i></a>
                             </div>

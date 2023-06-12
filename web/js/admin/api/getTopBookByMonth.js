@@ -14,7 +14,7 @@ function topBookComponent(data) {
             `
 }
 export default async function getTopBookByMonth(month) {
-        const response = await fetch(`./topbookbymonthapi?month=` + month)
+        const response = await fetch(`./topbookbymonthapi?month=`+month)
         const data = await response.json();
-        return topBookComponent(data);
+        return [topBookComponent(data.topBook), data.amount];
 }

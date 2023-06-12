@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import model.Book;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import model.Category;
 import model.PageData;
 
 /**
@@ -203,22 +205,16 @@ public class BookDAO extends DAO {
         return (int) Math.ceil((float) n / (float) productPerPage);
     }
 
-    public List<Book> getRelateBook(Book book, int n) {
-        String query = "";
-        return this.getListByQuery(query);
-    }
 
-    public Book addProduct(String name, List<Integer> category_ids, String img, String language, String author_name, int author_id, String publisher_name, int publisher_id, float price, int amount) {
-        
-        
+    public Book addProduct(String name, List<Integer> category_ids, String img, String language, String author_name, int author_id, String publisher_name, int publisher_id, float price, int amount) throws Exception {
+        DBContext db = DBContext.getInstance();
+        Connection conn = db.getConnection();
         // Kiểm tra xem có author_name hay không? Nếu có thì thêm tác giả mới (q1).
-        if (author_name != null && !author_name.isEmpty()) {
+        if (!author_name.equals("")) {
             author_name = author_name.trim();
             // Thực hiện câu lệnh q1 để thêm tác giả mới vào database.
-            String authorQuery = "INSERT INTO Author(name) VALUES (?)";
+            String authorQuery = "INSERT INTO Author VALUES (?)";
             try {
-                DBContext db = DBContext.getInstance();
-                Connection conn = db.getConnection();
                 PreparedStatement authorPs = conn.prepareStatement(authorQuery);
                 authorPs.setString(1, author_name);
                 authorPs.executeUpdate();
@@ -235,13 +231,11 @@ public class BookDAO extends DAO {
             }
         }
         // Kiểm tra xem có publisher_name hay không? Nếu có thì thêm nhà xuất bản mới (q2).
-        if (publisher_name != null && !publisher_name.isEmpty()) {
+        if (!publisher_name.equals("")) {
             publisher_name = publisher_name.trim();
             // Thực hiện câu lệnh q2 để thêm nhà xuất bản mới vào database.
             String publisherQuery = "INSERT INTO Publisher(name) VALUES (?)";
             try {
-                DBContext db = DBContext.getInstance();
-                Connection conn = db.getConnection();
                 PreparedStatement publisherPs = conn.prepareStatement(publisherQuery);
                 publisherPs.setString(1, publisher_name);
                 publisherPs.executeUpdate();
@@ -262,9 +256,7 @@ public class BookDAO extends DAO {
         int bookId = 0;
         String bookQuery = "INSERT INTO Book VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement bookPs = conn.prepareStatement(bookQuery);
+            PreparedStatement bookPs = conn.prepareStatement(bookQuery, Statement.RETURN_GENERATED_KEYS);
             bookPs.setString(1, name);
             bookPs.setString(2, img);
             bookPs.setString(3, language);
@@ -281,20 +273,16 @@ public class BookDAO extends DAO {
             if (generatedKeys.next()) {
                 bookId = generatedKeys.getInt(1);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Thực hiện câu lệnh q4 để thêm thông tin sách và category vào bảng book_category.
-        String bookCategoryQuery = "INSERT INTO Book_Category(book_id, category_id) VALUES (?, ?)";
-        try {
-            DBContext db = DBContext.getInstance();
-            Connection conn = db.getConnection();
-            PreparedStatement bookCategoryPs = conn.prepareStatement(bookCategoryQuery);
-            for (int category_id : category_ids) {
-                bookCategoryPs.setInt(1, bookId);
-                bookCategoryPs.setInt(2, category_id);
-                bookCategoryPs.executeUpdate();
+            for(int category_id : category_ids){
+                String query2 = "INSERT INTO  Book_Category VALUES (?,?)";
+                PreparedStatement ps = conn.prepareStatement(query2);
+                ps.setInt(1, bookId);
+                ps.setInt(2, category_id);
+                ps.executeUpdate();
+                try {
+                    
+                } catch (Exception e) {
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -344,39 +332,46 @@ public class BookDAO extends DAO {
     }
 
     public List<Book> getRelatedBooks(Book book) {
-        String query = "SELECT TOP 6 Book.* "
-                + "FROM Book "
-                + "INNER JOIN Book_Category ON Book.id = Book_Category.book_id "
-                + "WHERE Book_Category.Category_id = " + book.getCategories().get(0).getId();
-        return this.getListByQuery(query);
+        List<Book> relatedBooks = new ArrayList<>();
+
+        List<Category> categories = book.getCategories();
+
+        for (Category category : categories) {
+            if (relatedBooks.size() >= 6) {
+                break;
+            }
+
+            String query = "SELECT TOP " + (6 - relatedBooks.size()) + " Book.* "
+                    + "FROM Book "
+                    + "INNER JOIN Book_Category ON Book.id = Book_Category.book_id "
+                    + "WHERE Book_Category.Category_id = " + category.getId()
+                    + " AND Book.id != " + book.getId();
+
+            List<Book> books = getListByQuery(query);
+
+            relatedBooks.addAll(books);
+        }
+
+        return relatedBooks;
     }
 
-    public String testsearchBooks(String _keywords, String[] _category_ids, String _author_id, String _publisher_id, String _page_index, String _amount_per_page, String _id_order, String _price_order) {
-        String keywords = this.setValue(_keywords, "");
-        String category_ids = _category_ids != null ? "'" + String.join(",", _category_ids) + "'" : "null";
-        String author_id = this.setValue(_author_id, null);
-        String publisher_id = this.setValue(_publisher_id, null);
-        String page_index = this.setValue(_page_index, "1");
-        String amount_per_page = this.setValue(_amount_per_page, "" + PageData.amount_per_page);
-        String id_order = _id_order != null ? "'" + _id_order + "'" : "null";
-        String price_order = _price_order != null ? "'" + _price_order + "'" : "null";
-        if (id_order.equals("null") && price_order.equals("null")) {
-            id_order = "'DESC'";
-            price_order = "null";
-        }
-        String query = "EXEC searchBooks \n"
-                + "@keywords = '" + keywords + "',\n"
-                + "@category_id = " + category_ids + ",\n"
-                + "@publisher_id = " + publisher_id + ",\n"
-                + "@author_id = " + author_id + ",\n"
-                + "@page_index = " + page_index + ",\n"
-                + "@amount_per_page = " + amount_per_page + ",\n"
-                + "@idOrder = " + id_order + ",\n"
-                + "@priceOrder = " + price_order;
-        return query;
-    }
-    public Book getTopBookByMonth(int month){
-        String query ="exec GetTopBookByMonth "+month;
+    public Book getTopBookByMonth(int month) {
+        String query = "exec GetTopBookByMonth " + month;
         return this.getBookByQuery(query);
+    }
+    public int getCountBooks() throws Exception{
+        DBContext db = DBContext.getInstance();
+        Connection conn = db.getConnection();
+            String query = "select count(*) from book";
+            try {
+                PreparedStatement ps = conn.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        return 0;
     }
 }

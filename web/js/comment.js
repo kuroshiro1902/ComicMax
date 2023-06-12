@@ -1,3 +1,26 @@
+const ratingState = $("#ratingState")
+const ratingStates ={
+    1: `<p class="rating-state" style="color: var(--warning)"> Bad!! <i class="fa-solid fa-face-angry"></i> </p>`,
+    2: `<p class="rating-state" style="color: var(--warning)"> Not Good! <i class="fa-solid fa-face-frown"></i> </p>`,
+    3: `<p class="rating-state" style="color: var(--info)"> Normal <i class="fa-solid fa-face-meh"></i> </p>`,
+    4: `<p class="rating-state" style="color: var(--confirm)"> Good! <i class="fa-solid fa-face-smile"></i> </p>`,
+    5: `<p class="rating-state" style="color: var(--confirm)"> Awesome!!! <i class="fa-solid fa-face-smile-beam"></i> </p>`        
+}
+const star_grayImg = "./img/star_gray.svg"
+const star_yellowImg = "./img/star_yellow.svg"
+const inputs = $("#rating input")
+const labels = []
+inputs.forEach(input=>{
+    labels.push(input.parentNode)
+    input.onchange = (e)=>{
+        if(input.checked){
+            const value = input.value
+            ratingState.innerHTML = ratingStates[value]
+            for(let i=0;i<value;i++) labels[i].style.backgroundImage = `url("${star_yellowImg}")`
+            for(let i=value;i<labels.length;i++) labels[i].style.backgroundImage = `url("${star_grayImg}")`
+        }
+    }
+})
 function Textarea(text){
     const e = document.createElement('textarea')
     e.rows = "3";

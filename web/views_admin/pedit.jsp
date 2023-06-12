@@ -71,7 +71,7 @@
         </div>
     </div>
     <div id="add-container">
-        <form class="add-field" method="GET" action="./addproduct">
+        <form class="add-field" action="./addproduct">
             <h3>Add Product</h3>
             <label for="add-title">Title</label>
             <input id="add-title" type="text" name="name" placeholder="Title" required>

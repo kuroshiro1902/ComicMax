@@ -5,24 +5,18 @@
 
 package control;
 
-import dao.ItemDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import model.Account;
-import model.Item;
-
 /**
  *
  * @author emsin
  */
-public class Buy extends HttpServlet {
+public class Account extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,22 +29,8 @@ public class Buy extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("account");
-        String username = account.getUsername();
-        String[] item_ids = request.getParameterValues("item_id");
-
-        ItemDAO itemdao = new ItemDAO();
-        List<Item> itemList = new ArrayList<>();
-        for (String id : item_ids) {
-            int book_id = Integer.parseInt(id);
-            Item item = itemdao.getItemByUsernameAndBookId(username, book_id);
-            if (item != null) {
-                itemList.add(item);
-            }
-        }
-        session.setAttribute("items", itemList);
-        session.setAttribute("totalPrice", itemdao.getTotalPriceByItemList(itemList));
-        request.getRequestDispatcher("/buy.jsp").forward(request, response);
+        model.Account account = (model.Account) session.getAttribute("account");
+        request.getRequestDispatcher("account.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,7 +57,7 @@ public class Buy extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         processRequest(request, response);
+        processRequest(request, response);
     }
 
     /** 

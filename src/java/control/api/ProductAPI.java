@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
+import java.util.List;
 import model.Account;
 import model.Item;
 /**
@@ -50,11 +51,14 @@ public class ProductAPI extends HttpServlet {
         
         response.setContentType("application/json");
         Gson gson = new Gson();
+        BookDAO bookDao = new BookDAO();
         String pid= request.getParameter("pid");
-        Book book = new BookDAO().getBookById(Integer.parseInt(pid));
+        Book book = bookDao.getBookById(Integer.parseInt(pid));
+        List<Book> relatedBooks = bookDao.getRelatedBooks(book);
         String bookJson = gson.toJson(book);
+        String relatedBooksJson = gson.toJson(relatedBooks);
         PrintWriter out = response.getWriter();
-	out.print(bookJson);
+	out.print("{\"book\":"+bookJson+",\"relatedBooks\":"+relatedBooksJson+"}");
         out.flush();
     } 
 

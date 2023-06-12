@@ -7,6 +7,7 @@ package control;
 
 import dao.BookDAO;
 import dao.CommentDAO;
+import dao.DeliveryItemDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import model.Account;
 import model.Book;
 import model.Comment;
+import model.DeliveryItem;
 
 /**
  *
@@ -48,11 +50,15 @@ public class Product extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Account account = (Account) request.getSession().getAttribute("account"); 
         int pid= Integer.parseInt(request.getParameter("pid"));
         Book book= new BookDAO().getBookById(pid);
         List<Comment> comments = new CommentDAO().getAllCommentsByBookId(pid);
+        boolean didUserBuyProduct = new DeliveryItemDAO().didUserBuyProduct(account, book);
+                
         request.setAttribute("book", book);
         request.setAttribute("comments",comments );
+        request.setAttribute("didUserBuyProduct",didUserBuyProduct );
         request.getRequestDispatcher("product.jsp").forward(request, response);
     } 
 
@@ -66,6 +72,7 @@ public class Product extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //Sua comment
         try {
             HttpSession session = request.getSession();
             Account account = (Account) session.getAttribute("account");

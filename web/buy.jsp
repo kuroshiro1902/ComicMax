@@ -99,7 +99,7 @@
                         <div class="total">
                             <div>
                                 <span style="font-weight: bolder">Total: </span>
-                                <span data-total class="num">$123  </span>
+                                <span data-total class="num">${totalPrice} </span>
                             </div>
                         </div>
                         </c:if>

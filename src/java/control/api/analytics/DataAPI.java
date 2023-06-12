@@ -3,26 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package control;
+package control.api.analytics;
 
-import dao.ItemDAO;
+import dao.AccountDAO;
+import dao.BookDAO;
+import dao.DeliveryItemDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import model.Account;
-import model.Item;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.time.LocalDate;
 
 /**
  *
  * @author emsin
  */
-public class Buy extends HttpServlet {
+public class DataAPI extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,25 +32,29 @@ public class Buy extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("account");
-        String username = account.getUsername();
-        String[] item_ids = request.getParameterValues("item_id");
-
-        ItemDAO itemdao = new ItemDAO();
-        List<Item> itemList = new ArrayList<>();
-        for (String id : item_ids) {
-            int book_id = Integer.parseInt(id);
-            Item item = itemdao.getItemByUsernameAndBookId(username, book_id);
-            if (item != null) {
-                itemList.add(item);
-            }
-        }
-        session.setAttribute("items", itemList);
-        session.setAttribute("totalPrice", itemdao.getTotalPriceByItemList(itemList));
-        request.getRequestDispatcher("/buy.jsp").forward(request, response);
+    throws ServletException, IOException, Exception {
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        //count books
+        int countBooks = new BookDAO().getCountBooks();
+        String countBooksJson = "\"countBooks\":"+countBooks;
+        //count accounts
+        int countAccounts = new AccountDAO().countAccount();
+        String countAccountsJson = "\"countAccounts\":"+countAccounts;
+        //
+        int currentMonth = LocalDate.now().getMonthValue();
+        //current month sold
+        int currentMonthSold = new DeliveryItemDAO().getAmountByMonth(currentMonth);
+        String currentMonthSoldJson = "\"currentMonthSold\":"+currentMonthSold;
+        //current month revenue
+        float currentMonthRevenue = new DeliveryItemDAO().getRevenueByMonth(currentMonth);
+        String currentMonthRevenueJson = "\"currentMonthRevenue\":"+currentMonthRevenue;
+        out.print("{"
+                +countBooksJson+","
+                +countAccountsJson+","
+                +currentMonthSoldJson+","
+                +currentMonthRevenueJson
+                +"}");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +68,11 @@ public class Buy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(DataAPI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
 
     /** 
@@ -77,7 +85,6 @@ public class Buy extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         processRequest(request, response);
     }
 
     /** 

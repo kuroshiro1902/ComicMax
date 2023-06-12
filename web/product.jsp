@@ -33,9 +33,9 @@
                 <div class="product-detail">
                     <h1 class="product__title main-product-title">
                     </h1>
-                    <div class="author">By <a href="shop?auid=" class="main-product-author click"></a></div>
+                    <div class="author">By <a href="shop.jsp?author=" class="main-product-author click"></a></div>
                     <div class="product__info">
-                        <span class="publisher">Publisher: <a href="shop?pubid=" class="main-product-publisher click"></a></span>
+                        <span class="publisher">Publisher: <a href="shop.jsp?pubid=" class="main-product-publisher click"></a></span>
                         <span class="language main-product-language">Language: <a href="" class="click"></a></span>
                         <span class="sold main-product-sold">Sold: <a></a></span>
                     </div>
@@ -46,7 +46,8 @@
 
                         <h2 class="product__price main-product-price">
                         </h2>
-                        <div class="product__add">
+                        <c:if test="${book.getAmount()>0}">
+                            <div class="product__add">
                             <label for="quantity"> </label>
                             <input type="number" id="quantity" name="quantity" min="1" max="123" placeholder="Quantity"><!--Thay max = so luong trong stock-->
                             <c:if  test="${sessionScope.account == null}">
@@ -56,15 +57,23 @@
                                 <span class="button button-add js-add-to-cart"></span>
                             </c:if>
                         </div>
+                        </c:if>
+                    
+                        <c:if test="${book.getAmount()<=0}">
+                            <div class="product__add">
+                                <h1 style="color: var(--red); text-transform: uppercase">Out of order.</h1>
+                        </div>
+                        </c:if>
+                        
                         <div class="product__description">
                             ${book.getName()} is one of the best-selling ${book.getCategories()[0]} comic series by ${book.getAuthor()}. Published by ${book.getPublisher()} in ${book.getLanguage()}, ${book.getName()} quickly received worldwide acceptance by comic lovers with ${book.getSold()} sold. With an engaging storyline, beautiful drawings, ${book.getName()} will take you on an exciting and fascinating adventure. Buy stories today on ComicMax with best deal!
                         </div>
 
                     </div>
                 </div>
-                <div class="relate-product-container">
+                <div>
                     <h1 style="padding-left: 24px">Related books</h1>
-                    <div class="product-container">
+                    <div class="product-container" id="relate-product-container">
                     <c:forEach begin="1" end="6" var="o">
                         <div class="product" title="test">
                             <a href class="product-img">

@@ -11,17 +11,27 @@ public class Comment {
     private int bookId;
     private String content;
     private Timestamp postTime;
+    private int rating;
     private int id;
 
     public Comment() {
     }
 
-    public Comment(String username, int bookId, String content, Timestamp postTime, int id) {
+    public Comment(String username, int bookId, String content, Timestamp postTime, int rating, int id) {
         this.username = username;
         this.bookId = bookId;
         this.content = content;
         this.postTime = postTime;
+        this.rating = rating;
         this.id = id;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public int getId() {
