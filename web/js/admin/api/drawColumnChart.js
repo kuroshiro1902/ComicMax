@@ -37,7 +37,7 @@ function calculateYAxisLabels(maxValue) {
 }
 // Hiển thị tooltip khi hover vào cột
 function showDataTooltip(label, data) {
-    tooltip.innerHTML = label + ': ' + data;
+    tooltip? tooltip.innerHTML = label + ': ' + data : null;
 }
 export default function drawChart(data) {
     // Tính toán thông số vẽ biểu đồ

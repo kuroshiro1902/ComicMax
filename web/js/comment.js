@@ -1,3 +1,4 @@
+import convertSingleToArray from "../js/utils/convertSingleToArray.js"
 const ratingState = $("#ratingState")
 const ratingStates ={
     1: `<p class="rating-state" style="color: var(--warning)"> Bad!! <i class="fa-solid fa-face-angry"></i> </p>`,
@@ -8,10 +9,12 @@ const ratingStates ={
 }
 const star_grayImg = "./img/star_gray.svg"
 const star_yellowImg = "./img/star_yellow.svg"
-const inputs = $("#rating input")
+const inputs = convertSingleToArray($("#rating input"))
 const labels = []
 inputs.forEach(input=>{
-    labels.push(input.parentNode)
+    try{
+        labels.push(input.parentNode)
+    
     input.onchange = (e)=>{
         if(input.checked){
             const value = input.value
@@ -20,6 +23,7 @@ inputs.forEach(input=>{
             for(let i=value;i<labels.length;i++) labels[i].style.backgroundImage = `url("${star_grayImg}")`
         }
     }
+    }catch(e){}
 })
 function Textarea(text){
     const e = document.createElement('textarea')

@@ -66,7 +66,7 @@ window.addEventListener("DOMContentLoaded", () => {
             //price
             $(".main-product-price").innerText = "$ "+book.price
             //img
-            $(".main-product-img").src = book.img
+            $(".main-product-img").forEach(img=>{img.src = book.img})
             
             //related book
             let relatedBooksHTML = relatedBooks.reduce((html,book)=>{

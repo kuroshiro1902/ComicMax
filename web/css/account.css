@@ -1,4 +1,75 @@
 @import url("./globalStyle.css");
+
+/*ACCOUNT*/
+#account{
+    display: flex;
+}
+.card{
+   border-radius: 4px;
+   box-shadow: 0 0 4px black; 
+   padding: 1.5rem;
+}
+.user-info{
+    position: sticky !important;
+    top: 80px;    
+}
+.user-info > *{
+    margin-bottom: 8px;
+}
+.edit-btn{
+    position: absolute;
+    font-size: 1.5rem;
+    right: 1rem; top: 1rem;
+    cursor: pointer;
+}
+.edit-btn:hover{
+    color: var(--info)
+}
+.avatar{
+    display: inline-block;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden !important;
+}
+.avatar img{
+    height: 200px;
+    width: 150px;
+    object-fit: cover;
+}
+.order-info{
+    padding: 1.5rem;
+    flex:1;
+}
+.order-info > *{
+    margin-bottom: 1rem
+}
+.chart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.overlay{
+    display: none;
+    justify-content: center; align-items: center;
+    position: fixed;
+    top:80px;left:0;right:0;bottom:0;
+    background-color: rgba(0,0,0,.5);
+}
+.edit-container{
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+.edit-container table{
+    border-spacing: 8px;
+}
+.edit-container input{
+    padding: 8px;
+    display: inline-block;
+    width: 100%;
+}
+/*LOGIN*/
 .main form{
     max-width: 800px;
     padding: 1rem 1.5rem;
@@ -52,3 +123,4 @@
 .message{
     color: var(--red);
 }
+

@@ -1,6 +1,7 @@
 package control;
 
 import dao.BookDAO;
+import dao.DeliveryItemDAO;
 import dao.Utils;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -23,15 +24,6 @@ public class Admin extends HttpServlet {
         return param == null ? defaultValue : param;
     }
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void editOption(HttpServletRequest request, HttpServletResponse response) {
         BookDAO bookdao = new BookDAO();
         //get Params
@@ -52,6 +44,30 @@ public class Admin extends HttpServlet {
     protected void analyticsOption(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("selected", "analytics");
     }
+    protected void deliveryOption(HttpServletRequest request, HttpServletResponse response) {
+        String type = request.getParameter("type");
+        String startTime = request.getParameter("start-time");
+        String endTime = request.getParameter("end-time");
+        if(type==null) type="order";
+        switch (type) {
+            case "order":
+                request.setAttribute("deliveryItemList", new DeliveryItemDAO().getAllOrderDeliveryItemsByTime(startTime, endTime));
+                request.setAttribute("type", "order");
+                break;
+            case "done":
+                request.setAttribute("deliveryItemList", new DeliveryItemDAO().getAllDoneDeliveryItemsByTime(startTime, endTime));
+                request.setAttribute("type", "done");
+                break;
+            default:
+                request.setAttribute("deliveryItemList", new DeliveryItemDAO().getAllOrderDeliveryItemsByTime(startTime, endTime));
+                request.setAttribute("type", "order");
+                break;
+        }
+        request.setAttribute("startTime", startTime);
+        request.setAttribute("endTime", endTime);
+        request.setAttribute("selected", "delivery");
+        
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,6 +82,9 @@ public class Admin extends HttpServlet {
             case "analytics":
                 this.analyticsOption(request,response);
                 break;
+            case "delivery":
+                this.deliveryOption(request,response);
+                break;
             default:
                 this.editOption(request, response);
                 break;
@@ -75,7 +94,6 @@ public class Admin extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

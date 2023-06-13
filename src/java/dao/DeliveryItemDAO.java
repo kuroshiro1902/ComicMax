@@ -65,6 +65,22 @@ public class DeliveryItemDAO extends DAO{
         } catch (Exception e) {}
         return 0;
     }
+    public List<DeliveryItem> getAllOrderDeliveryItemsByTime(String startTime, String endTime){
+        startTime = this.setValue(startTime, "");
+        endTime = this.setValue(endTime, "");
+        String query = "select * from deliveryitem where donetime is null";
+        if(!startTime.equals("")) query+=" and ordertime >= '"+startTime+"'";
+        if(!endTime.equals("")) query+=" and ordertime <= '"+endTime+"'";
+        query+=" order by ordertime desc";
+        return this.getListByQuery(query);
+    }
+    public List<DeliveryItem> getAllDoneDeliveryItemsByTime(String startTime, String endTime){
+        String query = "select * from deliveryitem where donetime is not null";
+        if(!startTime.equals("")) query+=" and donetime >= '"+startTime+"'";
+        if(!endTime.equals("")) query+=" and donetime <= '"+endTime+"'";
+        query+=" order by donetime desc";
+        return this.getListByQuery(query);
+    }
     public DeliveryItem getDeliveryItemByIdAndUsername(int id, String username){
         String query = "select * from deliveryitem where id = "+id+" and username = '"+username+"'";
         return this.getDeliveryItemByQuery(query);
@@ -75,6 +91,10 @@ public class DeliveryItemDAO extends DAO{
     }
     public List<DeliveryItem> getDoneDeliveryItemsByUserName(String username){
         String query = "select * from deliveryitem where username = '" + username + "' and donetime is not null order by donetime desc";
+        return this.getListByQuery(query);
+    }
+    public List<DeliveryItem> getDoneDeliveryItemsByUserNameAndMonth(String username, int month){
+        String query = "select * from deliveryitem where username = '"+username+"' and month(ordertime) = "+month;
         return this.getListByQuery(query);
     }
     public String addDeliveryItem(DeliveryItem deliveryItem) {

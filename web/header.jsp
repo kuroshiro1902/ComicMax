@@ -170,11 +170,11 @@
                         <div class="usersubnav-switch user-hover">
                             <a href="javascript:void(0)" class="header-usernav__item user user-hover"
                                 title="${sessionScope.account.getFullname()}">
-                                <img src="./img/temp.webp" alt="" style="border-radius: 50%">
+                                <img src="${sessionScope.account.getAvatar()}" alt="" style="border-radius: 50%">
                             </a>
                             <div class="subnav">
                                 <c:if test="${sessionScope.account.getIsAdmin() == 1}">
-                                    <a class="usersubnav__item" href="./admin">Manager product &nbsp;<i class="fa-solid fa-bag-shopping"></i></a>
+                                    <a class="usersubnav__item" href="./admin">Manager&nbsp;<i class="fa-solid fa-bag-shopping"></i></a>
                                 </c:if>
                                 <a class="usersubnav__item" href="./delivery">Delivery &nbsp;<i class="fa-solid fa-truck"></i></a>
                                 <a class="usersubnav__item" href="./account">Account &nbsp;<i class="fa-solid fa-user"></i></a>

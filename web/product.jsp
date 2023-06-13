@@ -28,7 +28,9 @@
         <div class="container">
             <div class="body" id="product" data-id>
                 <div class="product-img">
-                    <img class=" main-product-img" src="https://m.media-amazon.com/images/I/91eRoWSACCL.jpg" alt="">
+                    <div class="img-overlay">Click to view</div>
+                    <img class="main-product-img" onclick="(e)=>{e.stopPropagation()}" src="https://m.media-amazon.com/images/I/91eRoWSACCL.jpg" alt="">
+                    <div id="zoom-container"></div>
                 </div>
                 <div class="product-detail">
                     <h1 class="product__title main-product-title">
@@ -89,9 +91,10 @@
                     </c:forEach>
                 </div>
             </div>
-
+                        
             <jsp:include page="comment.jsp" />
         </div>
+        
     </body>
     <jsp:include page="footer.jsp" />
     <script src="./js/index.js"></script>
@@ -99,4 +102,29 @@
     <c:if  test="${sessionScope.account != null}">
         <script type="module" src="./js/CRUD/index.js"></script>
     </c:if>
+        <script>     
+            const zoomContainer = $("#zoom-container")
+            function zoomImage(zoomImg) {
+                zoomContainer.style.display="block"
+                zoomImg.classList.add('zoomed');
+            }
+            function notZoomImage(zoomImg) {
+                zoomContainer.style.display="none"
+                zoomImg.classList.remove('zoomed');
+            }
+            
+            
+            let zoomImg = document.createElement('div')
+            zoomImg.innerHTML = $(".main-product-img").outerHTML
+            zoomImg = zoomImg.firstElementChild
+            $("div.product-img").append(zoomImg)
+            $(".img-overlay").addEventListener('click',()=>{
+                zoomImage(zoomImg)
+            }) 
+            zoomContainer.onclick = ()=>{
+                notZoomImage(zoomImg)
+            }
+            
+            
+        </script>
 </html>

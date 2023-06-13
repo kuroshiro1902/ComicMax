@@ -77,7 +77,7 @@
             <div style="display: flex; align-items: center">
                 <div class="comment__user-info">
                     <div class="avatar">
-                        <img src="./img/temp.webp" alt="">
+                        <img src="${accountDAO.getAvatarByUsername(o.getUsername())}" alt="">
                     </div>
 
                     <div class="username">
